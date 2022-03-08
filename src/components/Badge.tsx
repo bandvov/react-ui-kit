@@ -7,7 +7,7 @@ const StyledBadge = styled.div<IBadge>`
   position: absolute;
   background-color: ${(props) => props.background || COLORS.green};
   width: max-content;
-  padding: 5px 10px;
+  padding: 4px 10px;
   border-radius: ${(props) => props.borderRadius || "25px"};
   left: 70%;
   top: -40%;
@@ -15,7 +15,7 @@ const StyledBadge = styled.div<IBadge>`
   outline: 1px solid white;
   ${(props)=> {
     if (props.size === "small") {
-     return css`font-size:12px; top: -30%;`
+     return css`font-size:12px; top: -30%; border-radius:  ${props.borderRadius} || "15px"} padding: 2px 5px;`
     }else if (props.size === "large") {
       return css`font-size:20px; top: -50%;`
     }
