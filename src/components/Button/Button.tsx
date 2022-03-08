@@ -1,6 +1,7 @@
-import React, { FC, CSSProperties, ReactElement } from "react";
+import React, { FC, ReactElement } from "react";
 import styled, { css } from "styled-components";
 import { COLORS, STATUS } from "../../CONSTANTS";
+import {IButton} from '../../types';
 
 const StyledButton = styled.button<IButton>`
 display: flex;
@@ -58,7 +59,7 @@ ${(props) => {
   }
 }}; 
 
-border-radius: ${(props) =>
+border-radius: ${(props) =>props.rounded? "50%":
   props.borderRadius && !props.rounded ? props.borderRadius : "5px"};
 border: none;
 padding:  ${(props) => (props.padding ? props.padding : ".75rem 1rem")};
@@ -69,37 +70,8 @@ width: max-content;
   
 }
 }`;
-export type Variant =
-  | "success"
-  | "danger"
-  | "disabled"
-  | "error"
-  | "success-outlined"
-  | "danger-outlined"
-  | "error-outlined"
-  | "default-outlined";
 
-export interface IButton {
-  children?: React.ReactNode | string | number;
-  style?: CSSProperties;
-  variant?: Variant;
-  className?: string;
-  outlined?: boolean;
-  backgroundColor?: string;
-  fullWidth?: string;
-  color?: string;
-  borderRadius?: string;
-  padding?: string;
-  fontSize?: string;
-  rounded?: boolean;
-  border?: string;
-  icon?: ReactElement;
-  iconLeft?: ReactElement;
-  disabled?: boolean;
-  onClick?: ()=> void;
-}
-
-const Button: FC<IButton> = ({ children, icon, iconLeft, ...props }) => {
+const Button: FC<IButton> = ({ children, icon, iconLeft, ...props }): ReactElement => {
   return (
     <StyledButton {...props}>
       {iconLeft}

@@ -48,8 +48,37 @@ function App() {
           <span>test button</span>
         </Button>
       </div>
-      <div style={{ border: "1px solid" }}>
-        <Badge />
+      <div style={{ border: "1px solid", gap:"20px",display:"flex" }}>
+        <Badge label={53} size="small" >
+          <Button rounded>
+            &copy;
+          </Button>
+        </Badge>
+        <Badge label={53} size="small" >
+          <Button >
+            &copy;
+          </Button>
+        </Badge>
+        <Badge label={5} >
+          <Button rounded>
+            &copy;
+          </Button>
+        </Badge>
+        <Badge label={5} >
+          <Button>
+            &copy;
+          </Button>
+        </Badge>
+        <Badge label={53} size="large" background="red" >
+          <Button rounded variant={'success'}>
+            &copy;
+          </Button>
+        </Badge>
+        <Badge onClick={()=> alert("click on badge")} label={53} size="large" color="green" background="white" border="1px solid blue">
+          <Button >
+            &copy;
+          </Button>
+        </Badge>
       </div>
   
     </div>
