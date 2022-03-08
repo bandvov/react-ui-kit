@@ -9,6 +9,7 @@ export type Variant =
   | "default-outlined";
 
   export type CommonProps = {
+    key?: string|number;
     className?: string;
     backgroundColor?: string;
     color?: string;
@@ -17,6 +18,7 @@ export type Variant =
     onClick?: ()=> void;
   }
   export interface IButton {
+    key?: string|number;
     children?: React.ReactNode | string | number;
     style?: CSSProperties;
     variant?: Variant;
@@ -37,13 +39,14 @@ export type Variant =
   }
   
   export interface IBadge {
+    key?: string|number;
     className?: string;
     children: ReactNode;
     color?: string;
     background?: string;
     label?: string | number;
-      borderRadius?: string;
-      size?: small | medium | ladge;
-      border?: string    
-      onClick?: ()=> void;
+    borderRadius?: string;  
+    border?: string    
+    onClick?: ()=> void;
+    position?: top | bottom | "top-left" | "bottom-left";
     }

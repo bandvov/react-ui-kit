@@ -9,21 +9,30 @@ const StyledBadge = styled.div<IBadge>`
   width: max-content;
   padding: 4px 10px;
   border-radius: ${(props) => props.borderRadius || "25px"};
-  left: 70%;
-  top: -40%;
+ 
   color: ${(props) => props.color || "white"};
   outline: 1px solid white;
-  ${(props)=> {
-    if (props.size === "small") {
-     return css`font-size:12px; top: -30%; border-radius:  ${props.borderRadius} || "15px"} padding: 2px 5px;`
-    }else if (props.size === "large") {
-      return css`font-size:20px; top: -50%;`
-    }
-  }}
   border:${(props)=> props.border || "1px solid white"};
   :hover {
-   ${(props)=> props.onClick ? css`cursor:pointer`:"" }; 
+   ${(props)=> props.onClick ? css`cursor:pointer`: "" }; 
   }
+  ${(props)=> {
+    if (props.position === "bottom") {
+      return css` left: 70%; bottom: -40%;`
+    } else if (props.position === "bottom-left") {
+      return css` right: 70%; bottom: -40%;`
+    }  else if (props.position === "top-left") {
+      return css` right: 70%; top: -40%;`
+    } else {
+      return css` left: 70%; top: -40%;`
+    }
+  }}
+  ${(props)=> {
+    console.log(props)
+    if (!props.children) {
+      return css`height: 15px; width: 15px; border-radius: 50%; padding:0;top:60%`
+    }
+  }}
 `;
 
 const Badge: FC<IBadge> = ({ children,className, label, ...props }): ReactElement => {

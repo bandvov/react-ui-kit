@@ -49,34 +49,45 @@ function App() {
         </Button>
       </div>
       <div style={{ border: "1px solid", gap:"20px",display:"flex" }}>
-        <Badge label={53} size="small" >
-          <Button rounded>
-            &copy;
-          </Button>
-        </Badge>
-        <Badge label={53} size="small" >
-          <Button >
-            &copy;
-          </Button>
-        </Badge>
+      
         <Badge label={5} >
           <Button rounded>
             &copy;
           </Button>
         </Badge>
-        <Badge label={5} >
+        <Badge label={531} >
           <Button>
             &copy;
           </Button>
         </Badge>
-        <Badge label={53} size="large" background="red" >
+        <Badge label={53} background="red" >
           <Button rounded variant={'success'}>
             &copy;
           </Button>
         </Badge>
-        <Badge onClick={()=> alert("click on badge")} label={53} size="large" color="green" background="white" border="1px solid blue">
+        <Badge onClick={()=> alert("click on badge")} label={5}>
           <Button >
+            large
+          </Button>
+        </Badge>
+        <Badge position={'bottom'} label={5}>
+          <Button rounded>
             &copy;
+          </Button>
+        </Badge>
+        <Badge position={'top-left'} label={5}>
+          <Button  rounded>
+            &copy;
+          </Button>
+        </Badge>
+        <Badge position={'bottom-left'} label={5} color="green" background="white" border="1px solid blue">
+          <Button rounded>
+            &copy;          
+          </Button>
+        </Badge>
+        <Badge>
+          <Button rounded>
+            &copy;          
           </Button>
         </Badge>
       </div>
