@@ -72,7 +72,6 @@ width: max-content;
 export type Variant =
   | "success"
   | "danger"
-  | "warning"
   | "disabled"
   | "error"
   | "success-outlined"
@@ -97,6 +96,7 @@ export interface IButton {
   icon?: ReactElement;
   iconLeft?: ReactElement;
   disabled?: boolean;
+  onClick?: ()=> void;
 }
 
 const Button: FC<IButton> = ({ children, icon, iconLeft, ...props }) => {
