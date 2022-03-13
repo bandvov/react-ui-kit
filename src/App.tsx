@@ -6,24 +6,19 @@ function App() {
   return (
     <div
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat( auto-fit, minmax(150px, 1fr) )",
+        display: "flex",      
         gap: "10px",
         margin: "1rem",
         border: "1px solid",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        minHeight: "100vh",
+       
         padding: "1rem",
+        flexDirection:"column"
       }}
     >
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(1fr, max-content)",
-          gap: "10px",
-          border: "1px solid",
-        }}
+       style={{width:"auto",padding:"1rem", border: "1px solid", gap:"20px",display:"flex",flexWrap: "wrap", flex:"1 0 auto" }}
       >
         <Button variant="success">{"success"}</Button>
         <Button variant={"danger"}>{"danger"}</Button>
@@ -48,7 +43,7 @@ function App() {
           <span>test button</span>
         </Button>
       </div>
-      <div style={{ border: "1px solid", gap:"20px",display:"flex" }}>
+      <div style={{width:"auto", padding:"1rem", border: "1px solid", gap:"20px",display:"flex",flexWrap: "wrap", flex:1  }}>
       
         <Badge label={5} >
           <Button rounded>
@@ -74,17 +69,7 @@ function App() {
           <Button rounded>
             &copy;
           </Button>
-        </Badge>
-        <Badge position={'top-left'} label={5}>
-          <Button  rounded>
-            &copy;
-          </Button>
-        </Badge>
-        <Badge position={'bottom-left'} label={5} color="green" background="white" border="1px solid blue">
-          <Button rounded>
-            &copy;          
-          </Button>
-        </Badge>
+        </Badge>    
         <Badge>
           <Button rounded>
             &copy;          

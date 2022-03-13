@@ -19,10 +19,6 @@ const StyledBadge = styled.div<IBadge>`
   ${(props)=> {
     if (props.position === "bottom") {
       return css` left: 70%; bottom: -40%;`
-    } else if (props.position === "bottom-left") {
-      return css` right: 70%; bottom: -40%;`
-    }  else if (props.position === "top-left") {
-      return css` right: 70%; top: -40%;`
     } else {
       return css` left: 70%; top: -40%;`
     }
