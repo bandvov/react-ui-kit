@@ -1,15 +1,59 @@
-import React, { ReactNode } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React, { ReactNode } from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import  Button from '../components/Button/Button';
+import Button from "../components/Button/Button";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Example/MyButton',
+  title: "Example/MyButton",
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    variant: { control: 'variant' },
+    variant: {
+      options: [
+        "default",
+        "default-outlined",
+        "success",
+        "success-outlined",
+        "danger",
+        "danger-outlined",
+        "error",
+        "error-outlined",
+      ],
+      control: { type: "select" },
+    },
+    justify: {
+      options: ["center", "flex-start", "flex-end", "stretch"],
+      control: { type: "select" },
+    },
+    disabled: {
+      options:[true,false],
+      control: { type: "boolean" },
+    },
+    icon: {
+      options: ["icon", ""],
+      mapping: { icon: <div>&rarr;</div>, "": null }, // Maps serializable option values to complex arg values
+      control: {
+        type: "radio", // Type 'select' is automatically inferred when 'options' is defined
+        labels: {
+          // 'labels' maps option values to string labels
+          icon: "Icon",
+          "": "No icon",
+        },
+      },
+    },
+    iconLeft: {
+      options: ["icon", ""],
+      mapping: { icon: <div>&larr;</div>, "": null }, // Maps serializable option values to complex arg values
+      control: {
+        type: "radio", // Type 'select' is automatically inferred when 'options' is defined
+        labels: {
+          // 'labels' maps option values to string labels
+          icon: "Icon",
+          "": "No icon",
+        },
+      },
+    },
   },
 } as ComponentMeta<typeof Button>;
 
@@ -18,48 +62,6 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const DefaultButton = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-DefaultButton.args = {};
-export const DefaultOutlinedButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-DefaultOutlinedButton.args = {
-  variant:"default-outlined"
+DefaultButton.args = {
+  children: "Button",
 };
-export const SuccessButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-SuccessButton.args = {
- variant: "success",
-};
-export const SuccessOutlinedButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-SuccessOutlinedButton.args = {
- variant: "success-outlined",
-};
-export const DangerButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-DangerButton.args = {
- variant: "danger",
-};
-export const DangerOutlinedButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-DangerOutlinedButton.args = {
- variant: "danger-outlined",
-};
-
-export const ErrorButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-ErrorButton.args = {
- variant: "error",
-};
-export const ErrorOutlinedButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-ErrorOutlinedButton.args = {
- variant: "error-outlined",
-};
-export const DisabledButton = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-DisabledButton.args = {
- variant: "disabled",
- disabled: true
-};
-
-
