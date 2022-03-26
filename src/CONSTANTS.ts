@@ -15,5 +15,4 @@ export const STATUS = {
   errorOutlined:"error-outlined",
   default: "default",
   defaultOutlined: "default-outlined",
-  disabled: "disabled",
 }
