@@ -29,7 +29,7 @@ function App() {
         <Button variant={"error-outlined"}>{"error outlined"}</Button>
         <Button variant={"default-outlined"}>{"default outlined"}</Button>
 
-        <Button disabled borderRadius="30px/30px" variant={"disabled"}>
+        <Button disabled borderRadius="30px/30px">
           {"headsdasdo"}
         </Button>
 

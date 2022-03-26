@@ -1,11 +1,13 @@
 import React, { FC, ReactElement } from "react";
 import styled, { css } from "styled-components";
 import { COLORS, STATUS } from "../../CONSTANTS";
-import {IButton} from '../../types';
+import { IButton } from "../../types";
 
 const StyledButton = styled.button<IButton>`
 display: flex;
 gap: 10px;
+justify-content: ${(props) => props.justify || "center"};
+border: ${(props) => props.border || "none"};
 ${(props) => {
   if (props.variant === STATUS.success) {
     return css`
@@ -46,7 +48,7 @@ ${(props) => {
       background-color: ${COLORS.red};
       color: ${props.color || "white"};
     `;
-  } else if (props.variant === STATUS.disabled) {
+  } else if (props.disabled) {
     return css`
       background-color: ${COLORS.lightgrey};
       color: ${props.color || COLORS.gray};
@@ -59,19 +61,28 @@ ${(props) => {
   }
 }}; 
 
-border-radius: ${(props) =>props.rounded? "50%":
-  props.borderRadius && !props.rounded ? props.borderRadius : "5px"};
-border: none;
+border-radius: ${(props) =>
+  props.rounded
+    ? "50%"
+    : props.borderRadius && !props.rounded
+    ? props.borderRadius
+    : "5px"};
+
 padding:  ${(props) => (props.padding ? props.padding : ".75rem 1rem")};
 font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
-width: max-content;
+width: ${(props) => (props.fullWidth ? "100%" : "max-content")}; 
+
 :hover{
-  cursor:${(props)=> props.disabled ? "not-allowed" : "pointer"};
-  
+  cursor:${(props) => (props.disabled ? "not-allowed" : "pointer")};
 }
 }`;
 
-const Button: FC<IButton> = ({ children, icon, iconLeft, ...props }): ReactElement => {
+const Button: FC<IButton> = ({
+  children,
+  icon,
+  iconLeft,
+  ...props
+}): ReactElement => {
   return (
     <StyledButton {...props}>
       {iconLeft}
