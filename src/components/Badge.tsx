@@ -18,15 +18,16 @@ const StyledBadge = styled.div<IBadge>`
   }
   ${(props)=> {
     if (props.position === "bottom") {
-      return css` left: 70%; bottom: -40%;`
+      return css` right: -15px; bottom: -40%;`
     } else {
-      return css` left: 70%; top: -40%;`
+      return css` right: -15px; top: -40%;`
     }
   }}
   ${(props)=> {
-    console.log(props)
-    if (!props.children) {
-      return css`height: 15px; width: 15px; border-radius: 50%; padding:0;top:60%`
+    if (!props.children && props.position ==="top") {
+      return css`height: 10px; width: 10px; border-radius: 50%; padding:0; top:0; right: -5px`
+    }else if(!props.children && props.position ==="bottom") {
+      return css`height: 10px; width: 10px; border-radius: 50%; padding:0;bottom:0; right: -5px`
     }
   }}
 `;

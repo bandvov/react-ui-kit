@@ -47,5 +47,5 @@ export interface IBadge {
   borderRadius?: string;
   border?: string;
   onClick?: () => void;
-  position?: top | bottom | "top-left" | "bottom-left";
+  position?: "top" | "bottom";
 }
