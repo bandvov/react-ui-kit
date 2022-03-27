@@ -9,33 +9,67 @@ const StyledBadge = styled.div<IBadge>`
   width: max-content;
   padding: 4px 10px;
   border-radius: ${(props) => props.borderRadius || "25px"};
- 
+
   color: ${(props) => props.color || "white"};
   outline: 1px solid white;
-  border:${(props)=> props.border || "1px solid white"};
+  border: ${(props) => props.border || "1px solid white"};
   :hover {
-   ${(props)=> props.onClick ? css`cursor:pointer`: "" }; 
+    ${(props) =>
+      props.onClick
+        ? css`
+            cursor: pointer;
+          `
+        : ""};
   }
-  ${(props)=> {
+  ${(props) => {
     if (props.position === "bottom") {
-      return css` right: -15px; bottom: -40%;`
+      return css`
+        left: 80%;
+        bottom: -40%;
+      `;
     } else {
-      return css` right: -15px; top: -40%;`
+      return css`
+        left: 80%;
+        top: -40%;
+      `;
     }
   }}
-  ${(props)=> {
-    if (!props.children && props.position ==="top") {
-      return css`height: 10px; width: 10px; border-radius: 50%; padding:0; top:0; right: -5px`
-    }else if(!props.children && props.position ==="bottom") {
-      return css`height: 10px; width: 10px; border-radius: 50%; padding:0;bottom:0; right: -5px`
+  ${(props) => {
+    if (!props.children) {
+      if (props.position === "bottom") {
+        return css`
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          padding: 0;
+          bottom: 0;
+          right: -5px;
+        `;
+      } else {
+        return css`
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          padding: 0;
+          top: 0;
+          right: -5px;
+        `;
+      }
     }
   }}
 `;
 
-const Badge: FC<IBadge> = ({ children,className, label, ...props }): ReactElement => {
+const Badge: FC<IBadge> = ({
+  children,
+  className,
+  label,
+  ...props
+}): ReactElement => {
   return (
     <div style={{ position: "relative", width: "max-content" }}>
-      <StyledBadge className={className} {...props}>{label}</StyledBadge>
+      <StyledBadge className={className} {...props}>
+        {label}
+      </StyledBadge>
       {children}
     </div>
   );
