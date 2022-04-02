@@ -1,3 +1,4 @@
+[![Storybook](https://github.com/bandvov/react-ui-kit/actions/workflows/storybook.yml/badge.svg)](https://github.com/bandvov/react-ui-kit/actions/workflows/storybook.yml)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
