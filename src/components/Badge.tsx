@@ -4,6 +4,7 @@ import { COLORS } from "../CONSTANTS";
 import { IBadge } from "../types";
 
 const StyledBadge = styled.div<IBadge>`
+z-index: 111111;
   position: absolute;
   background-color: ${(props) => props.background || COLORS.green};
   width: max-content;

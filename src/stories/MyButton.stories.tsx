@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Button from "../components/Button/Button";
+import Button from "../components/Button";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -20,7 +20,7 @@ export default {
         "error",
         "error-outlined",
       ],
-      control: { type: "select" },
+      control: { type: "radio" },
     },
     justify: {
       options: ["center", "flex-start", "flex-end", "stretch"],

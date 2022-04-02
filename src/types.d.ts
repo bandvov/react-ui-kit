@@ -10,18 +10,13 @@ export type Variant =
 export type CommonProps = {
   key?: string | number;
   className?: string;
-  backgroundColor?: string;
-  color?: string;
-  border?: string;
-  borderRadius?: string;
   onClick?: () => void;
-};
-export interface IButton {
-  key?: string | number;
-  children?: React.ReactNode | string | number;
   style?: CSSProperties;
-  variant?: Variant;
   className?: string;
+};
+export interface IButton extends CommonProps {
+  children?: React.ReactNode | string | number;
+  variant?: Variant;
   backgroundColor?: string;
   fullWidth?: boolean;
   color?: string;
@@ -37,9 +32,7 @@ export interface IButton {
   justify?: "center" | "flex-start" | "flex-end" | "stretch";
 }
 
-export interface IBadge {
-  key?: string | number;
-  className?: string;
+export interface IBadge extends CommonProps {
   children: ReactNode;
   color?: string;
   background?: string;

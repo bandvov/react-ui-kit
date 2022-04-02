@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Badge from "../components/Badge";
-import Button from "../components/Button/Button";
+import Button from "../components/Button";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
