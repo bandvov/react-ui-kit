@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import Badge from "./components/Badge";
 import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
-import MyCheckbox from "./components/MyCheckbox";
 
 function App() {
   const [checked, setChecked] = useState(false);
-  const [otherChecked, setOtherChecked] = useState(false);
   return (
     <div
       style={{
@@ -16,7 +14,7 @@ function App() {
         border: "1px solid",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-
+        flexWrap: "wrap",
         padding: "1rem",
         flexDirection: "column",
       }}
@@ -45,7 +43,7 @@ function App() {
           {"headsdasdo"}
         </Button>
 
-        <Button borderRadius="30px/30px">
+        <Button borderRadius="20px/20px">
           <span>H</span>
         </Button>
         <Button icon={<div>&copy;</div>}>
@@ -98,7 +96,8 @@ function App() {
           flex: 1,
         }}
       >
-        <MyCheckbox
+        <Checkbox
+          disabled
           checked={checked}
           handler={() => {
             console.log("click");
@@ -106,7 +105,16 @@ function App() {
           }}
           label={"click me"}
         />
-        <MyCheckbox
+        <Checkbox
+          checked={checked}
+          handler={() => {
+            console.log("click");
+            setChecked(!checked);
+          }}
+          label={"click me"}
+        />
+        <Checkbox
+          variant={"toggle"}
           checked={checked}
           handler={() => {
             console.log("click");
