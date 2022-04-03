@@ -44,7 +44,7 @@ function App() {
         </Button>
 
         <Button borderRadius="20px/20px">
-          <span>H</span>
+          <span>Button</span>
         </Button>
         <Button icon={<div>&copy;</div>}>
           <span>test button</span>

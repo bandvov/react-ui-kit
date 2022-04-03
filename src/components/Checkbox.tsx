@@ -55,14 +55,17 @@ const ClassicCheckbox = styled.label<ILabel>`
   ${(props) => {
     if (props.checked) {
       return css`
+        ::before {
+          background-color: ${props.disabled ? COLORS.gray : COLORS.Blue};
+        }
         ::after {
           content: "";
           position: absolute;
           width: 10px;
           height: 5px;
-          top: 6px;
-          border-left: 2px solid ${props.disabled ? COLORS.gray : COLORS.Blue};
-          border-bottom: 2px solid ${props.disabled ? COLORS.gray : COLORS.Blue};
+          top: 3px;
+          border-left: 2px solid white;
+          border-bottom: 2px solid white;
           transform: translateX(5px) rotate(-45deg);
           transform-origin: 4px 7px;
         }
