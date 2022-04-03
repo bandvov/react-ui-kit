@@ -17,18 +17,11 @@ jobs:
         run: |
           npm ci
           npm run build-storybook
-      - name: Deploy with gh-pages
-        uses: crazy-max/ghactions-github-pages@v1
-        with: 
-          target_branch: gh-pages
-          build_dir: docs-build
-        env: 
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#       - name: Deploy 🚀
-#         uses: JamesIves/github-pages-deploy-action@3.6.2
-#         with:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           BRANCH: gh-pages # The branch the action should deploy to.
-#           FOLDER: docs-build # The folder that the build-storybook script generates files.
-#           CLEAN: true # Automatically remove deleted files from the deploy branch
-#           TARGET_FOLDER: docs
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: docs-build # The folder that the build-storybook script generates files.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+          TARGET_FOLDER: docs
