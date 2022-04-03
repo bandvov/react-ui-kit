@@ -20,7 +20,7 @@ export default {
         "error",
         "error-outlined",
       ],
-      control: { type: "radio" },
+      control: { type: "select" },
     },
     justify: {
       options: ["center", "flex-start", "flex-end", "stretch"],
