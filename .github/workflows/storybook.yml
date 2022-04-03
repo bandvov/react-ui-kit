@@ -18,11 +18,12 @@ jobs:
           npm ci
           npm run build-storybook
       - name: Deploy with gh-pages
-        run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: crazy-max/ghactions-github-pages@v1
+        with: 
+          target_branch: gh-pages
+          build_dir: docs-build
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #       - name: Deploy 🚀
 #         uses: JamesIves/github-pages-deploy-action@3.6.2
 #         with:
