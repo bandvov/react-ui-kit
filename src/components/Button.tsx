@@ -8,8 +8,13 @@ const StyledButton = styled.button<IButton>`
   gap: 10px;
   justify-content: ${(props) => props.justify || "center"};
   border: ${(props) => props.border || "none"};
-  ${(props) => {
-    if (props.variant === STATUS.success) {
+  ${(props) => {    
+    if (props.disabled) {
+      return css`
+        background-color: ${COLORS.lightgrey};
+        color: ${props.color || COLORS.gray};
+      `;
+    } else if (props.variant === STATUS.success) {
       return css`
         background-color: ${COLORS.green};
         color: ${props.color || "white"};
@@ -48,12 +53,7 @@ const StyledButton = styled.button<IButton>`
         background-color: ${COLORS.red};
         color: ${props.color || "white"};
       `;
-    } else if (props.disabled) {
-      return css`
-        background-color: ${COLORS.lightgrey};
-        color: ${props.color || COLORS.gray};
-      `;
-    } else {
+    }  else {
       return css`
         background-color: ${COLORS.Blue};
         color: ${props.color || "white"};
