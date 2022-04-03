@@ -68,7 +68,8 @@ const StyledButton = styled.button<IButton>`
       ? props.borderRadius
       : "5px"};
 
-  padding: ${(props) => (props.padding ? props.padding : ".75rem 1rem")};
+  padding: ${(props) =>
+    props.padding ? props.padding : props.rounded ? ".5rem .7rem" : ".5rem 1rem"};
   font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
   width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   background-color: ${(props) => props.backgroundColor || ""};
