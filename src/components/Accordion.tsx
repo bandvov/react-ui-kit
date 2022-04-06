@@ -1,13 +1,16 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 export default function AccordionItem({
+  show,
+  setShow,
   title,
   children,
 }: {
+  show: boolean;
+  setShow: ()=> void;
   title: string;
   children: string | ReactElement;
 }): ReactElement {
-  const [show, setShow] = useState(false);
   const [titleHeight, setTitleHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
   const titleRef = useRef<any>(null);
@@ -29,14 +32,14 @@ export default function AccordionItem({
     <div
       key={title}
       style={{
-        height: show ? contentHeight + 16 + "px" : titleHeight + 2 + "px",
+        height: show ? contentHeight + 16 + "px" : titleHeight + 3 + "px",
         overflow: "hidden",
         transition: "all 0.3s ease-in-out",
       }}
     >
       <h4
         ref={titleRef}
-        onClick={() => setShow(!show)}
+        onClick={() => setShow()}
         style={{
           paddingLeft: "1rem",
           border: "1px solid",

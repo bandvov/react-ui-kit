@@ -32,6 +32,8 @@ const items: { title: string; content: string | ReactElement }[] = [
 ];
 function App() {
   const [checked, setChecked] = useState(false);
+  const [show, setShow] = useState<number | null>(null);
+
   return (
     <div
       style={{
@@ -134,8 +136,7 @@ function App() {
         />
         <Checkbox
           checked={checked}
-          handler={() => {
-            console.log("click");
+          handler={() => {     
             setChecked(!checked);
           }}
           label={"click me"}
@@ -144,7 +145,6 @@ function App() {
           variant={"toggle"}
           checked={checked}
           handler={() => {
-            console.log("click");
             setChecked(!checked);
           }}
         />
@@ -161,10 +161,22 @@ function App() {
         }}
       >
         <div>
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
               <div key={item.title} style={{ width: "400px" }}>
-                <Accordion title={item.title}>{item.content}</Accordion>
+                <Accordion
+                  show={show === index}
+                  setShow={() => {
+                    if (show === index) {
+                      setShow(null);
+                    } else {
+                      setShow(index);
+                    }
+                  }}
+                  title={item.title}
+                >
+                  {item.content}
+                </Accordion>
               </div>
             );
           })}
