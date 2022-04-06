@@ -8,8 +8,8 @@ z-index: 111111;
   position: absolute;
   background-color: ${(props) => props.background || COLORS.green};
   width: max-content;
-  padding: 4px 10px;
-  border-radius: ${(props) => props.borderRadius || "25px"};
+  padding: 2px 8px;
+  border-radius: ${(props) => props.borderRadius || "13px"};
 
   color: ${(props) => props.color || "white"};
   outline: 1px solid white;

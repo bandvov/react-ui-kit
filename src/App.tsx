@@ -1,8 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, ReactElement } from "react";
+import Accordion from "./components/Accordion";
 import Badge from "./components/Badge";
 import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
 
+const items: { title: string; content: string | ReactElement }[] = [
+  {
+    title: "one",
+    content: `bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bl
+      a bla bla bla bla bla bla 
+      a bla bla bla bla bla bla 
+      a bla bla bla bla bla bla 
+      a bla bla bla bla bla bla 
+      a bla bla bla bla bla bla 
+      bla bla bla bla bla`,
+  },
+  {
+    title: "two",
+    content: "bla bla bla bla blaa bla bla bla bla bla bla bla bla bla bla",
+  },
+  {
+    title: "three",
+    content:
+      "bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla",
+  },
+  {
+    title: "four",
+    content:
+      "bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla",
+  },
+];
 function App() {
   const [checked, setChecked] = useState(false);
   return (
@@ -121,6 +148,27 @@ function App() {
             setChecked(!checked);
           }}
         />
+      </div>
+      <div
+        style={{
+          width: "auto",
+          padding: "1rem",
+          border: "1px solid",
+          gap: "20px",
+          display: "flex",
+          flexWrap: "wrap",
+          flex: 1,
+        }}
+      >
+        <div>
+          {items.map((item) => {
+            return (
+              <div key={item.title} style={{ width: "400px" }}>
+                <Accordion title={item.title}>{item.content}</Accordion>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
