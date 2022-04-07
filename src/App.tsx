@@ -122,7 +122,7 @@ function App() {
           gap: "20px",
           display: "flex",
           flexWrap: "wrap",
-          flex: 1,
+          flex: "1 0 100%",
         }}
       >
         <Checkbox
@@ -163,7 +163,7 @@ function App() {
         <div>
           {items.map((item, index) => {
             return (
-              <div key={item.title} style={{ width: "400px" }}>
+              <div key={item.title} >
                 <Accordion
                   show={show === index}
                   setShow={() => {

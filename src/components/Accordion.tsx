@@ -32,7 +32,7 @@ export default function AccordionItem({
     <div
       key={title}
       style={{
-        height: show ? contentHeight + 16 + "px" : titleHeight + 3 + "px",
+        height: show ? contentHeight + titleHeight + "px" : titleHeight + 3 + "px",
         overflow: "hidden",
         transition: "all 0.3s ease-in-out",
       }}
@@ -41,7 +41,7 @@ export default function AccordionItem({
         ref={titleRef}
         onClick={() => setShow()}
         style={{
-          paddingLeft: "1rem",
+          padding: "0 1rem",
           border: "1px solid",
           margin: "0",
           display: "flex",
@@ -57,7 +57,7 @@ export default function AccordionItem({
         )}
       </h4>
       <div>
-        <div ref={contentRef} style={{ padding: `1rem` }}>
+        <div ref={contentRef} style={{padding:"0.5rem"}}>
           {children}
         </div>
       </div>
