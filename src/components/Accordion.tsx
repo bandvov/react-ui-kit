@@ -1,4 +1,20 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+
+const AccordionContainer = styled.div<{ height: number }>`
+  height: ${(prpps) => prpps.height}px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+`;
+
+const AccordionTitle = styled.div`
+  padding: 0 1rem;
+  border: 1px solid;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export default function AccordionItem({
   show,
@@ -7,7 +23,7 @@ export default function AccordionItem({
   children,
 }: {
   show: boolean;
-  setShow: ()=> void;
+  setShow: () => void;
   title: string;
   children: string | ReactElement;
 }): ReactElement {
@@ -29,38 +45,23 @@ export default function AccordionItem({
   }, [contentRef]);
 
   return (
-    <div
+    <AccordionContainer
       key={title}
-      style={{
-        height: show ? contentHeight + titleHeight + "px" : titleHeight + 3 + "px",
-        overflow: "hidden",
-        transition: "all 0.3s ease-in-out",
-      }}
+      height={show ? contentHeight + titleHeight : titleHeight + 3}
     >
-      <h4
-        ref={titleRef}
-        onClick={() => setShow()}
-        style={{
-          padding: "0 1rem",
-          border: "1px solid",
-          margin: "0",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <AccordionTitle ref={titleRef} onClick={() => setShow()}>
         {title}
         {show ? (
-          <span style={{ marginRight: "1rem", fontSize: "32px" }}>&#8722;</span>
+          <span style={{ fontSize: "32px" }}>&#8722;</span>
         ) : (
-          <span style={{ marginRight: "1rem", fontSize: "32px" }}>&#43;</span>
+          <span style={{ fontSize: "32px" }}>&#43;</span>
         )}
-      </h4>
+      </AccordionTitle>
       <div>
-        <div ref={contentRef} style={{padding:"0.5rem"}}>
+        <div ref={contentRef} style={{ padding: "0.5rem" }}>
           {children}
         </div>
       </div>
-    </div>
+    </AccordionContainer>
   );
 }
