@@ -5,34 +5,56 @@ export default function Dropdown({
   isOpen,
   title,
   children,
-  toggle,
+  setOpen,
 }: {
-  toggle: () => void;
+  setOpen: (status: boolean) => void;
   isOpen: boolean;
   title: string;
   children: ReactElement| ReactElement[];
 }) {
+const ref = useRef<HTMLDivElement>(null)
+  
+useEffect(() => {
+ 
+    const handleClickOutside = (event: any) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+      setOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [ setOpen ]);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div  ref={ref} style={{ position: "relative" }}>
       <Button
-      variant={"default-outlined"}
+
+        variant={"default-outlined"}
         style={{
-          margin:"auto",
+          margin: "auto",
           width: "100%",
           display: "flex",
           justifyContent: "space-between",
         }}
-        onClick={toggle}
+        onClick={()=>{       
+          setOpen(!isOpen)
+        }}
+        onKeyDown={(e: any)=>{
+          if (e.code === "Escape") {
+            setOpen(!isOpen)
+          }       
+        }}
       >
         {title} {isOpen ? <span>&#708;</span> : <span>&#709;</span>}
       </Button>
       <div
+       
         style={{
-      
           width: "max-content",
           top: "50px",
-          left: 'calc(50% - 90px)',
+          left: "calc(50% - 90px)",
           opacity: isOpen ? 1 : 0,
           transition: "all .2s ",
           boxShadow: `0 1em 1em rgba(0,0,0,0.1),

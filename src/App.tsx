@@ -81,9 +81,10 @@ function App() {
 
   const dropdownHandler = (id: number): void => {
     const updatedItems = items.map((item) => {
-      item.selected = false;
       if (item.id === id) {
         item.selected = !item.selected;
+      } else {
+        item.selected = false;
       }
       return item;
     });
@@ -199,7 +200,7 @@ function App() {
           label={"click me"}
         />
         <Checkbox
-              label="a as dasd as"
+          label="a as dasd as"
           disabled
           variant={"toggle"}
           checked={checked}
@@ -208,7 +209,7 @@ function App() {
           }}
         />
         <Checkbox
-        label="a as dasd as"
+          label="a as dasd as"
           variant={"toggle"}
           checked={checked}
           handler={() => {
@@ -263,12 +264,20 @@ function App() {
         <Dropdown
           isOpen={openDropdown}
           title={"Location"}
-          toggle={() => setOpenDropdown(!openDropdown)}
+          setOpen={setOpenDropdown}
         >
           {items.map((item: DropdownItem) => {
             return (
               <div
                 tabIndex={0}
+                onKeyDown={(e: any) => {
+                  if (e.code === "Space" || e.code === "Enter") {
+                    setOpenDropdown(false);
+                    dropdownHandler(item.id);
+                  }else if (e.code === "Escape") {
+                    setOpenDropdown(false);
+                  }
+                }}
                 onClick={() => {
                   setOpenDropdown(false);
                   dropdownHandler(item.id);
