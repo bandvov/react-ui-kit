@@ -3,8 +3,16 @@ import Accordion from "./components/Accordion";
 import Badge from "./components/Badge";
 import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
+import Dropdown from "./components/Dropdown";
+import { COLORS } from "./CONSTANTS";
 
-const items: { title: string; content: string | ReactElement }[] = [
+interface DropdownItem {
+  id: number;
+  title: string;
+  selected: boolean;
+  url?: string;
+}
+const accordionItems: { title: string; content: string | ReactElement }[] = [
   {
     title: "one",
     content: `bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bl
@@ -30,10 +38,58 @@ const items: { title: string; content: string | ReactElement }[] = [
       "bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla",
   },
 ];
+
+const dropdownItems: DropdownItem[] = [
+  {
+    id: 0,
+    title: "New York",
+    selected: false,
+    url: "http://www.google.com",
+  },
+  {
+    id: 1,
+    title: "Dublin",
+    selected: false,
+  },
+  {
+    id: 2,
+    title: "California",
+    selected: false,
+  },
+  {
+    id: 3,
+    title: "Istanbul",
+    selected: false,
+  },
+  {
+    id: 4,
+    title: "Izmir asd das das das d",
+    selected: false,
+  },
+  {
+    id: 5,
+    title: "Oslo",
+    selected: false,
+  },
+];
+
 function App() {
   const [checked, setChecked] = useState(false);
   const [show, setShow] = useState<number | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
+  const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
 
+  const dropdownHandler = (id: number): void => {
+    const updatedItems = items.map((item) => {
+      item.selected = false;
+      if (item.id === id) {
+        item.selected = !item.selected;
+      }
+      return item;
+    });
+
+    setItems(updatedItems);
+  };
 
   return (
     <div
@@ -137,10 +193,18 @@ function App() {
         />
         <Checkbox
           checked={checked}
-          handler={() => {     
+          handler={() => {
             setChecked(!checked);
           }}
           label={"click me"}
+        />
+        <Checkbox
+          disabled
+          variant={"toggle"}
+          checked={checked}
+          handler={() => {
+            setChecked(!checked);
+          }}
         />
         <Checkbox
           variant={"toggle"}
@@ -162,9 +226,9 @@ function App() {
         }}
       >
         <div>
-          {items.map((item, index) => {
+          {accordionItems.map((item, index) => {
             return (
-              <div key={item.title} >
+              <div key={item.title}>
                 <Accordion
                   show={show === index}
                   setShow={() => {
@@ -182,6 +246,44 @@ function App() {
             );
           })}
         </div>
+      </div>
+      <div
+        style={{
+          width: "auto",
+          padding: "1rem",
+          border: "1px solid",
+          gap: "20px",
+          display: "flex",
+          flexWrap: "wrap",
+          flex: 1,
+        }}
+      >
+        <Dropdown
+          isOpen={openDropdown}
+          title={"Location"}
+          toggle={() => setOpenDropdown(!openDropdown)}
+        >
+          {items.map((item: DropdownItem) => {
+            return (
+              <div
+                tabIndex={0}
+                onClick={() => {
+                  setOpenDropdown(false);
+                  dropdownHandler(item.id);
+                }}
+                style={{
+                  backgroundColor: item.selected ? COLORS.Blue : "white",
+                  color: item.selected ? "white" : "black",
+                  borderBottom: "0.5px solid",
+                  display: "flex",
+                  justifyContent: "stretch",
+                }}
+              >
+                <span style={{ padding: "0.2rem .5rem" }}>{item.title}</span>
+              </div>
+            );
+          })}
+        </Dropdown>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ export type Variant =
   | "default-outlined";
 
 export type CommonProps = {
+  ref?: MutableRefObject<any>;
   key?: string | number;
   className?: string;
   onClick?: () => void;
