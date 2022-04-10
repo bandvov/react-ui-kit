@@ -13,6 +13,7 @@ export type CommonProps = {
   className?: string;
   onClick?: () => void;
   onBlur?: () => void;
+  onKeyDown?: (event: any) => void;
   style?: CSSProperties;
   className?: string;
 };
