@@ -9,11 +9,15 @@ const AccordionContainer = styled.div<{ height: number }>`
 
 const AccordionTitle = styled.div`
   padding: 0 1rem;
-  border: 1px solid;
+  border: .5px solid;
   margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  :hover {
+    cursor: pointer;
+    background-color: #f5f7f6
+  }
 `;
 
 export default function AccordionItem({
@@ -47,7 +51,7 @@ export default function AccordionItem({
   return (
     <AccordionContainer
       key={title}
-      height={show ? contentHeight + titleHeight : titleHeight + 3}
+      height={show ? contentHeight + titleHeight : titleHeight + 1}
     >
       <AccordionTitle ref={titleRef} onClick={() => setShow()}>
         {title}
