@@ -39,7 +39,11 @@ const ToggleCheckbox = styled.label<ILabel>`
     margin-left: ${(props) => (props.checked ? "16px" : "2px")};
     transition: 0.3s;
   }
+  :hover{
+    cursor: ${(props)=> props.disabled?"not-allowed":"pointer"};
+  }
 `;
+
 const ClassicCheckbox = styled.label<ILabel>`
   position: relative;
   display: flex;
@@ -72,6 +76,9 @@ const ClassicCheckbox = styled.label<ILabel>`
       `;
     }
   }}
+  :hover{
+    cursor: ${(props)=> props.disabled?"not-allowed":"pointer"};
+  }
 `;
 const CheckboxContainer = styled.div`
   align-items: center;
@@ -88,6 +95,7 @@ export default function Checkbox({
   checked = true,
   label,
   variant = "default",
+  disabled,
   ...props
 }: {
   checked: boolean;
@@ -100,19 +108,21 @@ export default function Checkbox({
   return (
     <CheckboxContainer>
       <HiddenCheckbox
+        disabled={disabled}
         name="checkbox"
         checked={checked}
-        onChange={handler}
+        onChange={!disabled ? handler : () => {}}
         {...props}
       />
       <Component
+        disabled={disabled}
         htmlFor={"checkbox"}
         tabIndex={0}
         checked={checked}
-        onClick={handler}
+        onClick={!disabled ? handler : () => {}}
         {...props}
         onKeyDown={(e): void => {
-          if (e.code === "Space" || e.code === "Enter") {
+          if (!disabled && (e.code === "Space" || e.code === "Enter")) {
             handler();
           }
         }}
