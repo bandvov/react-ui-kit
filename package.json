@@ -5,6 +5,7 @@
   "homepage": "https://${{GITHUB_USERNAME}}.github.io/react-ui-kit",
   "dependencies": {
     "@storybook/react": "^6.4.19",
+    "@storybook/testing-react": "^1.2.4",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

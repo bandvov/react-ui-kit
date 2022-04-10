@@ -8,7 +8,7 @@ const StyledButton = styled.button<IButton>`
   gap: 10px;
   justify-content: ${(props) => props.justify || "center"};
   border: ${(props) => props.border || "none"};
-  ${(props) => {    
+  ${(props) => {
     if (props.disabled) {
       return css`
         background-color: ${COLORS.lightgrey};
@@ -23,25 +23,25 @@ const StyledButton = styled.button<IButton>`
       return css`
         background-color: transparent;
         color: ${props.color || COLORS.green};
-        outline: ${props.border || "1px solid" + COLORS.green};
+        outline: ${props.border || "1px solid " + COLORS.green};
       `;
     } else if (props.variant === STATUS.dangerOutlined) {
       return css`
         background-color: transparent;
         color: ${props.color || COLORS.orange};
-        outline: ${props.border || "1px solid" + COLORS.orange};
+        outline: ${props.border || "1px solid " + COLORS.orange};
       `;
     } else if (props.variant === STATUS.errorOutlined) {
       return css`
         background-color: transparent;
         color: ${props.color || COLORS.red};
-        outline: ${props.border || "1px solid" + COLORS.red};
+        outline: ${props.border || "1px solid " + COLORS.red};
       `;
     } else if (props.variant === STATUS.defaultOutlined) {
       return css`
         background-color: transparent;
         color: ${props.color || COLORS.Blue};
-        outline: ${props.border || "1px solid" + COLORS.Blue};
+        outline: ${props.border || "1px solid " + COLORS.Blue};
       `;
     } else if (props.variant === STATUS.danger) {
       return css`
@@ -53,7 +53,7 @@ const StyledButton = styled.button<IButton>`
         background-color: ${COLORS.red};
         color: ${props.color || "white"};
       `;
-    }  else {
+    } else {
       return css`
         background-color: ${COLORS.Blue};
         color: ${props.color || "white"};
@@ -69,7 +69,11 @@ const StyledButton = styled.button<IButton>`
       : "5px"};
 
   padding: ${(props) =>
-    props.padding ? props.padding : props.rounded ? ".5rem .7rem" : ".5rem 1rem"};
+    props.padding
+      ? props.padding
+      : props.rounded
+      ? ".5rem .7rem"
+      : ".5rem 1rem"};
   font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
   width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   background-color: ${(props) => props.backgroundColor || ""};
