@@ -15,16 +15,18 @@ const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })<{
 
 const ToggleCheckbox = styled.label<ILabel>`
   position: relative;
-  input[type="checkbox"] {
-    background-color: red;
-  }
+  color: ${(props) => (props.disabled ? COLORS.gray : "black")};
+  display: flex;
+  line-height: 16px;
   ::before {
     content: "";
     width: 28px;
     height: 14px;
-    border: 1px solid ${(props) => (props.checked ? COLORS.Blue : COLORS.gray)};
+    border: 1px solid
+      ${(props) =>
+        !props.checked || props.disabled ? COLORS.gray : COLORS.Blue};
     background-color: ${(props) =>
-      props.checked ? "white" : COLORS.lightgrey};
+      !props.checked || props.disabled ? COLORS.lightgrey : "white"};
     border-radius: 9px;
     padding: 1px;
   }
@@ -35,22 +37,27 @@ const ToggleCheckbox = styled.label<ILabel>`
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background-color: ${(props) => (props.checked ? COLORS.Blue : "gray")};
+    background-color: ${(props) =>
+      !props.checked || props.disabled ? "gray" : COLORS.Blue};
     margin-left: ${(props) => (props.checked ? "16px" : "2px")};
     transition: 0.3s;
   }
+  :hover {
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  }
 `;
+
 const ClassicCheckbox = styled.label<ILabel>`
   position: relative;
   display: flex;
   align-items: center;
   color: ${(props) => (props.disabled ? COLORS.gray : "black")};
+  line-height: 16px;
   ::before {
     content: "";
     width: 14px;
     height: 14px;
     border: 1px solid ${(props) => (props.disabled ? COLORS.gray : COLORS.Blue)};
-    background-color: white;
   }
   ${(props) => {
     if (props.checked) {
@@ -72,6 +79,9 @@ const ClassicCheckbox = styled.label<ILabel>`
       `;
     }
   }}
+  :hover {
+    cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  }
 `;
 const CheckboxContainer = styled.div`
   align-items: center;
@@ -88,6 +98,7 @@ export default function Checkbox({
   checked = true,
   label,
   variant = "default",
+  disabled,
   ...props
 }: {
   checked: boolean;
@@ -100,19 +111,21 @@ export default function Checkbox({
   return (
     <CheckboxContainer>
       <HiddenCheckbox
+        disabled={disabled}
         name="checkbox"
         checked={checked}
-        onChange={handler}
+        onChange={!disabled ? handler : () => {}}
         {...props}
       />
       <Component
+        disabled={disabled}
         htmlFor={"checkbox"}
         tabIndex={0}
         checked={checked}
-        onClick={handler}
+        onClick={!disabled ? handler : () => {}}
         {...props}
         onKeyDown={(e): void => {
-          if (e.code === "Space" || e.code === "Enter") {
+          if (!disabled && (e.code === "Space" || e.code === "Enter")) {
             handler();
           }
         }}

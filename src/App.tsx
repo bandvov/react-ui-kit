@@ -199,6 +199,7 @@ function App() {
           label={"click me"}
         />
         <Checkbox
+              label="a as dasd as"
           disabled
           variant={"toggle"}
           checked={checked}
@@ -207,6 +208,7 @@ function App() {
           }}
         />
         <Checkbox
+        label="a as dasd as"
           variant={"toggle"}
           checked={checked}
           handler={() => {
