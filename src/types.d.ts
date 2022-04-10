@@ -12,6 +12,7 @@ export type CommonProps = {
   key?: string | number;
   className?: string;
   onClick?: () => void;
+  onBlur?: () => void;
   style?: CSSProperties;
   className?: string;
 };
@@ -29,7 +30,6 @@ export interface IButton extends CommonProps {
   icon?: ReactElement;
   iconLeft?: ReactElement;
   disabled?: boolean;
-  onClick?: () => void;
   justify?: "center" | "flex-start" | "flex-end" | "stretch";
 }
 
@@ -40,6 +40,5 @@ export interface IBadge extends CommonProps {
   label?: string | number;
   borderRadius?: string;
   border?: string;
-  onClick?: () => void;
   position?: "top" | "bottom";
 }

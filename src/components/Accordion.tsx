@@ -33,8 +33,8 @@ export default function AccordionItem({
 }): ReactElement {
   const [titleHeight, setTitleHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
-  const titleRef = useRef<any>(null);
-  const contentRef = useRef<any>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (titleRef.current) {
