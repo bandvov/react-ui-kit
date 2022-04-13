@@ -4,6 +4,7 @@ import Badge from "./components/Badge";
 import Button from "./components/Button";
 import Checkbox from "./components/Checkbox";
 import Dropdown from "./components/Dropdown";
+import Modal from "./components/Modal";
 import { COLORS } from "./CONSTANTS";
 
 interface DropdownItem {
@@ -193,6 +194,14 @@ function App() {
           label={"click me"}
         />
         <Checkbox
+          rounded={true}
+          checked={checked}
+          handler={() => {
+            setChecked(!checked);
+          }}
+          label={"click me"}
+        />
+        <Checkbox
           checked={checked}
           handler={() => {
             setChecked(!checked);
@@ -274,7 +283,7 @@ function App() {
                   if (e.code === "Space" || e.code === "Enter") {
                     setOpenDropdown(false);
                     dropdownHandler(item.id);
-                  }else if (e.code === "Escape") {
+                  } else if (e.code === "Escape") {
                     setOpenDropdown(false);
                   }
                 }}
@@ -295,6 +304,32 @@ function App() {
             );
           })}
         </Dropdown>
+      </div>
+      <div
+        style={{
+          width: "auto",
+          padding: "1rem",
+          border: "1px solid",
+          gap: "20px",
+          display: "flex",
+          flexWrap: "wrap",
+          flex: 1,
+        }}
+      >
+        <Modal>
+          <div
+            style={{
+              padding: "3rem",
+              border: "5px solid white",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: "auto",
+              width: "max-content",
+            }}
+          >
+            <h1 style={{ color: "white" }}>Hello</h1>
+          </div>
+        </Modal>
       </div>
     </div>
   );
