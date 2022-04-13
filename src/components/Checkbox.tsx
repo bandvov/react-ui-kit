@@ -6,6 +6,7 @@ interface ILabel {
   checked?: boolean;
   before?: any;
   disabled?: boolean;
+  rounded?: boolean;
 }
 const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })<{
   name: string;
@@ -55,6 +56,14 @@ const ClassicCheckbox = styled.label<ILabel>`
   line-height: 16px;
   ::before {
     content: "";
+    ${(props) => {
+      return (
+        props.rounded &&
+        css`
+          border-radius: 50%;
+        `
+      );
+    }};
     width: 14px;
     height: 14px;
     border: 1px solid ${(props) => (props.disabled ? COLORS.gray : COLORS.Blue)};
@@ -101,6 +110,7 @@ export default function Checkbox({
   disabled,
   ...props
 }: {
+  rounded?: boolean;
   checked: boolean;
   disabled?: boolean;
   label?: string;
