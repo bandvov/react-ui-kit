@@ -19,6 +19,7 @@ const ToggleCheckbox = styled.label<ILabel>`
   color: ${(props) => (props.disabled ? COLORS.gray : "black")};
   display: flex;
   line-height: 16px;
+  padding: 3px 0;
   ::before {
     content: "";
     width: 28px;
@@ -34,7 +35,7 @@ const ToggleCheckbox = styled.label<ILabel>`
   ::after {
     content: "";
     position: absolute;
-    top: 2px;
+    top: 5px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
@@ -54,6 +55,7 @@ const ClassicCheckbox = styled.label<ILabel>`
   align-items: center;
   color: ${(props) => (props.disabled ? COLORS.gray : "black")};
   line-height: 16px;
+  padding: 3px 0;
   ::before {
     content: "";
     ${(props) => {
@@ -79,7 +81,7 @@ const ClassicCheckbox = styled.label<ILabel>`
           position: absolute;
           width: 10px;
           height: 5px;
-          top: 3px;
+          top: 5px;
           border-left: 2px solid white;
           border-bottom: 2px solid white;
           transform: translateX(5px) rotate(-45deg);
