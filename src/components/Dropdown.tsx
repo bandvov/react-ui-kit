@@ -10,27 +10,25 @@ export default function Dropdown({
   setOpen: (status: boolean) => void;
   isOpen: boolean;
   title: string;
-  children: ReactElement| ReactElement[];
+  children: ReactElement | ReactElement[];
 }) {
-const ref = useRef<HTMLDivElement>(null)
-  
-useEffect(() => {
- 
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (ref.current && !ref.current.contains(event.target)) {
-      setOpen(false);
+        setOpen(false);
       }
     };
-    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener("click", handleClickOutside, true);
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
+      document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [ setOpen ]);
+  }, [setOpen]);
 
   return (
-    <div  ref={ref} style={{ position: "relative" }}>
+    <div ref={ref} style={{ position: "relative" }}>
       <Button
-
         variant={"default-outlined"}
         style={{
           margin: "auto",
@@ -38,23 +36,23 @@ useEffect(() => {
           display: "flex",
           justifyContent: "space-between",
         }}
-        onClick={()=>{       
-          setOpen(!isOpen)
+        onClick={() => {
+          setOpen(!isOpen);
         }}
-        onKeyDown={(e: any)=>{
+        onKeyDown={(e: any) => {
           if (e.code === "Escape") {
-            setOpen(!isOpen)
-          }       
+            setOpen(!isOpen);
+          }
         }}
       >
         {title} {isOpen ? <span>&#708;</span> : <span>&#709;</span>}
       </Button>
       <div
-       
         style={{
           width: "max-content",
           top: "50px",
           left: "calc(50% - 90px)",
+          overflow: "hidden",
           opacity: isOpen ? 1 : 0,
           transition: "all .2s ",
           boxShadow: `0 1em 1em rgba(0,0,0,0.1),
