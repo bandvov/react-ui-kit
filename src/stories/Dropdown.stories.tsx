@@ -8,26 +8,19 @@ export default {
   component: Dropdown,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-  decorators: [
-    (StoryFn) => {
-      // mock state
-      const [open, setOpen] = useState(false);
-      return (
-        <StoryFn isOpen={open} setOpen={setOpen}>
-          <h1>Dropdown</h1>
-        </StoryFn>
-      );
-    },
-  ],
 } as ComponentMeta<typeof Dropdown>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Dropdown> = (args) => (
-  <Dropdown {...args}>
-    <h1>Hello this is dropdown</h1>
-  </Dropdown>
-);
-
+const Template: ComponentStory<typeof Dropdown> = (args) => {
+  const [open, setOpen] = useState<boolean>(false);
+  return (
+    <div style={{ margin: "10rem 25rem" }}>
+      <Dropdown {...args} isOpen={open} setOpen={setOpen}>
+        <h1 style={{ padding: "1rem" }}>Hello this is dropdown</h1>
+      </Dropdown>
+    </div>
+  );
+};
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
