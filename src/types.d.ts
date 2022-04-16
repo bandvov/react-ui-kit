@@ -15,7 +15,6 @@ export type CommonProps = {
   onBlur?: () => void;
   onKeyDown?: (event: any) => void;
   style?: CSSProperties;
-  className?: string;
 };
 export interface IButton extends CommonProps {
   children?: React.ReactNode | string | number;
@@ -58,4 +57,11 @@ interface ILabel {
   before?: any;
   disabled?: boolean;
   rounded?: boolean;
+}
+
+interface DropdownItem {
+  id: number;
+  title: string;
+  selected: boolean;
+  url?: string;
 }

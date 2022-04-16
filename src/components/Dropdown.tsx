@@ -1,5 +1,5 @@
 import React, { ReactElement, useRef, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Button from "../components/Button";
 import { Position } from "../types";
 
@@ -7,13 +7,30 @@ const iconPath = process.env.PUBLIC_URL + "/icons/";
 
 const ChildrenContainer = styled.div<{ isOpen: boolean; position: Position }>`
   width: max-content;
-  top: 50px;
-  left: calc(50% - 90px);
+  ${(props) => {
+    switch (props.position) {
+      case "bottom":
+        return css`
+          top: 50px;
+          left: calc(50% - 90px);
+          box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1),
+            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
+      case "top":
+        return css`
+          bottom: 50px;
+          left: calc(50% - 90px);
+          box-shadow: 0 -0.5em 1em rgba(0, 0, 0, 0.1),
+            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
+
+      default:
+        break;
+    }
+  }}
   overflow: hidden;
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
-  transition: all 0.2s;
-  box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
-    0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
   height: ${(props) => (props.isOpen ? "" : 0)};
   position: absolute;
 `;
@@ -48,7 +65,12 @@ export default function Dropdown({
   const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
 
   return (
-    <div ref={ref} style={{ position: "relative" }}>
+    <div
+      ref={ref}
+      style={{
+        position: "relative",
+      }}
+    >
       <Button
         variant={"default-outlined"}
         style={{
