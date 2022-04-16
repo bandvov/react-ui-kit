@@ -1,13 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { COLORS } from "../CONSTANTS";
+import { ILabel } from "../types";
 
-interface ILabel {
-  checked?: boolean;
-  before?: any;
-  disabled?: boolean;
-  rounded?: boolean;
-}
 const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })<{
   name: string;
 }>`

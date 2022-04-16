@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect } from "react";
 import styled from "styled-components";
 
 const StyledModal = styled.div<{ open: boolean }>`

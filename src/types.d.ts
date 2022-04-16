@@ -43,3 +43,19 @@ export interface IBadge extends CommonProps {
   border?: string;
   position?: "top" | "bottom";
 }
+
+export type Position =
+  | "bottom"
+  | "top"
+  | "left"
+  | "right"
+  | "right-bottom"
+  | "right-top"
+  | "left-bottom"
+  | "left-top";
+interface ILabel {
+  checked?: boolean;
+  before?: any;
+  disabled?: boolean;
+  rounded?: boolean;
+}

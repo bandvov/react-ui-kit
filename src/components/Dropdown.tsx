@@ -1,14 +1,31 @@
-import React, { ReactElement, useRef, useState, useEffect } from "react";
+import React, { ReactElement, useRef, useEffect } from "react";
+import styled from "styled-components";
 import Button from "../components/Button";
+import { Position } from "../types";
 
 const iconPath = process.env.PUBLIC_URL + "/icons/";
+
+const ChildrenContainer = styled.div<{ isOpen: boolean; position: Position }>`
+  width: max-content;
+  top: 50px;
+  left: calc(50% - 90px);
+  overflow: hidden;
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
+  transition: all 0.2s;
+  box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+  height: ${(props) => (props.isOpen ? "" : 0)};
+  position: absolute;
+`;
 
 export default function Dropdown({
   isOpen,
   title,
   children,
   setOpen,
+  position = "bottom",
 }: {
+  position?: Position;
   setOpen: (status: boolean) => void;
   isOpen: boolean;
   title: string;
@@ -27,6 +44,8 @@ export default function Dropdown({
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, [setOpen]);
+
+  const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
 
   return (
     <div ref={ref} style={{ position: "relative" }}>
@@ -52,26 +71,12 @@ export default function Dropdown({
           style={{ margin: "auto" }}
           width={10}
           height={10}
-          src={iconPath + (isOpen ? "arrow_down.svg" : "arrow_up.svg")}
+          src={iconPath + iconName}
         />
       </Button>
-      <div
-        style={{
-          width: "max-content",
-          top: "50px",
-          left: "calc(50% - 90px)",
-          overflow: "hidden",
-          opacity: isOpen ? 1 : 0,
-          transition: "all .2s ",
-          boxShadow: `0 1em 1em rgba(0,0,0,0.1),
-          0 0  0 2px rgb(255,255,255),
-          0.1em 0.1em .5em rgba(0,0,0,0.3)`,
-          height: isOpen ? "" : 0,
-          position: "absolute",
-        }}
-      >
+      <ChildrenContainer isOpen={isOpen} position={position}>
         {children}
-      </div>
+      </ChildrenContainer>
     </div>
   );
 }
