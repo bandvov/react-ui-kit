@@ -1,29 +1,48 @@
-import React, { ReactElement, useRef, useEffect } from "react";
+import React, { ReactElement, useRef, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Button from "../components/Button";
 import { Position } from "../types";
 
 const iconPath = process.env.PUBLIC_URL + "/icons/";
 
-const ChildrenContainer = styled.div<{ isOpen: boolean; position: Position }>`
+const ChildrenContainer = styled.div<{
+  offset: number;
+  isOpen: boolean;
+  position: Position;
+}>`
   width: max-content;
   ${(props) => {
+    console.log(props);
+
     switch (props.position) {
       case "bottom":
         return css`
-          top: 50px;
-          left: calc(50% - 90px);
+          top: 40px;
+          left: calc(-${props.offset / 2 + "px"} + 50%);
           box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1),
             0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
         `;
       case "top":
         return css`
-          bottom: 50px;
-          left: calc(50% - 90px);
+          bottom: 40px;
+          left: calc(-${props.offset / 2 + "px"} + 50%);
           box-shadow: 0 -0.5em 1em rgba(0, 0, 0, 0.1),
             0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
         `;
-
+      case "left":
+        return css`
+          top: calc(-${props.offset / 2 + "px"} + 50%);
+          right: calc(100% + 10px);
+          box-shadow: 0 0 0 2px rgb(255, 255, 255),
+            0 0.5em 1em rgba(0, 0, 0, 0.1), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
+      case "right":
+        return css`
+          top: calc(-${props.offset / 2 + "px"} + 50%);
+          left: calc(100% + 10px);
+          box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1),
+            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
       default:
         break;
     }
@@ -49,6 +68,9 @@ export default function Dropdown({
   children: ReactElement | ReactElement[];
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const childrenRef = useRef<HTMLDivElement>(null);
+  const [offseHeight, setOffsetHeight] = useState<number>(0);
+  const [offseWidth, setOffsetWidth] = useState<number>(0);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -61,6 +83,13 @@ export default function Dropdown({
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, [setOpen]);
+
+  useEffect(() => {
+    if (childrenRef.current) {
+      setOffsetHeight(childrenRef.current.offsetHeight);
+      setOffsetWidth(childrenRef.current.offsetWidth);
+    }
+  }, [childrenRef]);
 
   const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
 
@@ -96,7 +125,14 @@ export default function Dropdown({
           src={iconPath + iconName}
         />
       </Button>
-      <ChildrenContainer isOpen={isOpen} position={position}>
+      <ChildrenContainer
+        offset={
+          position === "left" || position === "right" ? offseHeight : offseWidth
+        }
+        ref={childrenRef}
+        isOpen={isOpen}
+        position={position}
+      >
         {children}
       </ChildrenContainer>
     </div>
