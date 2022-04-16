@@ -1,6 +1,8 @@
 import React, { ReactElement, useRef, useState, useEffect } from "react";
 import Button from "../components/Button";
 
+const iconPath = process.env.PUBLIC_URL + "/icons/";
+
 export default function Dropdown({
   isOpen,
   title,
@@ -45,7 +47,13 @@ export default function Dropdown({
           }
         }}
       >
-        {title} {isOpen ? <span>&#708;</span> : <span>&#709;</span>}
+        {title}{" "}
+        <img
+          style={{ margin: "auto" }}
+          width={10}
+          height={10}
+          src={iconPath + (isOpen ? "arrow_down.svg" : "arrow_up.svg")}
+        />
       </Button>
       <div
         style={{
