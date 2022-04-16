@@ -6,13 +6,8 @@ import Checkbox from "./components/Checkbox";
 import Dropdown from "./components/Dropdown";
 import Modal from "./components/Modal";
 import { COLORS } from "./CONSTANTS";
+import { DropdownItem } from "./types";
 
-interface DropdownItem {
-  id: number;
-  title: string;
-  selected: boolean;
-  url?: string;
-}
 const accordionItems: { title: string; content: string | ReactElement }[] = [
   {
     title: "one",
@@ -64,7 +59,7 @@ const dropdownItems: DropdownItem[] = [
   },
   {
     id: 4,
-    title: "Izmir asd das das das d",
+    title: "Izmir",
     selected: false,
   },
   {
@@ -78,6 +73,7 @@ function App() {
   const [checked, setChecked] = useState(false);
   const [show, setShow] = useState<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
+  const [openDropdown1, setOpenDropdown1] = useState<boolean>(false);
   const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -305,6 +301,120 @@ function App() {
             );
           })}
         </Dropdown>
+        <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
+          position={"top"}
+        >
+          {items.map((item: DropdownItem) => {
+            return (
+              <div
+                tabIndex={0}
+                onKeyDown={(e: any) => {
+                  if (e.code === "Space" || e.code === "Enter") {
+                    setOpenDropdown1(false);
+                    dropdownHandler(item.id);
+                  } else if (e.code === "Escape") {
+                    setOpenDropdown1(false);
+                  }
+                }}
+                onClick={() => {
+                  setOpenDropdown1(false);
+                  dropdownHandler(item.id);
+                }}
+                style={{
+                  backgroundColor: item.selected ? COLORS.Blue : "white",
+                  color: item.selected ? "white" : "black",
+                  borderBottom: "0.5px solid",
+                  display: "flex",
+                  justifyContent: "stretch",
+                }}
+              >
+                <span style={{ padding: "0.2rem .5rem" }}>{item.title}</span>
+              </div>
+            );
+          })}
+        </Dropdown>
+        <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
+          position={"left"}
+        >
+          {items.map((item: DropdownItem) => {
+            return (
+              <div
+                tabIndex={0}
+                onKeyDown={(e: any) => {
+                  if (e.code === "Space" || e.code === "Enter") {
+                    setOpenDropdown1(false);
+                    dropdownHandler(item.id);
+                  } else if (e.code === "Escape") {
+                    setOpenDropdown1(false);
+                  }
+                }}
+                onClick={() => {
+                  setOpenDropdown1(false);
+                  dropdownHandler(item.id);
+                }}
+                style={{
+                  backgroundColor: item.selected ? COLORS.Blue : "white",
+                  color: item.selected ? "white" : "black",
+                  borderBottom: "0.5px solid",
+                  display: "flex",
+                  justifyContent: "stretch",
+                }}
+              >
+                <span style={{ padding: "0.2rem .5rem" }}>{item.title}</span>
+              </div>
+            );
+          })}
+        </Dropdown>
+        <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
+          position={"right"}
+        >
+          {items.map((item: DropdownItem) => {
+            return (
+              <div
+                tabIndex={0}
+                onKeyDown={(e: any) => {
+                  if (e.code === "Space" || e.code === "Enter") {
+                    setOpenDropdown1(false);
+                    dropdownHandler(item.id);
+                  } else if (e.code === "Escape") {
+                    setOpenDropdown1(false);
+                  }
+                }}
+                onClick={() => {
+                  setOpenDropdown1(false);
+                  dropdownHandler(item.id);
+                }}
+                style={{
+                  backgroundColor: item.selected ? COLORS.Blue : "white",
+                  color: item.selected ? "white" : "black",
+                  borderBottom: "0.5px solid",
+                  display: "flex",
+                  justifyContent: "stretch",
+                }}
+              >
+                <span style={{ padding: "0.2rem .5rem" }}>{item.title}</span>
+              </div>
+            );
+          })}
+        </Dropdown>
+        <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
+        >
+          <div>
+            <h1>Dropdown</h1>
+          </div>
+        </Dropdown>
       </div>
       <div
         style={{
@@ -322,7 +432,7 @@ function App() {
             setOpenModal(true);
           }}
         >
-          Open modal
+          Open new modal
         </Button>
         <Modal open={openModal} setOpen={setOpenModal}>
           <div

@@ -1,18 +1,79 @@
-import React, { ReactElement, useRef, useState, useEffect } from "react";
+import React, { ReactElement, useRef, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 import Button from "../components/Button";
+import { Position } from "../types";
+
+const iconPath = process.env.PUBLIC_URL + "/icons/";
+
+const ChildrenContainer = styled.div<{
+  offset: number;
+  isOpen: boolean;
+  position: Position;
+}>`
+  background-color: white;
+  width: max-content;
+  ${(props) => {
+    switch (props.position) {
+      case "bottom":
+        return css`
+          top: 40px;
+          left: calc(-${props.offset / 2 + "px"} + 50%);
+          box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1),
+            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
+      case "top":
+        return css`
+          bottom: 40px;
+          left: calc(-${props.offset / 2 + "px"} + 50%);
+          box-shadow: 0 -0.5em 1em rgba(0, 0, 0, 0.1),
+            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
+      case "left":
+        return css`
+          top: calc(-${props.offset / 2 + "px"} + 50%);
+          right: calc(100% + 10px);
+          box-shadow: 0 0 0 2px rgb(255, 255, 255),
+            0 0.5em 1em rgba(0, 0, 0, 0.1), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
+      case "right":
+        return css`
+          top: calc(-${props.offset / 2 + "px"} + 50%);
+          left: calc(100% + 10px);
+          box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1),
+            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
+        `;
+      default:
+        break;
+    }
+  }}
+  overflow: hidden;
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
+  transition: all 0.2s ease-in-out;
+  height: ${(props) => (props.isOpen ? "" : 0)};
+  position: absolute;
+`;
 
 export default function Dropdown({
   isOpen,
   title,
   children,
   setOpen,
+  position = "bottom",
+  buttonStyles,
 }: {
+  buttonStyles?: {
+    [key: string]: string;
+  };
+  position?: Position;
   setOpen: (status: boolean) => void;
   isOpen: boolean;
   title: string;
   children: ReactElement | ReactElement[];
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const childrenRef = useRef<HTMLDivElement>(null);
+  const [offsetHeight, setOffsetHeight] = useState<number>(0);
+  const [offsetWidth, setOffsetWidth] = useState<number>(0);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -26,15 +87,29 @@ export default function Dropdown({
     };
   }, [setOpen]);
 
+  useEffect(() => {
+    if (childrenRef.current) {
+      setOffsetHeight(childrenRef.current.scrollHeight);
+      setOffsetWidth(childrenRef.current.clientWidth);
+    }
+  }, [childrenRef]);
+
+  const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
+
   return (
-    <div ref={ref} style={{ position: "relative" }}>
+    <div
+      ref={ref}
+      style={{
+        position: "relative",
+      }}
+    >
       <Button
+        backgroundColor="white"
         variant={"default-outlined"}
         style={{
-          margin: "auto",
-          width: "100%",
           display: "flex",
           justifyContent: "space-between",
+          ...(buttonStyles || {}),
         }}
         onClick={() => {
           setOpen(!isOpen);
@@ -45,25 +120,26 @@ export default function Dropdown({
           }
         }}
       >
-        {title} {isOpen ? <span>&#708;</span> : <span>&#709;</span>}
+        {title}{" "}
+        <img
+          style={{ margin: "auto" }}
+          width={10}
+          height={10}
+          src={iconPath + iconName}
+        />
       </Button>
-      <div
-        style={{
-          width: "max-content",
-          top: "50px",
-          left: "calc(50% - 90px)",
-          overflow: "hidden",
-          opacity: isOpen ? 1 : 0,
-          transition: "all .2s ",
-          boxShadow: `0 1em 1em rgba(0,0,0,0.1),
-          0 0  0 2px rgb(255,255,255),
-          0.1em 0.1em .5em rgba(0,0,0,0.3)`,
-          height: isOpen ? "" : 0,
-          position: "absolute",
-        }}
+      <ChildrenContainer
+        offset={
+          position === "left" || position === "right"
+            ? offsetHeight
+            : offsetWidth
+        }
+        ref={childrenRef}
+        isOpen={isOpen}
+        position={position}
       >
         {children}
-      </div>
+      </ChildrenContainer>
     </div>
   );
 }

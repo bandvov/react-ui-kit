@@ -15,7 +15,6 @@ export type CommonProps = {
   onBlur?: () => void;
   onKeyDown?: (event: any) => void;
   style?: CSSProperties;
-  className?: string;
 };
 export interface IButton extends CommonProps {
   children?: React.ReactNode | string | number;
@@ -42,4 +41,27 @@ export interface IBadge extends CommonProps {
   borderRadius?: string;
   border?: string;
   position?: "top" | "bottom";
+}
+
+export type Position =
+  | "bottom"
+  | "top"
+  | "left"
+  | "right"
+  | "right-bottom"
+  | "right-top"
+  | "left-bottom"
+  | "left-top";
+interface ILabel {
+  checked?: boolean;
+  before?: any;
+  disabled?: boolean;
+  rounded?: boolean;
+}
+
+interface DropdownItem {
+  id: number;
+  title: string;
+  selected: boolean;
+  url?: string;
 }
