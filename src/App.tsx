@@ -79,6 +79,7 @@ function App() {
   const [show, setShow] = useState<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const dropdownHandler = (id: number): void => {
     const updatedItems = items.map((item) => {
@@ -316,18 +317,26 @@ function App() {
           flex: 1,
         }}
       >
-        <Modal>
+        <Button
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        >
+          Open modal
+        </Button>
+        <Modal open={openModal} setOpen={setOpenModal}>
           <div
             style={{
+              backgroundColor: "lightblue",
               padding: "3rem",
               border: "5px solid white",
               marginLeft: "auto",
               marginRight: "auto",
-              marginTop: "auto",
+              marginTop: "calc(50vh - 79px)",
               width: "max-content",
             }}
           >
-            <h1 style={{ color: "white" }}>Hello</h1>
+            <h1>Hello</h1>
           </div>
         </Modal>
       </div>
