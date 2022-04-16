@@ -60,6 +60,7 @@ export default function Dropdown({
   setOpen,
   position = "bottom",
   buttonStyles,
+  ...props
 }: {
   buttonStyles?: {
     [key: string]: string;
@@ -101,7 +102,9 @@ export default function Dropdown({
       ref={ref}
       style={{
         position: "relative",
+        width: "max-content",
       }}
+      {...props}
     >
       <Button
         backgroundColor="white"
