@@ -13,7 +13,7 @@ export default {
       // mock state
       const [open, setOpen] = useState(false);
       return (
-        <StoryFn isOpen={open} title={"Test"} setOpen={setOpen}>
+        <StoryFn isOpen={open} setOpen={setOpen}>
           <h1>Dropdown</h1>
         </StoryFn>
       );
@@ -32,5 +32,5 @@ export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 Primary.args = {
-  position: "left",
+  title: "test",
 };
