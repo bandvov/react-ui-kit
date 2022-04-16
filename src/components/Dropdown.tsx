@@ -10,10 +10,9 @@ const ChildrenContainer = styled.div<{
   isOpen: boolean;
   position: Position;
 }>`
+  background-color: white;
   width: max-content;
   ${(props) => {
-    console.log(props);
-
     switch (props.position) {
       case "bottom":
         return css`
@@ -60,7 +59,11 @@ export default function Dropdown({
   children,
   setOpen,
   position = "bottom",
+  buttonStyles,
 }: {
+  buttonStyles?: {
+    [key: string]: string;
+  };
   position?: Position;
   setOpen: (status: boolean) => void;
   isOpen: boolean;
@@ -69,8 +72,8 @@ export default function Dropdown({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
-  const [offseHeight, setOffsetHeight] = useState<number>(0);
-  const [offseWidth, setOffsetWidth] = useState<number>(0);
+  const [offsetHeight, setOffsetHeight] = useState<number>(0);
+  const [offsetWidth, setOffsetWidth] = useState<number>(0);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -86,8 +89,8 @@ export default function Dropdown({
 
   useEffect(() => {
     if (childrenRef.current) {
-      setOffsetHeight(childrenRef.current.offsetHeight);
-      setOffsetWidth(childrenRef.current.offsetWidth);
+      setOffsetHeight(childrenRef.current.scrollHeight);
+      setOffsetWidth(childrenRef.current.clientWidth);
     }
   }, [childrenRef]);
 
@@ -101,12 +104,12 @@ export default function Dropdown({
       }}
     >
       <Button
+        backgroundColor="white"
         variant={"default-outlined"}
         style={{
-          margin: "auto",
-          width: "100%",
           display: "flex",
           justifyContent: "space-between",
+          ...(buttonStyles || {}),
         }}
         onClick={() => {
           setOpen(!isOpen);
@@ -127,7 +130,9 @@ export default function Dropdown({
       </Button>
       <ChildrenContainer
         offset={
-          position === "left" || position === "right" ? offseHeight : offseWidth
+          position === "left" || position === "right"
+            ? offsetHeight
+            : offsetWidth
         }
         ref={childrenRef}
         isOpen={isOpen}

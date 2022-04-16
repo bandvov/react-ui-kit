@@ -406,6 +406,15 @@ function App() {
             );
           })}
         </Dropdown>
+        <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
+        >
+          <div>
+            <h1>Dropdown</h1>
+          </div>
+        </Dropdown>
       </div>
       <div
         style={{
