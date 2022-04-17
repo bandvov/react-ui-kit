@@ -9,9 +9,10 @@ const ChildrenContainer = styled.div<{
   offset: number;
   isOpen: boolean;
   position: Position;
+  fullWidth: boolean;
 }>`
   background-color: white;
-  width: max-content;
+  width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   ${(props) => {
     switch (props.position) {
       case "bottom":
@@ -60,6 +61,7 @@ export default function Dropdown({
   setOpen,
   position = "bottom",
   buttonStyles,
+  fullWidth = false,
   ...props
 }: {
   buttonStyles?: {
@@ -70,6 +72,7 @@ export default function Dropdown({
   isOpen: boolean;
   title: string;
   children: ReactElement | ReactElement[];
+  fullWidth?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
@@ -102,11 +105,12 @@ export default function Dropdown({
       ref={ref}
       style={{
         position: "relative",
-        width: "max-content",
+        width: fullWidth ? "100%" : "max-content",
       }}
       {...props}
     >
       <Button
+        fullWidth
         backgroundColor="white"
         variant={"default-outlined"}
         style={{
@@ -125,7 +129,7 @@ export default function Dropdown({
       >
         {title}{" "}
         <img
-          style={{ margin: "auto" }}
+          style={{ marginTop: "auto", marginBottom: "auto" }}
           width={10}
           height={10}
           src={iconPath + iconName}
@@ -140,6 +144,7 @@ export default function Dropdown({
         ref={childrenRef}
         isOpen={isOpen}
         position={position}
+        fullWidth={fullWidth}
       >
         {children}
       </ChildrenContainer>
