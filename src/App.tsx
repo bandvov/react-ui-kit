@@ -411,6 +411,7 @@ function App() {
         isOpen={openDropdown1}
         title={"Location"}
         setOpen={setOpenDropdown1}
+        fullWidth
       >
         <div>
           <h1>Dropdown</h1>
