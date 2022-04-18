@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { composeStories, composeStory } from "@storybook/testing-react";
 
 // Every component that is returned maps 1:1 with the stories, but they already contain all decorators from story level, meta level and global level.
@@ -121,5 +121,12 @@ describe("Button tests", () => {
       padding: ".5rem 1rem",
       // border-radius: 5px;
     });
+  });
+  test("Button action", () => {
+    const handler = jest.fn();
+    render(<Button onClick={handler}>Button</Button>);
+    const buttonElement = screen.getByText(/Button/i);
+    fireEvent.click(buttonElement);
+    expect(handler).toHaveBeenCalledTimes(1);
   });
 });

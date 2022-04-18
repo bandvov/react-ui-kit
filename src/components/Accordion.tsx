@@ -9,14 +9,14 @@ const AccordionContainer = styled.div<{ height: number }>`
 
 const AccordionTitle = styled.div`
   padding: 0 1rem;
-  border: .5px solid;
+  border: 0.5px solid;
   margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   :hover {
     cursor: pointer;
-    background-color: #f5f7f6
+    background-color: #f5f7f6;
   }
 `;
 
@@ -50,10 +50,15 @@ export default function AccordionItem({
 
   return (
     <AccordionContainer
+      data-testId={"accordion-container"}
       key={title}
       height={show ? contentHeight + titleHeight : titleHeight + 1}
     >
-      <AccordionTitle ref={titleRef} onClick={() => setShow()}>
+      <AccordionTitle
+        data-testId={"accordion-title"}
+        ref={titleRef}
+        onClick={() => setShow()}
+      >
         {title}
         {show ? (
           <span style={{ fontSize: "32px" }}>&#8722;</span>
@@ -61,10 +66,8 @@ export default function AccordionItem({
           <span style={{ fontSize: "32px" }}>&#43;</span>
         )}
       </AccordionTitle>
-      <div>
-        <div ref={contentRef} style={{ padding: "0.5rem" }}>
-          {children}
-        </div>
+      <div data-testId={"accordion-content"} ref={contentRef}>
+        {children}
       </div>
     </AccordionContainer>
   );

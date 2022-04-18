@@ -100,7 +100,7 @@ const CheckboxContainer = styled.div`
 `;
 
 export default function Checkbox({
-  handler,
+  onChange,
   checked = true,
   label,
   variant = "default",
@@ -112,7 +112,7 @@ export default function Checkbox({
   disabled?: boolean;
   label?: string;
   variant?: "toggle" | "default";
-  handler: () => void;
+  onChange: () => void;
 }) {
   const Component = variant === "toggle" ? ToggleCheckbox : ClassicCheckbox;
   return (
@@ -121,19 +121,23 @@ export default function Checkbox({
         disabled={disabled}
         name="checkbox"
         checked={checked}
-        onChange={!disabled ? handler : () => {}}
+        onChange={!disabled ? onChange : () => {}}
         {...props}
       />
       <Component
+        aria-label="checkbox"
+        aria-disabled={disabled}
+        aria-checked={checked}
+        data-testId={"checkbox"}
         disabled={disabled}
         htmlFor={"checkbox"}
         tabIndex={0}
         checked={checked}
-        onClick={!disabled ? handler : () => {}}
+        onClick={!disabled ? onChange : () => {}}
         {...props}
         onKeyDown={(e): void => {
           if (!disabled && (e.code === "Space" || e.code === "Enter")) {
-            handler();
+            onChange();
           }
         }}
       >

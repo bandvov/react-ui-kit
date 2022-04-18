@@ -9,15 +9,15 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     variant: {
-      options:["default","toggle"],
+      options: ["default", "toggle"],
       control: { type: "radio" },
     },
     disabled: {
-      options:[true,false],
+      options: [true, false],
       control: { type: "boolean" },
     },
     checked: {
-      options:[true,false],
+      options: [true, false],
       control: { type: "boolean" },
     },
   },
@@ -32,8 +32,6 @@ export const DefaultButton = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 DefaultButton.args = {
   checked: true,
-  handler:()=> alert("hello"),
-  variant:"default",
-
-
+  onChange: () => alert("hello"),
+  variant: "default",
 };
