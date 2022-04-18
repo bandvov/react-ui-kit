@@ -92,6 +92,10 @@ function Pagination({
     }
   };
 
+  console.log("current", currentButton);
+  console.log("show", show);
+  console.log("current - show", currentButton + show);
+
   return (
     <div style={{ display: "flex" }}>
       <ul style={{ display: "flex", listStyle: "none" }}>
@@ -161,7 +165,7 @@ function Pagination({
         )}
         {items}
 
-        {baseArray.length - show > currentButton && (
+        {arrayOfCurrentButtons[0] + show <= baseArray.length && (
           <li>
             <button
               onClick={() => {
