@@ -15,5 +15,6 @@ jobs:
           run: npm ci
 
         - name: Run tests 
-          run: npm run test -- --coverage
-
+          run: npm run test
+        - name: Collect coverage  
+          run: npm run coverage
