@@ -6,7 +6,7 @@ import Checkbox from "./components/Checkbox";
 import Dropdown from "./components/Dropdown";
 import Modal from "./components/Modal";
 import { COLORS } from "./CONSTANTS";
-import Pagination from "./Pagination";
+import Pagination from "./components/Pagination";
 import { DropdownItem } from "./types";
 
 const accordionItems: { title: string; content: string | ReactElement }[] = [
@@ -464,6 +464,8 @@ function App() {
         }}
       >
         <Pagination />
+        <Pagination pages={11} />
+        <Pagination pages={16} />
       </div>
     </div>
   );
