@@ -185,7 +185,7 @@ function App() {
         <Checkbox
           disabled
           checked={checked}
-          handler={() => {
+          onChange={() => {
             console.log("click");
             setChecked(!checked);
           }}
@@ -194,14 +194,14 @@ function App() {
         <Checkbox
           rounded={true}
           checked={checked}
-          handler={() => {
+          onChange={() => {
             setChecked(!checked);
           }}
           label={"click me"}
         />
         <Checkbox
           checked={checked}
-          handler={() => {
+          onChange={() => {
             setChecked(!checked);
           }}
           label={"click me"}
@@ -211,7 +211,7 @@ function App() {
           disabled
           variant={"toggle"}
           checked={checked}
-          handler={() => {
+          onChange={() => {
             setChecked(!checked);
           }}
         />
@@ -219,7 +219,7 @@ function App() {
           label="a as dasd as"
           variant={"toggle"}
           checked={checked}
-          handler={() => {
+          onChange={() => {
             setChecked(!checked);
           }}
         />
@@ -238,21 +238,20 @@ function App() {
         <div>
           {accordionItems.map((item, index) => {
             return (
-              <div key={item.title}>
-                <Accordion
-                  show={show === index}
-                  setShow={() => {
-                    if (show === index) {
-                      setShow(null);
-                    } else {
-                      setShow(index);
-                    }
-                  }}
-                  title={item.title}
-                >
-                  {item.content}
-                </Accordion>
-              </div>
+              <Accordion
+                key={item.title}
+                show={show === index}
+                setShow={() => {
+                  if (show === index) {
+                    setShow(null);
+                  } else {
+                    setShow(index);
+                  }
+                }}
+                title={item.title}
+              >
+                {item.content}
+              </Accordion>
             );
           })}
         </div>
@@ -407,17 +406,17 @@ function App() {
             );
           })}
         </Dropdown>
+        <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
+          fullWidth
+        >
+          <div>
+            <h1>Dropdown</h1>
+          </div>
+        </Dropdown>
       </div>
-      <Dropdown
-        isOpen={openDropdown1}
-        title={"Location"}
-        setOpen={setOpenDropdown1}
-        fullWidth
-      >
-        <div>
-          <h1>Dropdown</h1>
-        </div>
-      </Dropdown>
       <div
         style={{
           width: "auto",
