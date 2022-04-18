@@ -48,7 +48,10 @@ function Pagination({
   });
 
   const previousButtonHandler = () => {
-    if (currentButton < arrayOfCurrentButtons[0] && currentButton >= 0) {
+    if (show - currentButton === 0) {
+      setArrayOfCurrentButtons(baseArray.slice(0, show));
+    }
+    if (currentButton < arrayOfCurrentButtons[0] && currentButton > 0) {
       setArrayOfCurrentButtons(
         baseArray.slice(
           arrayOfCurrentButtons[0] - show - 1,
@@ -56,17 +59,16 @@ function Pagination({
         )
       );
     }
+
     if (currentButton + 1 === arrayOfCurrentButtons[0] && currentButton === 0) {
       setCurrentButton(baseArray.length - 1);
-      setArrayOfCurrentButtons(baseArray.slice(baseArray.length - show));
+      setArrayOfCurrentButtons(baseArray.slice(-show));
     } else {
       setCurrentButton(currentButton - 1);
     }
   };
 
   const nextButtonHandler = () => {
-    console.log("here");
-
     if (
       currentButton + 1 >=
       arrayOfCurrentButtons[arrayOfCurrentButtons.length - 1]
@@ -91,10 +93,6 @@ function Pagination({
       setCurrentButton(currentButton + 1);
     }
   };
-
-  console.log("current", currentButton);
-  console.log("show", show);
-  console.log("current - show", currentButton + show);
 
   return (
     <div style={{ display: "flex" }}>
