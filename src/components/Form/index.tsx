@@ -1,3 +1,3 @@
-import FormInput from "./FormInput";
+import FormInput from "./TextInput";
 
 export { FormInput };
