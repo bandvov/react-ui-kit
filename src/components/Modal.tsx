@@ -37,7 +37,6 @@ export default function Modal({
     <StyledModal
       onClick={(e) => {
         setOpen(false);
-        e.stopPropagation();
       }}
       open={open}
     >
