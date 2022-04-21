@@ -100,10 +100,11 @@ const Button: FC<IButton> = ({
   children,
   icon,
   iconLeft,
+  type = "button",
   ...props
 }): ReactElement => {
   return (
-    <StyledButton {...props}>
+    <StyledButton {...props} type={type}>
       {iconLeft}
       {children}
       {icon}

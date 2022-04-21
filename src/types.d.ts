@@ -31,6 +31,7 @@ export interface IButton extends CommonProps {
   iconLeft?: ReactElement;
   disabled?: boolean;
   justify?: "center" | "flex-start" | "flex-end" | "stretch";
+  type?: "button" | "submit";
 }
 
 export interface IBadge extends CommonProps {
