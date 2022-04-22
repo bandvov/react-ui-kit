@@ -1,13 +1,21 @@
 import React, { ReactEventHandler } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { COLORS } from "../../CONSTANTS";
+
 interface IInput {
   error: boolean;
 }
 const Label = styled.label<IInput>`
   position: relative;
   display: inline-block;
-  color: ${(props) => (props.error ? COLORS.red : "")};
+  color: "";
+  ${(props) => {
+    if (props.error) {
+      return css`
+        color: COLORS.red;
+      `;
+    }
+  }};
   span {
     pointer-events: none;
     position: absolute;
@@ -41,16 +49,18 @@ const Input = styled.input.attrs({ type: "text" })<IInput>`
     color: ${(props) => (props.error ? COLORS.red : COLORS.Blue)};
   }
 `;
-export default function FormInput({
+export default function TextInput({
   placeholder,
   error = false,
   value,
   setValue = () => {},
+  helperText,
 }: {
   setValue?: (value: string) => void;
   value?: string;
   error?: boolean;
   placeholder?: string;
+  helperText?: string;
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -67,15 +77,17 @@ export default function FormInput({
         />
         <span>{placeholder}</span>
       </Label>
-      <span
-        style={{
-          color: error ? "red" : "",
-          fontSize: "10px",
-          padding: "5px 10px",
-        }}
-      >
-        helper text
-      </span>
+      {helperText && (
+        <span
+          style={{
+            color: error ? "red" : "",
+            fontSize: "10px",
+            padding: "5px 10px 15px",
+          }}
+        >
+          {helperText}
+        </span>
+      )}
     </div>
   );
 }

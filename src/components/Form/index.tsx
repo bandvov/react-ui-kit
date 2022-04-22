@@ -1,3 +1,4 @@
-import FormInput from "./TextInput";
+import SearchInput from "./SearchInput";
+import TextInput from "./TextInput";
 
-export { FormInput };
+export { TextInput, SearchInput };

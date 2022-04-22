@@ -9,7 +9,7 @@ import { COLORS } from "./CONSTANTS";
 import Pagination from "./components/Pagination";
 import { DropdownItem } from "./types";
 import Wrapper from "./Wrapper";
-import { FormInput } from "./components/Form";
+import { TextInput, SearchInput } from "./components/Form";
 
 const accordionItems: { title: string; content: string | ReactElement }[] = [
   {
@@ -80,6 +80,7 @@ function App() {
   const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
 
   const dropdownHandler = (id: number): void => {
     const updatedItems = items.map((item) => {
@@ -92,6 +93,12 @@ function App() {
     });
 
     setItems(updatedItems);
+  };
+
+  const validate = (value: string) => {
+    console.log(/^[0-9\-\+]{9,15}$/.test(value));
+
+    return !/^[0-9\-\+]{9,15}$/.test(value);
   };
 
   return (
@@ -409,20 +416,30 @@ function App() {
             alert("form submited");
           }}
         >
-          <FormInput setValue={setValue} value={value} />
-          <FormInput setValue={setValue} value={value} />
-          <FormInput setValue={setValue} value={value} />
-          <FormInput setValue={setValue} value={value} />
-          <FormInput setValue={setValue} value={value} />
-          <FormInput
+          <TextInput setValue={setValue} value={value} />
+          <TextInput setValue={setValue} value={value} />
+          <TextInput setValue={setValue} value={value} />
+          <TextInput setValue={setValue} value={value} />
+          <TextInput
+            error={error}
+            helperText="Some text"
+            setValue={(value) => {
+              setValue(value);
+              setError(validate(value));
+            }}
+            value={value}
+          />
+          <TextInput
             setValue={setValue}
             value={value}
-            error
             placeholder="Placeholder"
           />
-          <FormInput placeholder="Placeholder" />
+          <TextInput placeholder="Placeholder" />
           <button type="submit">submit</button>
         </form>
+      </Wrapper>
+      <Wrapper>
+        <SearchInput />
       </Wrapper>
     </div>
   );
