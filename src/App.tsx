@@ -8,6 +8,8 @@ import Modal from "./components/Modal";
 import { COLORS } from "./CONSTANTS";
 import Pagination from "./components/Pagination";
 import { DropdownItem } from "./types";
+import Wrapper from "./Wrapper";
+import { TextInput, SearchInput } from "./components/Form";
 
 const accordionItems: { title: string; content: string | ReactElement }[] = [
   {
@@ -77,6 +79,8 @@ function App() {
   const [openDropdown1, setOpenDropdown1] = useState<boolean>(false);
   const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
 
   const dropdownHandler = (id: number): void => {
     const updatedItems = items.map((item) => {
@@ -89,6 +93,12 @@ function App() {
     });
 
     setItems(updatedItems);
+  };
+
+  const validate = (value: string) => {
+    console.log(/^[0-9\-\+]{9,15}$/.test(value));
+
+    return !/^[0-9\-\+]{9,15}$/.test(value);
   };
 
   return (
@@ -105,17 +115,7 @@ function App() {
         flexDirection: "column",
       }}
     >
-      <div
-        style={{
-          width: "auto",
-          padding: "1rem",
-          border: "1px solid",
-          gap: "20px",
-          display: "flex",
-          flexWrap: "wrap",
-          flex: "1 0 auto",
-        }}
-      >
+      <Wrapper>
         <Button variant="success">{"success"}</Button>
         <Button variant={"danger"}>{"danger"}</Button>
         <Button variant={"error"}>{"error"}</Button>
@@ -138,18 +138,8 @@ function App() {
         <Button iconLeft={<div>&larr;</div>}>
           <span>test button</span>
         </Button>
-      </div>
-      <div
-        style={{
-          width: "auto",
-          padding: "1rem",
-          border: "1px solid",
-          gap: "20px",
-          display: "flex",
-          flexWrap: "wrap",
-          flex: 1,
-        }}
-      >
+      </Wrapper>
+      <Wrapper>
         <Badge label={5}>
           <Button rounded>&copy;</Button>
         </Badge>
@@ -170,18 +160,8 @@ function App() {
         <Badge>
           <Button rounded>&copy;</Button>
         </Badge>
-      </div>
-      <div
-        style={{
-          width: "auto",
-          padding: "1rem",
-          border: "1px solid",
-          gap: "20px",
-          display: "flex",
-          flexWrap: "wrap",
-          flex: "1 0 100%",
-        }}
-      >
+      </Wrapper>
+      <Wrapper>
         <Checkbox
           disabled
           checked={checked}
@@ -223,18 +203,8 @@ function App() {
             setChecked(!checked);
           }}
         />
-      </div>
-      <div
-        style={{
-          width: "auto",
-          padding: "1rem",
-          border: "1px solid",
-          gap: "20px",
-          display: "flex",
-          flexWrap: "wrap",
-          flex: 1,
-        }}
-      >
+      </Wrapper>
+      <Wrapper>
         <div>
           {accordionItems.map((item, index) => {
             return (
@@ -255,18 +225,8 @@ function App() {
             );
           })}
         </div>
-      </div>
-      <div
-        style={{
-          width: "auto",
-          padding: "1rem",
-          border: "1px solid",
-          gap: "20px",
-          display: "flex",
-          flexWrap: "wrap",
-          flex: 1,
-        }}
-      >
+      </Wrapper>
+      <Wrapper>
         <Dropdown
           isOpen={openDropdown}
           title={"Location"}
@@ -410,24 +370,62 @@ function App() {
           isOpen={openDropdown1}
           title={"Location"}
           setOpen={setOpenDropdown1}
+          position={"right"}
+        >
+          <>
+            {items.map((item: DropdownItem) => {
+              return (
+                <div
+                  tabIndex={0}
+                  onKeyDown={(e: any) => {
+                    if (e.code === "Space" || e.code === "Enter") {
+                      setOpenDropdown1(false);
+                      dropdownHandler(item.id);
+                    } else if (e.code === "Escape") {
+                      setOpenDropdown1(false);
+                    }
+                  }}
+                  onClick={() => {
+                    setOpenDropdown1(false);
+                    dropdownHandler(item.id);
+                  }}
+                  style={{
+                    backgroundColor: item.selected ? COLORS.Blue : "white",
+                    color: item.selected ? "white" : "black",
+                    borderBottom: "0.5px solid",
+                    display: "flex",
+                    justifyContent: "stretch",
+                  }}
+                >
+                  <span style={{ padding: "0.2rem .5rem" }}>{item.title}</span>
+                </div>
+              );
+            })}
+            <Dropdown
+              position="right"
+              isOpen={openDropdown1}
+              title={"Location"}
+              setOpen={setOpenDropdown1}
+              fullWidth
+            >
+              <div>
+                <h1>Dropdown</h1>
+              </div>
+            </Dropdown>
+          </>
+        </Dropdown>
+        {/* <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
           fullWidth
         >
           <div>
             <h1>Dropdown</h1>
           </div>
-        </Dropdown>
-      </div>
-      <div
-        style={{
-          width: "auto",
-          padding: "1rem",
-          border: "1px solid",
-          gap: "20px",
-          display: "flex",
-          flexWrap: "wrap",
-          flex: 1,
-        }}
-      >
+        </Dropdown> */}
+      </Wrapper>
+      <Wrapper>
         <Button
           onClick={() => {
             setOpenModal(true);
@@ -437,6 +435,9 @@ function App() {
         </Button>
         <Modal open={openModal} setOpen={setOpenModal}>
           <div
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
             style={{
               backgroundColor: "lightblue",
               padding: "3rem",
@@ -450,22 +451,44 @@ function App() {
             <h1>Hello</h1>
           </div>
         </Modal>
-      </div>
-      <div
-        style={{
-          width: "auto",
-          padding: "1rem",
-          border: "1px solid",
-          gap: "20px",
-          display: "flex",
-          flexWrap: "wrap",
-          flex: 1,
-        }}
-      >
+      </Wrapper>
+      <Wrapper>
         <Pagination />
         <Pagination pages={11} />
         <Pagination pages={16} />
-      </div>
+      </Wrapper>
+      <Wrapper>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert("form submited");
+          }}
+        >
+          <TextInput onChange={setValue} value={value} />
+          <TextInput onChange={setValue} value={value} />
+          <TextInput onChange={setValue} value={value} />
+          <TextInput onChange={setValue} value={value} />
+          <TextInput
+            error={error}
+            helperText="Some text"
+            onChange={(value) => {
+              setValue(value);
+              setError(validate(value));
+            }}
+            value={value}
+          />
+          <TextInput
+            onChange={setValue}
+            value={value}
+            placeholder="Placeholder"
+          />
+          <TextInput disabled placeholder="Placeholder" />
+          <button type="submit">submit</button>
+        </form>
+      </Wrapper>
+      <Wrapper>
+        <SearchInput />
+      </Wrapper>
     </div>
   );
 }
