@@ -1,3 +1,4 @@
+import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Button from "./Button";
 // Every component that is returned maps 1:1 with the stories, but they already contain all decorators from story level, meta level and global level.
@@ -13,6 +14,9 @@ describe("Button tests", () => {
       backgroundColor: COLORS.Blue,
       fontSize: "16px",
       padding: ".5rem 1rem",
+      width: "max-content",
+      borderRadius: "5px",
+      color: "white",
     });
   });
   test("Test Default outlined button styles", () => {
@@ -112,20 +116,51 @@ describe("Button tests", () => {
       // border-radius: 5px;
     });
   });
+  test("Test button border radius", () => {
+    render(
+      <Button borderRadius="15px" disabled onClick={() => {}}>
+        radius
+      </Button>
+    );
+    const buttonElement = screen.getByText(/radius/i);
+    expect(buttonElement).toHaveStyle({
+      borderRadius: "15px",
+    });
+  });
+
   test("Test rounded button styles", () => {
     render(
-      <Button variant="error-outlined" onClick={() => {}}>
+      <Button rounded onClick={() => {}}>
         rounded
       </Button>
     );
     const buttonElement = screen.getByText(/rounded/i);
-    expect(buttonElement).toMatchSnapshot();
+
     expect(buttonElement).toHaveStyle({
-      backgroundColor: "transparent",
-      color: COLORS.red,
-      outline: `1px solid ${COLORS.red}`,
-      padding: ".5rem 1rem",
-      // border-radius: 5px;
+      borderRadius: "50%",
+    });
+  });
+  test("Test button font size", () => {
+    render(
+      <Button fontSize="25px" onClick={() => {}}>
+        font
+      </Button>
+    );
+    const buttonElement = screen.getByText(/font/i);
+
+    expect(buttonElement).toHaveStyle({
+      fontSize: "25px",
+    });
+  });
+  test("Test button full width", () => {
+    render(
+      <Button fullWidth onClick={() => {}}>
+        fullwidth
+      </Button>
+    );
+    const buttonElement = screen.getByText(/fullwidth/i);
+    expect(buttonElement).toHaveStyle({
+      width: "100%",
     });
   });
   test("Button action", () => {
