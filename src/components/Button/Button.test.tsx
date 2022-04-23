@@ -9,7 +9,7 @@ import { COLORS } from "../../CONSTANTS";
 describe("Button tests", () => {
   test("Test default button styles", () => {
     render(<Button onClick={() => {}}>Default</Button>);
-    const buttonElement = screen.getByText(/Default/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: COLORS.Blue,
       fontSize: "16px",
@@ -25,7 +25,7 @@ describe("Button tests", () => {
         Default outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Default outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.Blue,
@@ -40,7 +40,7 @@ describe("Button tests", () => {
         Success
       </Button>
     );
-    const buttonElement = screen.getByText(/Success/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: COLORS.green,
     });
@@ -51,7 +51,7 @@ describe("Button tests", () => {
         Success outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Success outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.green,
@@ -66,7 +66,7 @@ describe("Button tests", () => {
         Danger
       </Button>
     );
-    const buttonElement = screen.getByText(/Danger/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: COLORS.orange,
       padding: ".5rem 1rem",
@@ -79,7 +79,7 @@ describe("Button tests", () => {
         Danger outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Danger outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.orange,
@@ -107,7 +107,7 @@ describe("Button tests", () => {
         Error outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Error outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.red,
@@ -122,7 +122,7 @@ describe("Button tests", () => {
         radius
       </Button>
     );
-    const buttonElement = screen.getByText(/radius/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       borderRadius: "15px",
     });
@@ -134,8 +134,7 @@ describe("Button tests", () => {
         rounded
       </Button>
     );
-    const buttonElement = screen.getByText(/rounded/i);
-
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       borderRadius: "50%",
     });
@@ -146,8 +145,7 @@ describe("Button tests", () => {
         font
       </Button>
     );
-    const buttonElement = screen.getByText(/font/i);
-
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       fontSize: "25px",
     });
@@ -158,7 +156,7 @@ describe("Button tests", () => {
         fullwidth
       </Button>
     );
-    const buttonElement = screen.getByText(/fullwidth/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       width: "100%",
     });

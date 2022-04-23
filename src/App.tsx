@@ -163,6 +163,9 @@ function App() {
         <Badge>
           <Button rounded>&copy;</Button>
         </Badge>
+        <Badge position="bottom">
+          <Button rounded>&copy;</Button>
+        </Badge>
       </Wrapper>
       <Wrapper>
         <Checkbox

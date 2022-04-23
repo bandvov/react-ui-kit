@@ -68,7 +68,7 @@ const Badge: FC<IBadge> = ({
 }): ReactElement => {
   return (
     <div style={{ position: "relative", width: "max-content" }}>
-      <StyledBadge className={className} {...props}>
+      <StyledBadge data-testId="badge" className={className} {...props}>
         {label}
       </StyledBadge>
       {children}

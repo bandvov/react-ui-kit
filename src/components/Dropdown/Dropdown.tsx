@@ -122,6 +122,7 @@ export default function Dropdown({
       >
         {title}{" "}
         <img
+          alt={isOpen ? "arrow up" : "arrowDown"}
           style={{ marginTop: "auto", marginBottom: "auto" }}
           width={10}
           height={10}

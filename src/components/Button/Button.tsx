@@ -104,7 +104,7 @@ const Button: FC<IButton> = ({
   ...props
 }): ReactElement => {
   return (
-    <StyledButton {...props} type={type}>
+    <StyledButton data-testId={"button"} {...props} type={type}>
       {iconLeft}
       {children}
       {icon}
