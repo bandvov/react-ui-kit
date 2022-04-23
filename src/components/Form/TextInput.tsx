@@ -4,6 +4,7 @@ import { COLORS } from "../../CONSTANTS";
 
 interface IInput {
   error: boolean;
+  disabled?: boolean;
 }
 const Label = styled.label<IInput>`
   position: relative;
@@ -36,7 +37,7 @@ const Input = styled.input.attrs({ type: "text" })<IInput>`
   color: ${(props) => (props.error ? COLORS.red : "")};
   :focus {
     outline: none;
-    box-shadow: 0 0 1px 1px
+    box-shadow: 0 0 0.5px 0.5px
       ${(props) => (props.error ? COLORS.red : COLORS.Blue)}b0;
   }
   :focus + span,
@@ -53,14 +54,16 @@ export default function TextInput({
   placeholder,
   error = false,
   value,
-  setValue = () => {},
+  onChange = () => {},
   helperText,
+  ...props
 }: {
-  setValue?: (value: string) => void;
+  onChange?: (value: string) => void;
   value?: string;
   error?: boolean;
   placeholder?: string;
   helperText?: string;
+  disabled?: boolean;
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -68,12 +71,12 @@ export default function TextInput({
         <Input
           onChange={(e) => {
             console.log("onChange");
-
-            setValue(e.currentTarget.value);
+            onChange(e.currentTarget.value);
           }}
           error={error}
           placeholder=" "
           value={value}
+          {...props}
         />
         <span>{placeholder}</span>
       </Label>

@@ -370,12 +370,60 @@ function App() {
           isOpen={openDropdown1}
           title={"Location"}
           setOpen={setOpenDropdown1}
+          position={"right"}
+        >
+          <>
+            {items.map((item: DropdownItem) => {
+              return (
+                <div
+                  tabIndex={0}
+                  onKeyDown={(e: any) => {
+                    if (e.code === "Space" || e.code === "Enter") {
+                      setOpenDropdown1(false);
+                      dropdownHandler(item.id);
+                    } else if (e.code === "Escape") {
+                      setOpenDropdown1(false);
+                    }
+                  }}
+                  onClick={() => {
+                    setOpenDropdown1(false);
+                    dropdownHandler(item.id);
+                  }}
+                  style={{
+                    backgroundColor: item.selected ? COLORS.Blue : "white",
+                    color: item.selected ? "white" : "black",
+                    borderBottom: "0.5px solid",
+                    display: "flex",
+                    justifyContent: "stretch",
+                  }}
+                >
+                  <span style={{ padding: "0.2rem .5rem" }}>{item.title}</span>
+                </div>
+              );
+            })}
+            <Dropdown
+              position="right"
+              isOpen={openDropdown1}
+              title={"Location"}
+              setOpen={setOpenDropdown1}
+              fullWidth
+            >
+              <div>
+                <h1>Dropdown</h1>
+              </div>
+            </Dropdown>
+          </>
+        </Dropdown>
+        {/* <Dropdown
+          isOpen={openDropdown1}
+          title={"Location"}
+          setOpen={setOpenDropdown1}
           fullWidth
         >
           <div>
             <h1>Dropdown</h1>
           </div>
-        </Dropdown>
+        </Dropdown> */}
       </Wrapper>
       <Wrapper>
         <Button
@@ -416,25 +464,25 @@ function App() {
             alert("form submited");
           }}
         >
-          <TextInput setValue={setValue} value={value} />
-          <TextInput setValue={setValue} value={value} />
-          <TextInput setValue={setValue} value={value} />
-          <TextInput setValue={setValue} value={value} />
+          <TextInput onChange={setValue} value={value} />
+          <TextInput onChange={setValue} value={value} />
+          <TextInput onChange={setValue} value={value} />
+          <TextInput onChange={setValue} value={value} />
           <TextInput
             error={error}
             helperText="Some text"
-            setValue={(value) => {
+            onChange={(value) => {
               setValue(value);
               setError(validate(value));
             }}
             value={value}
           />
           <TextInput
-            setValue={setValue}
+            onChange={setValue}
             value={value}
             placeholder="Placeholder"
           />
-          <TextInput placeholder="Placeholder" />
+          <TextInput disabled placeholder="Placeholder" />
           <button type="submit">submit</button>
         </form>
       </Wrapper>

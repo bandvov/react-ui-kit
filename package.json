@@ -30,7 +30,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs-build",
     "deploy": "gh-pages -d  docs-build",
-    "coverage":"npm run test -- --coverage ."
+    "coverage": "npm run test -- --coverage ."
   },
   "eslintConfig": {
     "extends": [
@@ -69,7 +69,6 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-interactions": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
