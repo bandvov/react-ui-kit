@@ -9,7 +9,7 @@ import { COLORS } from "./CONSTANTS";
 import Pagination from "./components/Pagination";
 import { DropdownItem } from "./types";
 import Wrapper from "./Wrapper";
-import { TextInput, SearchInput } from "./components/Form";
+import { TextInput } from "./components/Form";
 
 const accordionItems: { title: string; content: string | ReactElement }[] = [
   {
@@ -485,9 +485,6 @@ function App() {
           <TextInput disabled placeholder="Placeholder" />
           <button type="submit">submit</button>
         </form>
-      </Wrapper>
-      <Wrapper>
-        <SearchInput />
       </Wrapper>
     </div>
   );
