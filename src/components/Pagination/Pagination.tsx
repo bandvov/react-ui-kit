@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { COLORS } from "../CONSTANTS";
-import Button from "./Button";
+import { COLORS } from "../../CONSTANTS";
+import Button from "../Button/Button";
 
 function Pagination({
   pages = 1,

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from "react";
 import styled, { css } from "styled-components";
-import { COLORS, STATUS } from "../CONSTANTS";
-import { IButton } from "../types";
+import { COLORS, STATUS } from "../../CONSTANTS";
+import { IButton } from "../../types";
 
 const StyledButton = styled.button<IButton>`
   display: flex;

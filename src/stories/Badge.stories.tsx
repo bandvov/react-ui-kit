@@ -1,8 +1,6 @@
 import React, { ReactNode } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Badge from "../components/Badge";
-import Button from "../components/Button";
-
+import { Badge, Button } from "../components";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -11,9 +9,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     position: {
-      options: [
-      "top","bottom",
-      ],
+      options: ["top", "bottom"],
       control: { type: "radio" },
     },
   },
@@ -25,6 +21,6 @@ const Template: ComponentStory<typeof Badge> = (args) => <Badge {...args} />;
 export const BadgeTemplate = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 BadgeTemplate.args = {
-  label:"",
-  children: <Button rounded >&copy;</Button>,
+  label: "",
+  children: <Button rounded>&copy;</Button>,
 };

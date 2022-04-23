@@ -1,7 +1,7 @@
 import React, { ReactElement, useRef, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import Button from "../components/Button";
-import { Position } from "../types";
+import Button from "../Button/Button";
+import { Position } from "../../types";
 
 const iconPath = process.env.PUBLIC_URL + "/icons/";
 

@@ -58,6 +58,7 @@ interface ILabel {
   before?: any;
   disabled?: boolean;
   rounded?: boolean;
+  backgroundColor?: string;
 }
 
 interface DropdownItem {

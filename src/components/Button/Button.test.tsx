@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Button from "./Button";
 // Every component that is returned maps 1:1 with the stories, but they already contain all decorators from story level, meta level and global level.
-import { COLORS } from "../CONSTANTS";
+import { COLORS } from "../../CONSTANTS";
 
 // Returns a component that already contain all decorators from story level, meta level and global level.
 

@@ -1,15 +1,17 @@
 import React, { useState, ReactElement } from "react";
-import Accordion from "./components/Accordion";
-import Badge from "./components/Badge";
-import Button from "./components/Button";
-import Checkbox from "./components/Checkbox";
-import Dropdown from "./components/Dropdown";
-import Modal from "./components/Modal";
+import {
+  Accordion,
+  Badge,
+  Button,
+  Checkbox,
+  Pagination,
+  Dropdown,
+  Modal,
+  TextInput,
+} from "./components";
 import { COLORS } from "./CONSTANTS";
-import Pagination from "./components/Pagination";
 import { DropdownItem } from "./types";
 import Wrapper from "./Wrapper";
-import { TextInput } from "./components/Form";
 
 const accordionItems: { title: string; content: string | ReactElement }[] = [
   {
@@ -77,6 +79,7 @@ function App() {
   const [show, setShow] = useState<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [openDropdown1, setOpenDropdown1] = useState<boolean>(false);
+  const [openInnerDropdown, setOpenInnerDropdown] = useState<boolean>(false);
   const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [value, setValue] = useState("");
@@ -173,6 +176,23 @@ function App() {
         />
         <Checkbox
           rounded={true}
+          checked={checked}
+          onChange={() => {
+            setChecked(!checked);
+          }}
+          label={"click me"}
+        />
+        <Checkbox
+          backgroundColor="green"
+          rounded={true}
+          checked={checked}
+          onChange={() => {
+            setChecked(!checked);
+          }}
+          label={"click me"}
+        />
+        <Checkbox
+          backgroundColor="green"
           checked={checked}
           onChange={() => {
             setChecked(!checked);
@@ -403,18 +423,21 @@ function App() {
             })}
             <Dropdown
               position="right"
-              isOpen={openDropdown1}
+              isOpen={openInnerDropdown}
               title={"Location"}
-              setOpen={setOpenDropdown1}
-              fullWidth
+              setOpen={setOpenInnerDropdown}
             >
-              <div>
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 <h1>Dropdown</h1>
               </div>
             </Dropdown>
           </>
         </Dropdown>
-        {/* <Dropdown
+        <Dropdown
           isOpen={openDropdown1}
           title={"Location"}
           setOpen={setOpenDropdown1}
@@ -423,7 +446,7 @@ function App() {
           <div>
             <h1>Dropdown</h1>
           </div>
-        </Dropdown> */}
+        </Dropdown>
       </Wrapper>
       <Wrapper>
         <Button

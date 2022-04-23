@@ -22,7 +22,7 @@ const AccordionTitle = styled.div`
   }
 `;
 
-export default function AccordionItem({
+export default function Accordion({
   show,
   setShow,
   title,

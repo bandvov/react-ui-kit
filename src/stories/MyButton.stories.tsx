@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
-import Button from "../components/Button";
+import { Button } from "../components";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -27,7 +26,7 @@ export default {
       control: { type: "select" },
     },
     disabled: {
-      options:[true,false],
+      options: [true, false],
       control: { type: "boolean" },
     },
     icon: {
