@@ -1,21 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { composeStories, composeStory } from "@storybook/testing-react";
-
+import Button from "./Button";
 // Every component that is returned maps 1:1 with the stories, but they already contain all decorators from story level, meta level and global level.
-import Meta, { DefaultButton } from "../stories/MyButton.stories";
 import { COLORS } from "../CONSTANTS";
 
 // Returns a component that already contain all decorators from story level, meta level and global level.
-const Button = composeStory(DefaultButton, Meta);
 
 describe("Button tests", () => {
-  test("onclick handler is called", () => {
-    const onClickSpy = jest.fn();
-    render(<Button onClick={onClickSpy} />);
-    const buttonElement = screen.getByText(/Button/i);
-    buttonElement.click();
-    expect(onClickSpy).toHaveBeenCalled();
-  });
   test("Test default button styles", () => {
     render(<Button onClick={() => {}}>Default</Button>);
     const buttonElement = screen.getByText(/Default/i);
@@ -114,6 +104,22 @@ describe("Button tests", () => {
       </Button>
     );
     const buttonElement = screen.getByText(/Error outlined/i);
+    expect(buttonElement).toHaveStyle({
+      backgroundColor: "transparent",
+      color: COLORS.red,
+      outline: `1px solid ${COLORS.red}`,
+      padding: ".5rem 1rem",
+      // border-radius: 5px;
+    });
+  });
+  test("Test rounded button styles", () => {
+    render(
+      <Button variant="error-outlined" onClick={() => {}}>
+        rounded
+      </Button>
+    );
+    const buttonElement = screen.getByText(/rounded/i);
+    expect(buttonElement).toMatchSnapshot();
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.red,
