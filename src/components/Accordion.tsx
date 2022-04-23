@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const AccordionContainer = styled.div<{ height: number }>`
+  border: 0.5px solid;
   height: ${(prpps) => prpps.height}px;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
@@ -9,7 +10,8 @@ const AccordionContainer = styled.div<{ height: number }>`
 
 const AccordionTitle = styled.div`
   padding: 0 1rem;
-  border: 0.5px solid;
+  border-bottom: 0.5px solid;
+  border-collapse: collapse;
   margin: 0;
   display: flex;
   justify-content: space-between;

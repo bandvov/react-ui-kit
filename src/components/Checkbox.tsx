@@ -90,6 +90,7 @@ const ClassicCheckbox = styled.label<ILabel>`
   }
 `;
 const CheckboxContainer = styled.div`
+  width: max-content;
   align-items: center;
   label {
     display: flex;
@@ -141,7 +142,7 @@ export default function Checkbox({
           }
         }}
       >
-        <span> {label}</span>
+        {label && <span> {label}</span>}
       </Component>
     </CheckboxContainer>
   );
