@@ -13,41 +13,34 @@ const ChildrenContainer = styled.div<{
 }>`
   background-color: white;
   width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
   ${(props) => {
     switch (props.position) {
       case "bottom":
         return css`
           top: 40px;
           left: calc(-${props.offset / 2 + "px"} + 50%);
-          box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1),
-            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
         `;
       case "top":
         return css`
           bottom: 40px;
           left: calc(-${props.offset / 2 + "px"} + 50%);
-          box-shadow: 0 -0.5em 1em rgba(0, 0, 0, 0.1),
-            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
         `;
       case "left":
         return css`
           top: calc(-${props.offset / 2 + "px"} + 50%);
           right: calc(100% + 10px);
-          box-shadow: 0 0 0 2px rgb(255, 255, 255),
-            0 0.5em 1em rgba(0, 0, 0, 0.1), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
         `;
       case "right":
         return css`
           top: calc(-${props.offset / 2 + "px"} + 50%);
           left: calc(100% + 10px);
-          box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1),
-            0 0 0 2px rgb(255, 255, 255), 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.3);
         `;
       default:
         break;
     }
   }}
-  overflow: hidden;
+  overflow: ${(props) => (props.isOpen ? "" : "hidden")};
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
   transition: all 0.2s ease-in-out;
   height: ${(props) => (props.isOpen ? "" : 0)};
