@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
+import { COLORS } from "../CONSTANTS";
+import Button from "./Button";
 
 function Pagination({
-  pages = 5,
+  pages = 1,
   show = 4,
+  handler,
 }: {
   pages?: number;
   show?: number;
+  handler: (value: number) => void;
 }) {
   const baseArray = Array(pages)
     .fill("a")
@@ -21,28 +25,31 @@ function Pagination({
   }, []);
 
   useEffect(() => {
-    console.log(currentButton);
+    console.log("current", currentButton);
+    console.log("show", show);
+    console.log("arrayOfCurrentButtons", arrayOfCurrentButtons[0]);
+    console.log(currentButton < show);
+    handler(currentButton);
   }, [currentButton]);
 
   const items = arrayOfCurrentButtons.map((item, index) => {
     const isCurrentButton = currentButton === item - 1;
     return (
       <li>
-        <button
+        <Button
+          color={isCurrentButton ? "white" : ""}
+          padding="4px 10px"
+          variant="default-outlined"
           onClick={() => setCurrentButton(item - 1)}
           style={{
-            backgroundColor: isCurrentButton ? "blue" : "",
-            color: isCurrentButton ? "white" : "black",
-            height: "26px",
-            borderRadius: 0,
-            border: "1px solid lightgray",
-            cursor: "pointer",
-            minWidth: "26px",
+            backgroundColor: isCurrentButton ? COLORS.Blue : "",
+            marginLeft: "2px",
+            marginRight: "2px",
           }}
           key={index}
         >
           {item}
-        </button>
+        </Button>
       </li>
     );
   });
@@ -96,48 +103,42 @@ function Pagination({
 
   return (
     <div style={{ display: "flex" }}>
-      <ul style={{ display: "flex", listStyle: "none" }}>
+      <ul style={{ display: "flex", listStyle: "none", padding: 0 }}>
         <li>
-          <button
+          <Button
+            variant="default-outlined"
+            padding="4px 10px"
             disabled={currentButton === 0}
             onClick={() => {
               setCurrentButton(0);
               setArrayOfCurrentButtons(baseArray.slice(0, show));
             }}
             style={{
-              height: "26px",
-              width: "max-content",
-              fontSize: "16px",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid lightgray",
-              cursor: "pointer",
-              minWidth: "20px",
+              marginLeft: "2px",
+              marginRight: "2px",
             }}
           >
             &laquo;
-          </button>
+          </Button>
         </li>
         <li>
-          <button
+          <Button
+            variant="default-outlined"
+            padding="4px 10px"
             onClick={previousButtonHandler}
             style={{
-              height: "26px",
-              width: "max-content",
-              fontSize: "16px",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid lightgray",
-              cursor: "pointer",
-              minWidth: "20px",
+              marginLeft: "2px",
+              marginRight: "2px",
             }}
           >
             &#8249;
-          </button>
+          </Button>
         </li>
         {currentButton >= show && (
           <li>
-            <button
+            <Button
+              padding="4px 10px"
+              variant="default-outlined"
               onClick={() => {
                 console.log(currentButton);
                 setArrayOfCurrentButtons(
@@ -150,22 +151,21 @@ function Pagination({
                 setCurrentButton(arrayOfCurrentButtons[0] - 2);
               }}
               style={{
-                height: "26px",
-                borderRadius: 0,
-                cursor: "pointer",
-                border: "1px solid lightgray",
-                minWidth: "26px",
+                marginLeft: "2px",
+                marginRight: "2px",
               }}
             >
               {"..."}
-            </button>
+            </Button>
           </li>
         )}
         {items}
 
         {arrayOfCurrentButtons[0] + show <= baseArray.length && (
           <li>
-            <button
+            <Button
+              padding="4px 10px"
+              variant="default-outlined"
               onClick={() => {
                 console.log("elipsis");
                 if (
@@ -197,55 +197,44 @@ function Pagination({
                 }
               }}
               style={{
-                height: "26px",
-                borderRadius: 0,
-                border: "1px solid lightgray",
-                cursor: "pointer",
-                minWidth: "26px",
+                marginLeft: "2px",
+                marginRight: "2px",
               }}
             >
               {"..."}
-            </button>
+            </Button>
           </li>
         )}
 
         <li>
-          <button
+          <Button
+            padding="4px 10px"
+            variant="default-outlined"
             onClick={nextButtonHandler}
             style={{
-              height: "26px",
-              width: "max-content",
-              fontSize: "16px",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid lightgray",
-              cursor: "pointer",
-              minWidth: "20px",
+              marginLeft: "2px",
+              marginRight: "2px",
             }}
           >
             &rsaquo;
-          </button>
+          </Button>
         </li>
         <li>
-          <button
+          <Button
+            padding="4px 10px"
+            variant="default-outlined"
             disabled={currentButton + 1 === baseArray[baseArray.length - 1]}
             onClick={() => {
               setCurrentButton(baseArray.length - 1);
               setArrayOfCurrentButtons(baseArray.slice(-show));
             }}
             style={{
-              height: "26px",
-              width: "max-content",
-              fontSize: "16px",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid lightgray",
-              cursor: "pointer",
-              minWidth: "20px",
+              marginLeft: "2px",
+              marginRight: "2px",
             }}
           >
             &raquo;
-          </button>
+          </Button>
         </li>
       </ul>
     </div>

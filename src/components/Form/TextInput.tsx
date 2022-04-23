@@ -45,7 +45,7 @@ const Input = styled.input.attrs({ type: "text" })<IInput>`
     padding: 0 0.2rem;
     opacity: 1;
     line-height: 16px;
-    transform: scale(0.7) translateY(-120%) translateX(-20px);
+    transform: scale(0.5) translateY(-170%) translateX(-45px);
     background-color: white;
     color: ${(props) => (props.error ? COLORS.red : COLORS.Blue)};
   }

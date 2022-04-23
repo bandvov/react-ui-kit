@@ -9,7 +9,7 @@ import { COLORS } from "./CONSTANTS";
 import Pagination from "./components/Pagination";
 import { DropdownItem } from "./types";
 import Wrapper from "./Wrapper";
-import { TextInput, SearchInput } from "./components/Form";
+import { TextInput } from "./components/Form";
 
 const accordionItems: { title: string; content: string | ReactElement }[] = [
   {
@@ -453,9 +453,23 @@ function App() {
         </Modal>
       </Wrapper>
       <Wrapper>
-        <Pagination />
-        <Pagination pages={11} />
-        <Pagination pages={16} />
+        <Pagination
+          handler={(value: number) => {
+            console.log(value);
+          }}
+        />
+        <Pagination
+          handler={(value: number) => {
+            console.log(value);
+          }}
+          pages={9}
+        />
+        <Pagination
+          handler={(value: number) => {
+            console.log(value);
+          }}
+          pages={316}
+        />
       </Wrapper>
       <Wrapper>
         <form
@@ -485,9 +499,6 @@ function App() {
           <TextInput disabled placeholder="Placeholder" />
           <button type="submit">submit</button>
         </form>
-      </Wrapper>
-      <Wrapper>
-        <SearchInput />
       </Wrapper>
     </div>
   );
