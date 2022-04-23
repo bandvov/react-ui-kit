@@ -453,9 +453,23 @@ function App() {
         </Modal>
       </Wrapper>
       <Wrapper>
-        <Pagination />
-        <Pagination pages={11} />
-        <Pagination pages={16} />
+        <Pagination
+          handler={(value: number) => {
+            console.log(value);
+          }}
+        />
+        <Pagination
+          handler={(value: number) => {
+            console.log(value);
+          }}
+          pages={9}
+        />
+        <Pagination
+          handler={(value: number) => {
+            console.log(value);
+          }}
+          pages={316}
+        />
       </Wrapper>
       <Wrapper>
         <form

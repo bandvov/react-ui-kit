@@ -5,9 +5,11 @@ import Button from "./Button";
 function Pagination({
   pages = 1,
   show = 4,
+  handler,
 }: {
   pages?: number;
   show?: number;
+  handler: (value: number) => void;
 }) {
   const baseArray = Array(pages)
     .fill("a")
@@ -23,7 +25,11 @@ function Pagination({
   }, []);
 
   useEffect(() => {
-    console.log(currentButton);
+    console.log("current", currentButton);
+    console.log("show", show);
+    console.log("arrayOfCurrentButtons", arrayOfCurrentButtons[0]);
+    console.log(currentButton < show);
+    handler(currentButton);
   }, [currentButton]);
 
   const items = arrayOfCurrentButtons.map((item, index) => {
@@ -97,7 +103,7 @@ function Pagination({
 
   return (
     <div style={{ display: "flex" }}>
-      <ul style={{ display: "flex", listStyle: "none" }}>
+      <ul style={{ display: "flex", listStyle: "none", padding: 0 }}>
         <li>
           <Button
             variant="default-outlined"
