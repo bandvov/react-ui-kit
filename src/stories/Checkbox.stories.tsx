@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Checkbox from "../components/Checkbox";
+import { Checkbox } from "../components";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { COLORS } from "../CONSTANTS";
-import { ILabel } from "../types";
+import { COLORS } from "../../CONSTANTS";
+import { ILabel } from "../../types";
 
 const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })<{
   name: string;
@@ -69,14 +69,20 @@ const ClassicCheckbox = styled.label<ILabel>`
     if (props.checked) {
       return css`
         ::before {
-          background-color: ${props.disabled ? COLORS.gray : COLORS.Blue};
+          background-color: ${props.disabled
+            ? COLORS.gray
+            : props.backgroundColor
+            ? props.backgroundColor
+            : COLORS.Blue};
+          border: 1px solid
+            ${props.backgroundColor ? props.backgroundColor : COLORS.Blue};
         }
         ::after {
           content: "";
           position: absolute;
           width: 10px;
           height: 5px;
-          top: 5px;
+          top: 6px;
           border-left: 2px solid white;
           border-bottom: 2px solid white;
           transform: translateX(5px) rotate(-45deg);
@@ -102,12 +108,13 @@ const CheckboxContainer = styled.div`
 
 export default function Checkbox({
   onChange,
-  checked = true,
+  checked = false,
   label,
   variant = "default",
   disabled,
   ...props
 }: {
+  backgroundColor?: string;
   rounded?: boolean;
   checked: boolean;
   disabled?: boolean;

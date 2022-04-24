@@ -1,18 +1,22 @@
+import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Button from "./Button";
 // Every component that is returned maps 1:1 with the stories, but they already contain all decorators from story level, meta level and global level.
-import { COLORS } from "../CONSTANTS";
+import { COLORS } from "../../CONSTANTS";
 
 // Returns a component that already contain all decorators from story level, meta level and global level.
 
 describe("Button tests", () => {
   test("Test default button styles", () => {
     render(<Button onClick={() => {}}>Default</Button>);
-    const buttonElement = screen.getByText(/Default/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: COLORS.Blue,
       fontSize: "16px",
       padding: ".5rem 1rem",
+      width: "max-content",
+      borderRadius: "5px",
+      color: "white",
     });
   });
   test("Test Default outlined button styles", () => {
@@ -21,7 +25,7 @@ describe("Button tests", () => {
         Default outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Default outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.Blue,
@@ -36,7 +40,7 @@ describe("Button tests", () => {
         Success
       </Button>
     );
-    const buttonElement = screen.getByText(/Success/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: COLORS.green,
     });
@@ -47,7 +51,7 @@ describe("Button tests", () => {
         Success outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Success outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.green,
@@ -62,7 +66,7 @@ describe("Button tests", () => {
         Danger
       </Button>
     );
-    const buttonElement = screen.getByText(/Danger/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: COLORS.orange,
       padding: ".5rem 1rem",
@@ -75,7 +79,7 @@ describe("Button tests", () => {
         Danger outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Danger outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.orange,
@@ -103,7 +107,7 @@ describe("Button tests", () => {
         Error outlined
       </Button>
     );
-    const buttonElement = screen.getByText(/Error outlined/i);
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
       backgroundColor: "transparent",
       color: COLORS.red,
@@ -112,20 +116,49 @@ describe("Button tests", () => {
       // border-radius: 5px;
     });
   });
+  test("Test button border radius", () => {
+    render(
+      <Button borderRadius="15px" disabled onClick={() => {}}>
+        radius
+      </Button>
+    );
+    const buttonElement = screen.getByTestId(/button/i);
+    expect(buttonElement).toHaveStyle({
+      borderRadius: "15px",
+    });
+  });
+
   test("Test rounded button styles", () => {
     render(
-      <Button variant="error-outlined" onClick={() => {}}>
+      <Button rounded onClick={() => {}}>
         rounded
       </Button>
     );
-    const buttonElement = screen.getByText(/rounded/i);
-    expect(buttonElement).toMatchSnapshot();
+    const buttonElement = screen.getByTestId(/button/i);
     expect(buttonElement).toHaveStyle({
-      backgroundColor: "transparent",
-      color: COLORS.red,
-      outline: `1px solid ${COLORS.red}`,
-      padding: ".5rem 1rem",
-      // border-radius: 5px;
+      borderRadius: "50%",
+    });
+  });
+  test("Test button font size", () => {
+    render(
+      <Button fontSize="25px" onClick={() => {}}>
+        font
+      </Button>
+    );
+    const buttonElement = screen.getByTestId(/button/i);
+    expect(buttonElement).toHaveStyle({
+      fontSize: "25px",
+    });
+  });
+  test("Test button full width", () => {
+    render(
+      <Button fullWidth onClick={() => {}}>
+        fullwidth
+      </Button>
+    );
+    const buttonElement = screen.getByTestId(/button/i);
+    expect(buttonElement).toHaveStyle({
+      width: "100%",
     });
   });
   test("Button action", () => {

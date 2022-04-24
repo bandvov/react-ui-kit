@@ -1,7 +1,7 @@
 import React, { ReactElement, useRef, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import Button from "../components/Button";
-import { Position } from "../types";
+import Button from "../Button/Button";
+import { Position } from "../../types";
 
 const iconPath = process.env.PUBLIC_URL + "/icons/";
 
@@ -122,6 +122,7 @@ export default function Dropdown({
       >
         {title}{" "}
         <img
+          alt={isOpen ? "arrow up" : "arrowDown"}
           style={{ marginTop: "auto", marginBottom: "auto" }}
           width={10}
           height={10}
@@ -129,6 +130,10 @@ export default function Dropdown({
         />
       </Button>
       <ChildrenContainer
+        data-testId="children"
+        onBlur={() => {
+          setOpen(false);
+        }}
         offset={
           position === "left" || position === "right"
             ? offsetHeight
