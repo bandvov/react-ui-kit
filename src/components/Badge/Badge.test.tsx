@@ -37,4 +37,29 @@ describe("Badge", () => {
       borderRadius: "50%",
     });
   });
+  test("Badge with label", () => {
+    render(
+      <Badge label={222}>
+        <Button>Click</Button>
+      </Badge>
+    );
+    const element = screen.getByTestId(/badge/i);
+    expect(element).toHaveStyle({
+      backgroundColor: COLORS.green,
+      left: "80%",
+      top: "-40%",
+      borderRadius: "13px",
+    });
+  });
+  test("Badge with custom background color", () => {
+    render(
+      <Badge background={COLORS.red}>
+        <Button>Click</Button>
+      </Badge>
+    );
+    const element = screen.getByTestId(/badge/i);
+    expect(element).toHaveStyle({
+      backgroundColor: COLORS.red,
+    });
+  });
 });

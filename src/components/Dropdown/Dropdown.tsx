@@ -130,6 +130,10 @@ export default function Dropdown({
         />
       </Button>
       <ChildrenContainer
+        data-testId="children"
+        onBlur={() => {
+          setOpen(false);
+        }}
         offset={
           position === "left" || position === "right"
             ? offsetHeight
