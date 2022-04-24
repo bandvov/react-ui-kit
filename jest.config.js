@@ -14,4 +14,8 @@ module.exports = {
   coverageDirectory: "<rootDir>/coverage/",
   collectCoverage: true,
   testResultsProcessor: "jest-sonar-reporter",
+  jestSonar: {
+    reportPath: "coverage",
+    reportFile: "test-report.xml",
+    indent: 4
 };
