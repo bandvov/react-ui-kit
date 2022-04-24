@@ -10,4 +10,6 @@ module.exports = {
     "./src/stories",
     "./src/App.tsx",
   ],
+  collectCoverageFrom: ["src/**/*.ts?x"],
+  coverageDirectory: "<rootDir>/coverage/",
 };
