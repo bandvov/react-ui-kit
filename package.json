@@ -78,7 +78,11 @@
     "@storybook/preset-create-react-app": "^4.0.1",
     "@storybook/testing-library": "^0.0.9",
     "@types/styled-components": "^5.1.21",
+    "jest-sonar-reporter": "^2.0.0",
     "ts-jest": "^27.1.4",
     "webpack": "^5.70.0"
+  },
+  "jest": {
+    "testResultsProcessor": "jest-sonar-reporter"
   }
 }
