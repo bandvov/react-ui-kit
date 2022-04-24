@@ -10,4 +10,8 @@ module.exports = {
     "./src/stories",
     "./src/App.tsx",
   ],
+
+  coverageDirectory: "<rootDir>/coverage/",
+  collectCoverage: true,
+  testResultsProcessor: "jest-sonar-reporter",
 };
