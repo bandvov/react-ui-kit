@@ -5,8 +5,8 @@ import Checkbox from "./Checkbox/Checkbox";
 import Dropdown from "./Dropdown/Dropdown";
 import TextInput from "./Form/TextInput";
 import Pagination from "./Pagination/Pagination";
-import Modal from "./Modal/Modal";
-import DialogModal from "./Modal/DialogModal";
+import Backdrop from "./Backdrop/Backdrop";
+import DialogModal from "./DialogModal/DialogModal";
 
 export {
   Button,
@@ -15,7 +15,7 @@ export {
   Checkbox,
   TextInput,
   Dropdown,
-  Modal,
+  Backdrop,
   Pagination,
   DialogModal,
 };

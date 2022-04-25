@@ -6,7 +6,7 @@ import {
   Checkbox,
   Pagination,
   Dropdown,
-  Modal,
+  Backdrop,
   TextInput,
   DialogModal,
 } from "./components";
@@ -86,6 +86,7 @@ function App() {
   const [openDialogModal, setOpenDialogModal] = useState<boolean>(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
+  const [fade, setFade] = useState(false);
 
   const dropdownHandler = (id: number): void => {
     const updatedItems = items.map((item) => {
@@ -460,24 +461,7 @@ function App() {
         >
           Open new modal
         </Button>
-        <Modal open={openModal} setOpen={setOpenModal}>
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            style={{
-              backgroundColor: "lightblue",
-              padding: "3rem",
-              border: "5px solid white",
-              marginLeft: "auto",
-              marginRight: "auto",
-              marginTop: "calc(50vh - 79px)",
-              width: "max-content",
-            }}
-          >
-            <h1>Hello</h1>
-          </div>
-        </Modal>
+        <Backdrop open={openModal} setOpen={setOpenModal} />
       </Wrapper>
       <Wrapper>
         <Pagination
@@ -528,19 +512,28 @@ function App() {
         </form>
       </Wrapper>
       <Wrapper>
-        <Button onClick={() => setOpenDialogModal(true)}>Open dialog</Button>
+        <Button
+          onClick={() => {
+            setOpenDialogModal(true);
+            setFade(true);
+          }}
+        >
+          Open dialog
+        </Button>
         <DialogModal
+          setFade={setFade}
+          fade={fade}
           header={<div>header</div>}
           body={<div>body</div>}
           footer={
             <div style={{ display: "flex", gap: "10px" }}>
-              <Button onClick={() => setOpenDialogModal(false)}>Click</Button>
+              <Button onClick={() => setFade(false)}>Click</Button>
               <Button variant="error-outlined">Cancel</Button>
             </div>
           }
           open={openDialogModal}
           onClick={(value) => {
-            setOpenDialogModal(value);
+            setOpenDialogModal(false);
           }}
         />
       </Wrapper>
