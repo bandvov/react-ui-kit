@@ -8,6 +8,7 @@ import {
   Dropdown,
   Modal,
   TextInput,
+  DialogModal,
 } from "./components";
 import { COLORS } from "./CONSTANTS";
 import { DropdownItem } from "./types";
@@ -82,6 +83,7 @@ function App() {
   const [openInnerDropdown, setOpenInnerDropdown] = useState<boolean>(false);
   const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openDialogModal, setOpenDialogModal] = useState<boolean>(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -171,17 +173,16 @@ function App() {
         <Checkbox
           disabled
           checked={checked}
-          onChange={() => {
-            console.log("click");
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
         <Checkbox
           rounded={true}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
@@ -189,23 +190,23 @@ function App() {
           backgroundColor="green"
           rounded={true}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
         <Checkbox
           backgroundColor="green"
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
         <Checkbox
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
@@ -214,16 +215,16 @@ function App() {
           disabled
           variant={"toggle"}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
         />
         <Checkbox
           label="a as dasd as"
           variant={"toggle"}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
         />
       </Wrapper>
@@ -525,6 +526,23 @@ function App() {
           <TextInput disabled placeholder="Placeholder" />
           <button type="submit">submit</button>
         </form>
+      </Wrapper>
+      <Wrapper>
+        <Button onClick={() => setOpenDialogModal(true)}>Open dialog</Button>
+        <DialogModal
+          header={<div>header</div>}
+          body={<div>body</div>}
+          footer={
+            <div style={{ display: "flex", gap: "10px" }}>
+              <Button onClick={() => setOpenDialogModal(false)}>Click</Button>
+              <Button variant="error-outlined">Cancel</Button>
+            </div>
+          }
+          open={openDialogModal}
+          onClick={(value) => {
+            setOpenDialogModal(value);
+          }}
+        />
       </Wrapper>
     </div>
   );

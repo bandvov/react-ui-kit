@@ -6,6 +6,7 @@ import Dropdown from "./Dropdown/Dropdown";
 import TextInput from "./Form/TextInput";
 import Pagination from "./Pagination/Pagination";
 import Modal from "./Modal/Modal";
+import DialogModal from "./Modal/DialogModal";
 
 export {
   Button,
@@ -16,4 +17,5 @@ export {
   Dropdown,
   Modal,
   Pagination,
+  DialogModal,
 };

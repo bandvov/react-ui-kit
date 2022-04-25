@@ -120,7 +120,7 @@ export default function Checkbox({
   disabled?: boolean;
   label?: string;
   variant?: "toggle" | "default";
-  onChange: () => void;
+  onChange: (status: boolean) => void;
 }) {
   const Component = variant === "toggle" ? ToggleCheckbox : ClassicCheckbox;
   return (
@@ -129,7 +129,6 @@ export default function Checkbox({
         disabled={disabled}
         name="checkbox"
         checked={checked}
-        onChange={!disabled ? onChange : () => {}}
         {...props}
       />
       <Component
@@ -141,11 +140,11 @@ export default function Checkbox({
         htmlFor={"checkbox"}
         tabIndex={0}
         checked={checked}
-        onClick={!disabled ? onChange : () => {}}
+        onClick={!disabled ? () => onChange(!checked) : () => {}}
         {...props}
         onKeyDown={(e): void => {
           if (!disabled && (e.code === "Space" || e.code === "Enter")) {
-            onChange();
+            onChange(!checked);
           }
         }}
       >
