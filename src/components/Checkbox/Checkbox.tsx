@@ -108,7 +108,7 @@ const CheckboxContainer = styled.div`
 
 export default function Checkbox({
   onChange,
-  checked = false,
+  checked,
   label,
   variant = "default",
   disabled,
