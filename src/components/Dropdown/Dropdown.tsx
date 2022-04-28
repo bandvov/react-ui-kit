@@ -51,7 +51,10 @@ export default function Dropdown({
   isOpen,
   title,
   children,
-  setOpen,
+  onClick = () => {},
+  onKeyDown = () => {},
+  onMouseEnter = () => {},
+  onMouseLeave = () => {},
   position = "bottom",
   buttonStyles,
   fullWidth = false,
@@ -61,7 +64,10 @@ export default function Dropdown({
     [key: string]: string;
   };
   position?: Position;
-  setOpen: (status: boolean) => void;
+  onClick?: (status: boolean) => void;
+  onKeyDown?: (status: boolean) => void;
+  onMouseEnter?: (status: boolean) => void;
+  onMouseLeave?: (status: boolean) => void;
   isOpen: boolean;
   title: string;
   children: ReactElement | ReactElement[];
@@ -75,14 +81,14 @@ export default function Dropdown({
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(false);
+        closeHandler();
       }
     };
     document.addEventListener("click", handleClickOutside, true);
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [setOpen]);
+  }, [onClick, onMouseEnter, onMouseLeave]);
 
   useEffect(() => {
     if (childrenRef.current) {
@@ -93,17 +99,30 @@ export default function Dropdown({
 
   const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
 
+  function closeHandler(): void {
+    if (onClick) {
+      onClick(false);
+    }
+    if (onMouseEnter) {
+      onMouseEnter(false);
+    }
+    if (onMouseLeave) {
+      onMouseLeave(false);
+    }
+    if (onKeyDown) {
+      onKeyDown(false);
+    }
+  }
   return (
     <div
       ref={ref}
       style={{
         position: "relative",
-        width: fullWidth ? "100%" : "max-content",
       }}
       {...props}
     >
       <Button
-        fullWidth
+        fullWidth={fullWidth}
         backgroundColor="white"
         variant={"default-outlined"}
         style={{
@@ -112,11 +131,17 @@ export default function Dropdown({
           ...(buttonStyles || {}),
         }}
         onClick={() => {
-          setOpen(!isOpen);
+          onClick(!isOpen);
+        }}
+        onMouseEnter={() => {
+          onMouseEnter(!isOpen);
+        }}
+        onMouseLeave={() => {
+          onMouseLeave(!isOpen);
         }}
         onKeyDown={(e: any) => {
           if (e.code === "Escape") {
-            setOpen(!isOpen);
+            onKeyDown(!isOpen);
           }
         }}
       >
@@ -132,7 +157,7 @@ export default function Dropdown({
       <ChildrenContainer
         data-testId="children"
         onBlur={() => {
-          setOpen(false);
+          closeHandler();
         }}
         offset={
           position === "left" || position === "right"

@@ -255,7 +255,8 @@ function App() {
         <Dropdown
           isOpen={openDropdown}
           title={"Location"}
-          setOpen={setOpenDropdown}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
         >
           {items.map((item: DropdownItem) => {
             return (
@@ -289,7 +290,8 @@ function App() {
         <Dropdown
           isOpen={openDropdown1}
           title={"Location"}
-          setOpen={setOpenDropdown1}
+          onClick={setOpenDropdown1}
+          onKeyDown={setOpenDropdown1}
           position={"top"}
         >
           {items.map((item: DropdownItem) => {
@@ -324,7 +326,10 @@ function App() {
         <Dropdown
           isOpen={openDropdown1}
           title={"Location"}
-          setOpen={setOpenDropdown1}
+          onClick={setOpenDropdown1}
+          onKeyDown={setOpenDropdown1}
+          onMouseEnter={setOpenDropdown1}
+          onMouseLeave={setOpenDropdown1}
           position={"left"}
         >
           {items.map((item: DropdownItem) => {
@@ -359,7 +364,8 @@ function App() {
         <Dropdown
           isOpen={openDropdown1}
           title={"Location"}
-          setOpen={setOpenDropdown1}
+          onClick={setOpenDropdown1}
+          onKeyDown={setOpenDropdown1}
           position={"right"}
         >
           {items.map((item: DropdownItem) => {
@@ -394,7 +400,8 @@ function App() {
         <Dropdown
           isOpen={openDropdown1}
           title={"Location"}
-          setOpen={setOpenDropdown1}
+          onClick={setOpenDropdown1}
+          onKeyDown={setOpenDropdown1}
           position={"right"}
         >
           <>
@@ -430,7 +437,8 @@ function App() {
               position="right"
               isOpen={openInnerDropdown}
               title={"Location"}
-              setOpen={setOpenInnerDropdown}
+              onClick={setOpenDropdown1}
+              onKeyDown={setOpenDropdown1}
             >
               <div
                 onClick={(e) => {
@@ -442,17 +450,20 @@ function App() {
             </Dropdown>
           </>
         </Dropdown>
+      </Wrapper>
+      <div style={{ width: "500px" }}>
         <Dropdown
           isOpen={openDropdown1}
           title={"Location"}
-          setOpen={setOpenDropdown1}
+          onClick={setOpenDropdown1}
+          onKeyDown={setOpenDropdown1}
           fullWidth
         >
           <div>
             <h1>Dropdown</h1>
           </div>
         </Dropdown>
-      </Wrapper>
+      </div>
       <Wrapper>
         <Button
           onClick={() => {
