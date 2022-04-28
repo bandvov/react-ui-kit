@@ -42,4 +42,32 @@ describe("Checkbox", () => {
     });
     expect(handler).toBeCalledTimes(1);
   });
+  test("Disabled", () => {
+    const handler = jest.fn();
+    render(<Checkbox disabled onChange={handler} checked={true} />);
+    const checkboxElement = screen.getByTestId(/checkbox/i);
+    expect(checkboxElement).toHaveStyle({
+      color: COLORS.gray,
+    });
+  });
+  test("Toggle checkbox", () => {
+    const handler = jest.fn();
+    render(<Checkbox variant="toggle" onChange={handler} checked={true} />);
+    const checkboxElement = screen.getByTestId(/checkbox/i);
+    expect(checkboxElement).toHaveStyle({
+      color: "black",
+      padding: "3px 0",
+    });
+  });
+  test("Disabled toggle checkbox", () => {
+    const handler = jest.fn();
+    render(
+      <Checkbox disabled variant="toggle" onChange={handler} checked={true} />
+    );
+    const checkboxElement = screen.getByTestId(/checkbox/i);
+    expect(checkboxElement).toHaveStyle({
+      color: COLORS.gray,
+      padding: "3px 0",
+    });
+  });
 });

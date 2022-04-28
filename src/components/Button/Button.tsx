@@ -72,7 +72,7 @@ const StyledButton = styled.button<IButton>`
     props.padding
       ? props.padding
       : props.rounded
-      ? ".4rem .7rem"
+      ? ".4rem .6rem"
       : ".5rem 1rem"};
   font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
   width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
