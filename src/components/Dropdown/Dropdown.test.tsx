@@ -116,4 +116,15 @@ describe("Dropdown", () => {
     fireEvent.mouseLeave(button);
     expect(setOpen).toHaveBeenCalledTimes(1);
   });
+  test("Dropdown keyDown handler", () => {
+    const setOpen = jest.fn();
+    render(
+      <Dropdown title="Test" isOpen={true} onKeyDown={() => setOpen(true)}>
+        <div>default</div>
+      </Dropdown>
+    );
+    const button = screen.getByTestId("button");
+    fireEvent.keyDown(button, { code: "Escape" });
+    expect(setOpen).toHaveBeenCalledTimes(1);
+  });
 });
