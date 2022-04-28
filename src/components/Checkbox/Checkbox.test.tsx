@@ -42,23 +42,4 @@ describe("Checkbox", () => {
     });
     expect(handler).toBeCalledTimes(1);
   });
-
-  test("Check with Enter key", () => {
-    const handler = jest.fn();
-    render(<Checkbox label={"checkbox"} onChange={handler} checked={true} />);
-    const checkboxElement = screen.getByTestId(/checkbox/i);
-    fireEvent.keyDown(checkboxElement, {
-      code: "Enter",
-    });
-    expect(handler).toBeCalledTimes(1);
-  });
-  test("Check with Space key", () => {
-    const handler = jest.fn();
-    render(<Checkbox label={"checkbox"} onChange={handler} checked={true} />);
-    const checkboxElement = screen.getByTestId(/checkbox/i);
-    fireEvent.keyDown(checkboxElement, {
-      code: "Space",
-    });
-    expect(handler).toBeCalledTimes(1);
-  });
 });

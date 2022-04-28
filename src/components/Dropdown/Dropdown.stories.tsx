@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof Dropdown> = (args) => {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <div style={{ margin: "10rem 25rem" }}>
-      <Dropdown {...args} isOpen={open} setOpen={setOpen}>
+      <Dropdown {...args} isOpen={open} onClick={setOpen}>
         <h1 style={{ padding: "1rem" }}>Hello this is dropdown</h1>
       </Dropdown>
     </div>

@@ -8,6 +8,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     "./node_modules/",
     "./src/stories",
+    "./**/*stories.tsx",
     "./src/App.tsx",
   ],
 
@@ -17,5 +18,6 @@ module.exports = {
   jestSonar: {
     reportPath: "coverage",
     reportFile: "test-report.xml",
-    indent: 4
+    indent: 4,
+  },
 };
