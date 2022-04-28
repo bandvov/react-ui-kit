@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Badge, Button } from "../components";
+import { Badge, Button } from "..";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

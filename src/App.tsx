@@ -6,8 +6,9 @@ import {
   Checkbox,
   Pagination,
   Dropdown,
-  Modal,
+  Backdrop,
   TextInput,
+  DialogModal,
 } from "./components";
 import { COLORS } from "./CONSTANTS";
 import { DropdownItem } from "./types";
@@ -82,8 +83,10 @@ function App() {
   const [openInnerDropdown, setOpenInnerDropdown] = useState<boolean>(false);
   const [items, setItems] = useState<DropdownItem[]>(dropdownItems);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openDialogModal, setOpenDialogModal] = useState<boolean>(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
+  const [fade, setFade] = useState(false);
 
   const dropdownHandler = (id: number): void => {
     const updatedItems = items.map((item) => {
@@ -171,17 +174,16 @@ function App() {
         <Checkbox
           disabled
           checked={checked}
-          onChange={() => {
-            console.log("click");
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
         <Checkbox
           rounded={true}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
@@ -189,23 +191,23 @@ function App() {
           backgroundColor="green"
           rounded={true}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
         <Checkbox
           backgroundColor="green"
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
         <Checkbox
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
           label={"click me"}
         />
@@ -214,16 +216,16 @@ function App() {
           disabled
           variant={"toggle"}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
         />
         <Checkbox
           label="a as dasd as"
           variant={"toggle"}
           checked={checked}
-          onChange={() => {
-            setChecked(!checked);
+          onChange={(value) => {
+            setChecked(value);
           }}
         />
       </Wrapper>
@@ -459,24 +461,7 @@ function App() {
         >
           Open new modal
         </Button>
-        <Modal open={openModal} setOpen={setOpenModal}>
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            style={{
-              backgroundColor: "lightblue",
-              padding: "3rem",
-              border: "5px solid white",
-              marginLeft: "auto",
-              marginRight: "auto",
-              marginTop: "calc(50vh - 79px)",
-              width: "max-content",
-            }}
-          >
-            <h1>Hello</h1>
-          </div>
-        </Modal>
+        <Backdrop open={openModal} setOpen={setOpenModal} />
       </Wrapper>
       <Wrapper>
         <Pagination
@@ -525,6 +510,32 @@ function App() {
           <TextInput disabled placeholder="Placeholder" />
           <button type="submit">submit</button>
         </form>
+      </Wrapper>
+      <Wrapper>
+        <Button
+          onClick={() => {
+            setOpenDialogModal(true);
+            setFade(true);
+          }}
+        >
+          Open dialog
+        </Button>
+        <DialogModal
+          setFade={setFade}
+          fade={fade}
+          header={<div>header</div>}
+          body={<div>body</div>}
+          footer={
+            <div style={{ display: "flex", gap: "10px" }}>
+              <Button onClick={() => setFade(false)}>Click</Button>
+              <Button variant="error-outlined">Cancel</Button>
+            </div>
+          }
+          open={openDialogModal}
+          onClick={(value) => {
+            setOpenDialogModal(false);
+          }}
+        />
       </Wrapper>
     </div>
   );

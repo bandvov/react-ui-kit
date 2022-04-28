@@ -1,10 +1,9 @@
 import React, { ReactElement, useEffect } from "react";
 import styled from "styled-components";
 
-const StyledModal = styled.div<{ open: boolean }>`
-  display: ${(prop) => (prop.open ? "block" : "none")};
+const StyledBackdrop = styled.div`
   padding: 1rem;
-  z-index: 111111;
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,14 +12,12 @@ const StyledModal = styled.div<{ open: boolean }>`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export default function Modal({
-  children,
+export default function Backdrop({
   open,
   setOpen,
 }: {
   open: boolean;
   setOpen: (status: boolean) => void;
-  children: ReactElement;
 }) {
   const setHidden = () => {
     if (open) {
@@ -29,18 +26,18 @@ export default function Modal({
       document.body.style.overflow = "scroll";
     }
   };
+
   useEffect(() => {
     setHidden();
   }, [open]);
 
+  if (!open) return null;
+
   return (
-    <StyledModal
-      onClick={(e) => {
+    <StyledBackdrop
+      onClick={() => {
         setOpen(false);
       }}
-      open={open}
-    >
-      {children}
-    </StyledModal>
+    />
   );
 }
