@@ -22,6 +22,14 @@ describe("Backdrop", () => {
       });
     });
   });
+  test("Closed backdrop", async () => {
+    const setOpen = jest.fn();
+    render(<Backdrop open={false} setOpen={setOpen} />);
+    await waitFor(() => {
+      const backdrop = screen.queryByTestId("backdrop");
+      expect(backdrop).toBeNull();
+    });
+  });
   test("Handler", async () => {
     const setOpen = jest.fn();
     render(<Backdrop open={true} setOpen={setOpen} />);
