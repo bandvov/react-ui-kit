@@ -27,7 +27,7 @@ describe("Backdrop", () => {
     render(<Backdrop open={true} setOpen={setOpen} />);
     await waitFor(() => {
       const backdrop = screen.queryByTestId("backdrop");
-      fireEvent.click(backdrop);
+      fireEvent.click(backdrop!);
       expect(setOpen).toBeCalledTimes(1);
     });
   });
