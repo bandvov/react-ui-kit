@@ -2,7 +2,6 @@ import React, { ReactElement, useEffect } from "react";
 import styled from "styled-components";
 
 const StyledBackdrop = styled.div`
-  padding: 1rem;
   z-index: 100;
   position: fixed;
   top: 0;
@@ -35,6 +34,7 @@ export default function Backdrop({
 
   return (
     <StyledBackdrop
+      data-testId="backdrop"
       onClick={() => {
         setOpen(false);
       }}

@@ -2,9 +2,6 @@ name: Publish storybook
 on:
   push:
     branches: [ main ]
-    paths:
-    - 'stories/**'
-    - 'storybook/**'
 jobs:
   publish_storybook:
     runs-on: ubuntu-latest

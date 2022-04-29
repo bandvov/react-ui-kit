@@ -1,5 +1,6 @@
 module.exports = {
   preset: "ts-jest",
+  debug: true,
   modulePathIgnorePatterns: [
     "./node_modules/",
     "./src/stories",
