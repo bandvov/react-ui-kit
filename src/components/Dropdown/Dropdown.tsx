@@ -122,6 +122,7 @@ export default function Dropdown({
       {...props}
     >
       <Button
+        aria-expanded={isOpen}
         fullWidth={fullWidth}
         backgroundColor="white"
         variant={"default-outlined"}

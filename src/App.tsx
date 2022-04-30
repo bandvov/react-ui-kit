@@ -451,7 +451,7 @@ function App() {
           </>
         </Dropdown>
       </Wrapper>
-      <div style={{ width: "500px" }}>
+      <div>
         <Dropdown
           isOpen={openDropdown1}
           title={"Location"}
@@ -526,19 +526,16 @@ function App() {
         <Button
           onClick={() => {
             setOpenDialogModal(true);
-            setFade(true);
           }}
         >
           Open dialog
         </Button>
         <DialogModal
-          setFade={setFade}
-          fade={fade}
           header={<div>header</div>}
           body={<div>body</div>}
           footer={
             <div style={{ display: "flex", gap: "10px" }}>
-              <Button onClick={() => setFade(false)}>Click</Button>
+              <Button onClick={() => setOpenDialogModal(false)}>Click</Button>
               <Button variant="error-outlined">Cancel</Button>
             </div>
           }
