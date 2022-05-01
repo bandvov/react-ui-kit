@@ -63,9 +63,22 @@ interface ILabel {
   backgroundColor?: string;
 }
 
-interface DropdownItem {
-  id: number;
+interface IDropdownItem {
+  value: number;
   title: string;
-  selected: boolean;
-  url?: string;
+}
+
+interface IDropdown {
+  buttonStyles?: {
+    [key: string]: string;
+  };
+  position?: Position;
+  onClick?: (status: boolean) => void;
+  onKeyDown?: (status: boolean) => void;
+  onMouseEnter?: (status: boolean) => void;
+  onMouseLeave?: (status: boolean) => void;
+  isOpen: boolean;
+  title: string;
+  children: ReactElement | ReactElement[];
+  fullWidth?: boolean;
 }

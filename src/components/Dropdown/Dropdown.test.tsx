@@ -13,7 +13,6 @@ describe("Dropdown", () => {
     const children = screen.getByTestId("children");
     expect(children).toBeInTheDocument();
     expect(children).toHaveStyle({
-      backgroundColor: "white",
       top: "40px",
       opacity: 1,
       overflow: "",
@@ -31,7 +30,6 @@ describe("Dropdown", () => {
     const children = screen.getByTestId("children");
     expect(children).toBeInTheDocument();
     expect(children).toHaveStyle({
-      backgroundColor: "white",
       bottom: "40px",
       opacity: 1,
       // left: "calc(-41.5px + 50%)",
@@ -47,7 +45,6 @@ describe("Dropdown", () => {
     const children = screen.getByTestId("children");
     expect(children).toBeInTheDocument();
     expect(children).toHaveStyle({
-      backgroundColor: "white",
       opacity: 1,
       // top: "calc(-84.5px + 50%)",
       // right: "calc(100% + 10px)",
