@@ -80,6 +80,8 @@ export default function Dropdown({
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
+      console.log(event.target);
+
       if (ref.current && !ref.current.contains(event.target)) {
         closeHandler();
       }
@@ -157,9 +159,6 @@ export default function Dropdown({
       </Button>
       <ChildrenContainer
         data-testId="children"
-        onBlur={() => {
-          closeHandler();
-        }}
         offset={
           position === "left" || position === "right"
             ? offsetHeight
@@ -169,6 +168,7 @@ export default function Dropdown({
         isOpen={isOpen}
         position={position}
         fullWidth={fullWidth}
+        tabIndex={-1}
       >
         {children}
       </ChildrenContainer>
