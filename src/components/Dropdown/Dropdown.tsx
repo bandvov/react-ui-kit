@@ -80,15 +80,15 @@ export default function Dropdown({
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
-      console.log(event.target);
-
       if (ref.current && !ref.current.contains(event.target)) {
         closeHandler();
       }
     };
     document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener("keydown", handleClickOutside, true);
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("keydown", handleClickOutside, true);
     };
   }, [onClick, onMouseEnter, onMouseLeave]);
 
@@ -117,6 +117,7 @@ export default function Dropdown({
   }
   return (
     <div
+      tabIndex={-1}
       ref={ref}
       style={{
         position: "relative",

@@ -123,4 +123,15 @@ describe("Dropdown", () => {
     fireEvent.keyDown(button, { code: "Escape" });
     expect(setOpen).toHaveBeenCalledTimes(1);
   });
+  test("Dropdown blur close", () => {
+    const setOpen = jest.fn();
+    render(
+      <Dropdown title="Test" isOpen={true} onKeyDown={() => setOpen(false)}>
+        <div>default</div>
+      </Dropdown>
+    );
+    fireEvent.click(document);
+    expect(setOpen).toBeCalledTimes(1);
+    expect(setOpen).toBeCalledWith(false);
+  });
 });
