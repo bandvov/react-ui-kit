@@ -4,12 +4,14 @@ module.exports = {
   modulePathIgnorePatterns: [
     "./node_modules/",
     "./**/stories",
-    "./**/**/**/*stories.tsx",
+    "./**/**/**/*.stories.tsx",
   ],
   coveragePathIgnorePatterns: [
     "./node_modules/",
     "./**/stories",
-    "./**/**/**/*stories.tsx",
+    "./**/**/**/*.stories.tsx",
     "./src/App.tsx",
+    "./coverage/",
+    "./.storybook/",
   ],
 };
