@@ -3,13 +3,13 @@ module.exports = {
   debug: true,
   modulePathIgnorePatterns: [
     "./node_modules/",
-    "./src/stories",
-    "./**/*stories.tsx",
+    "./**/stories",
+    "./**/**/**/*stories.tsx",
   ],
   coveragePathIgnorePatterns: [
     "./node_modules/",
-    "./src/stories",
-    "./**/*stories.tsx",
+    "./**/stories",
+    "./**/**/**/*stories.tsx",
     "./src/App.tsx",
   ],
 };

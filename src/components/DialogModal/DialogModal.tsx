@@ -26,7 +26,7 @@ const StyledDialogModal = styled.div<{
           top: calc(50vh - ${props.offsetTop}px);
         `
       : css`
-          top: -50vh;
+          top: -100vh;
         `}
 
   @media ${device.tablet} {
@@ -88,23 +88,36 @@ export default function DialogModal({
           }
         }}
       >
-        <Button
-          padding="2px 8px"
-          fontSize="24px"
-          onClick={() => onClick(false)}
+        <div
           style={{
-            position: "absolute",
-            right: "-1rem",
-            top: "-1rem",
-            backgroundColor: "white",
+            border: "1px solid",
+            display: "flex",
+            justifyContent: "space-between",
+            alignContent: "center",
+            lineHeight: "26px",
           }}
-          rounded
-          variant="default-outlined"
         >
-          &times;
-        </Button>
-        <div style={{ border: "1px solid" }}>{header}</div>
-        <div style={{ border: "1px solid", margin: "1rem 0" }}>{body}</div>
+          {header}
+          <Button
+            border="none"
+            padding="1px 6px"
+            fontSize="24px"
+            onClick={() => onClick(false)}
+            variant="default-outlined"
+          >
+            &times;
+          </Button>
+        </div>
+        <div
+          style={{
+            maxHeight: "50vh",
+            overflowY: "auto",
+            border: "1px solid",
+            margin: "1rem 0",
+          }}
+        >
+          {body}
+        </div>
         <div>{footer}</div>
       </StyledDialogModal>
     </>

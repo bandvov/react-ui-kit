@@ -1,17 +1,17 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const AccordionContainer = styled.div<{ height: number }>`
+const AccordionContainer = styled.div<{ show: boolean; height: number }>`
   border: 0.5px solid;
   height: ${(prpps) => prpps.height}px;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
+  margin: ${(props) => (props.show ? "5px 0" : "1px 0")};
 `;
 
 const AccordionTitle = styled.div`
   padding: 0 1rem;
   border-bottom: 0.5px solid;
-  border-collapse: collapse;
   margin: 0;
   display: flex;
   justify-content: space-between;
@@ -52,9 +52,10 @@ export default function Accordion({
 
   return (
     <AccordionContainer
+      show={show}
       data-testId={"accordion-container"}
       key={title}
-      height={show ? contentHeight + titleHeight : titleHeight + 1}
+      height={show ? contentHeight + titleHeight : titleHeight}
     >
       <AccordionTitle
         data-testId={"accordion-title"}
