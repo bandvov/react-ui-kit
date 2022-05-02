@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { COLORS } from "../../CONSTANTS";
 
 const AccordionContainer = styled.div<{ show: boolean; height: number }>`
   border: 0.5px solid;
@@ -9,7 +10,8 @@ const AccordionContainer = styled.div<{ show: boolean; height: number }>`
   margin: ${(props) => (props.show ? "5px 0" : "1px 0")};
 `;
 
-const AccordionTitle = styled.div`
+const AccordionTitle = styled.div<{ show: boolean }>`
+  background-color: ${(props) => (props.show ? "#f5f7f6" : "")};
   padding: 0 1rem;
   border-bottom: 0.5px solid;
   margin: 0;
@@ -58,9 +60,20 @@ export default function Accordion({
       height={show ? contentHeight + titleHeight : titleHeight}
     >
       <AccordionTitle
+        show={show}
+        aria-expanded="true"
+        aria-controls="sect1"
+        tabIndex={0}
         data-testId={"accordion-title"}
+        id="sect1"
+        role="region"
         ref={titleRef}
         onClick={() => setShow()}
+        onKeyDown={(e): void => {
+          if (e.code === "Space" || e.code === "Enter") {
+            setShow();
+          }
+        }}
       >
         {title}
         {show ? (
