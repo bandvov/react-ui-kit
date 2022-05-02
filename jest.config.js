@@ -13,6 +13,5 @@ module.exports = {
     "./src/App.tsx",
     "./coverage/",
     "./.storybook/",
-    "./storybook-static/",
   ],
 };
