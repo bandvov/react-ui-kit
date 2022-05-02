@@ -14,6 +14,7 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "gh-pages": "^3.2.3",
+    "jest-sonarcloud-reporter": "^1.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
@@ -30,7 +31,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs-build",
     "deploy": "gh-pages -d  docs-build",
-    "coverage": "npm run test -- --coverage ."
+    "coverage": "npm run test -- --coverage . --testResultsProcessor=\"jest-sonar-reporter\""
   },
   "eslintConfig": {
     "extends": [
@@ -81,5 +82,10 @@
     "jest-sonar-reporter": "^2.0.0",
     "ts-jest": "^27.1.4",
     "webpack": "^5.70.0"
+  },
+  "jestSonar": {
+    "reportPath": "reports",
+    "reportFile": "test-report.xml",
+    "indent": 4
   }
 }
