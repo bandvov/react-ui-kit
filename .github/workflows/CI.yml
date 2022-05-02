@@ -16,5 +16,3 @@ jobs:
 
         - name: Run tests 
           run: npm run test
-        - name: Collect coverage  
-          run: npm run coverage
