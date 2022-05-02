@@ -30,7 +30,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs-build",
     "deploy": "gh-pages -d  docs-build",
-    "coverage": "npm run test -- --coverage ."
+    "coverage": "npm run test -- --coverage . --testResultsProcessor=\"jest-sonar-reporter\""
   },
   "eslintConfig": {
     "extends": [
@@ -81,5 +81,10 @@
     "jest-sonar-reporter": "^2.0.0",
     "ts-jest": "^27.1.4",
     "webpack": "^5.70.0"
+  },
+  "jestSonar": {
+    "reportFile": "test-reporter.xml",
+    "indent": 4,
+    "withRelativePaths": true
   }
 }
