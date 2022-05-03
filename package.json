@@ -81,10 +81,5 @@
     "jest-sonar-reporter": "^2.0.0",
     "ts-jest": "^27.1.4",
     "webpack": "^5.70.0"
-  },
-  "jestSonar": {
-    "reportFile": "test-reporter.xml",
-    "indent": 4,
-    "withRelativePaths": true
   }
 }
