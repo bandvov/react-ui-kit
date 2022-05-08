@@ -27,6 +27,7 @@ const StyledDialogModal = styled.div<{
         `
       : css`
           top: -100vh;
+          visibility: hidden;
         `}
 
   @media ${device.tablet} {
