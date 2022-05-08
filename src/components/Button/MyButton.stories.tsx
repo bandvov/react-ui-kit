@@ -64,3 +64,5 @@ export const DefaultButton = Template.bind({});
 DefaultButton.args = {
   children: "Button",
 };
+
+DefaultButton.storyName = "MyButton";

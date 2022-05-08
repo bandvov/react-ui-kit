@@ -14,16 +14,17 @@ export default {
 const Template: ComponentStory<typeof Dropdown> = (args) => {
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <div style={{ margin: "10rem 25rem" }}>
+    <div style={{ margin: "5rem auto", width: "max-content" }}>
       <Dropdown {...args} isOpen={open} onClick={setOpen}>
         <h1 style={{ padding: "1rem" }}>Hello this is dropdown</h1>
       </Dropdown>
     </div>
   );
 };
-export const Primary = Template.bind({});
+export const DropdownTemplate = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
-Primary.args = {
+DropdownTemplate.args = {
   title: "test",
 };
+DropdownTemplate.storyName = "Dropdown";
