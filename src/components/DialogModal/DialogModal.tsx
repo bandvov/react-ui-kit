@@ -15,7 +15,6 @@ const StyledDialogModal = styled.div<{
   display: flex;
   flex-direction: column;
   width: 90%;
-  margin-left: 0.5rem;
   background-color: white;
   padding: 1rem;
   transition: all 0.3s ease-in-out;
@@ -27,6 +26,7 @@ const StyledDialogModal = styled.div<{
         `
       : css`
           top: -100vh;
+          visibility: hidden;
         `}
 
   @media ${device.tablet} {
@@ -89,6 +89,7 @@ export default function DialogModal({
         }}
       >
         <div
+          data-testId="dialog-header"
           style={{
             border: "1px solid",
             display: "flex",
@@ -109,6 +110,7 @@ export default function DialogModal({
           </Button>
         </div>
         <div
+          data-testId="dialog-body"
           style={{
             maxHeight: "50vh",
             overflowY: "auto",
@@ -118,7 +120,7 @@ export default function DialogModal({
         >
           {body}
         </div>
-        <div>{footer}</div>
+        <div data-testId="dialog-footer">{footer}</div>
       </StyledDialogModal>
     </>
   );

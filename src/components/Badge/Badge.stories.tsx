@@ -24,3 +24,4 @@ BadgeTemplate.args = {
   label: "",
   children: <Button rounded>&copy;</Button>,
 };
+BadgeTemplate.storyName = "Badge";
