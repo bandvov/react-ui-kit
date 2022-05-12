@@ -18,7 +18,7 @@ jobs:
 
       - name: run tests     
         run: |
-         npm run coverage
+         npm run coverage --blame
          sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' coverage/lcov.info
          sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' coverage/test-reporter.xml  
 
