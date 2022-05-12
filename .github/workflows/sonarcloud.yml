@@ -19,7 +19,7 @@ jobs:
       - name: run tests     
         run: |
          npm run coverage
-         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' test/unit/coverage/lcov.info
+         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' coverage/lcov.info
          sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' eslint-report.json  
 
       - name: SonarCloud Scan
