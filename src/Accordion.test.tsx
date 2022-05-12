@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Accordion from "./Accordion";
+import { Accordion } from "./components";
 
 describe("Accordion", () => {
   test("Closed accordion", () => {
