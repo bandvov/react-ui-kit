@@ -20,7 +20,7 @@ jobs:
         run: |
          npm run coverage
          sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' coverage/lcov.info
-         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' eslint-report.json  
+         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' coverage/test-reporter.xml  
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
