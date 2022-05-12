@@ -17,14 +17,11 @@ jobs:
         run: npm ci      
 
       - name: run tests     
-        run: npm run coverage
+        run: |
+         npm run coverage
+         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' test/unit/coverage/lcov.info
+         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' eslint-report.json  
 
-      - name: Download code coverage results
-        uses: actions/download-artifact@v2
-        with:
-          name: code-coverage-report
-          path: coverage/lcov.info    
-          
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
