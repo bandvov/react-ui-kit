@@ -14,10 +14,14 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install dependencies
-        run: npm ci
-      
+        run: npm ci      
+
       - name: run tests     
-        run: npm run coverage
+        run: |
+         npm run coverage --blame
+         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' coverage/lcov.info
+         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' test-reporter.xml  
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
