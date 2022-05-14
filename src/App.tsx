@@ -384,6 +384,7 @@ function App() {
           Open dialog
         </Button>
         <DialogModal
+          slide="bottom"
           header={<div>header</div>}
           body={<div>body</div>}
           footer={

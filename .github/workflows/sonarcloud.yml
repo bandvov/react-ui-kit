@@ -18,10 +18,8 @@ jobs:
 
       - name: run tests     
         run: |
-         npm run coverage --blame
-         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' coverage/lcov.info
-         sed -i 's+/home/runner/work/jobreporter/jobreporter+/github/workspace+g' test-reporter.xml  
-
+         npm run coverage
+  
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
