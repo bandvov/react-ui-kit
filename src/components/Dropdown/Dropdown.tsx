@@ -11,8 +11,9 @@ const ChildrenContainer = styled.div<{
   position: Position;
   fullWidth: boolean;
 }>`
+  box-sizing: border-box;
   background-color: white;
-  width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
+  width: ${(props) => (props.fullWidth ? "calc(100% + 3px)" : "max-content")};
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
   ${(props) => {
     switch (props.position) {
@@ -24,7 +25,7 @@ const ChildrenContainer = styled.div<{
       case "top":
         return css`
           bottom: 40px;
-          left: calc(-${props.offset / 2 + "px"} + 50%);
+          left: calc(-${props.offset / 2 + 1 + "px"} + 50%);
         `;
       case "left":
         return css`
