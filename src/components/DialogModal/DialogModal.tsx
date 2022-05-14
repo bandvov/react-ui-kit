@@ -1,5 +1,5 @@
 import React, { useState, ReactElement, useRef, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import { device } from "../../CONSTANTS";
 import Button from "../Button/Button";
 import Backdrop from "../Backdrop/Backdrop";
@@ -8,6 +8,7 @@ const StyledDialogModal = styled.div<{
   fade: boolean | null;
   offsetTop: number;
   offsetLeft: number;
+  slide: "top" | "bottom";
 }>`
   z-index: 101;
   position: fixed;
@@ -19,15 +20,28 @@ const StyledDialogModal = styled.div<{
   padding: 1rem;
   transition: all 0.3s ease-in-out;
   left: calc(50vw - ${(props) => props.offsetLeft}px);
-  ${(props) =>
-    props.fade
-      ? css`
-          top: calc(50vh - ${props.offsetTop}px);
-        `
-      : css`
-          top: -100vh;
-          visibility: hidden;
-        `}
+  ${(props): FlattenSimpleInterpolation => {
+    switch (props.slide) {
+      case "top":
+        return props.fade
+          ? css`
+              top: calc(50vh - ${props.offsetTop}px);
+            `
+          : css`
+              top: -100vh;
+              visibility: hidden;
+            `;
+      case "bottom":
+        return props.fade
+          ? css`
+              top: calc(50vh - ${props.offsetTop}px);
+            `
+          : css`
+              top: 100vh;
+              visibility: hidden;
+            `;
+    }
+  }}
 
   @media ${device.tablet} {
     width: 50%;
@@ -44,12 +58,14 @@ export default function DialogModal({
   footer,
   open,
   onClick,
+  slide = "top",
 }: {
   header: ReactElement;
   body: ReactElement;
   footer: ReactElement;
   onClick: (status: boolean) => void;
   open: boolean;
+  slide?: "top" | "bottom";
 }) {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -74,6 +90,7 @@ export default function DialogModal({
     <>
       <Backdrop open={showBackdrop} setOpen={onClick} />
       <StyledDialogModal
+        slide={slide}
         fade={open}
         onClick={(e) => {
           e.stopPropagation();
