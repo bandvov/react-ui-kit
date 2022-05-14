@@ -61,8 +61,6 @@ export default function DialogModal({
       setOffsetTop(modalRef.current.scrollHeight / 2);
       setOffsetLeft(modalRef.current.scrollWidth / 2);
       modalRef.current.addEventListener("transitionstart", (): void => {
-        console.log("transition start");
-
         if (open) {
           setShowBackdrop(true);
         }

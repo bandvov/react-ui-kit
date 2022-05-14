@@ -11,7 +11,7 @@ import {
   DialogModal,
 } from "./components";
 import Select from "./components/Select/Select";
-import { COLORS } from "./CONSTANTS";
+import Tabs from "./components/Tabs/Tabs";
 import { IDropdownItem } from "./types";
 import Wrapper from "./Wrapper";
 
@@ -81,6 +81,8 @@ function App() {
   const [value, setValue] = useState("");
   const [values, setValues] = useState<number[]>([]);
   const [error, setError] = useState(false);
+  const [tabValue, setTabValue] = useState("Two");
+  const [innerAccordion, setInnerAccordion] = useState(false);
 
   const validate = (value: string) => {
     return !/^[0-9\-\+]{9,15}$/.test(value);
@@ -94,6 +96,25 @@ function App() {
       return values.length + " selected";
     }
   };
+
+  const mapperAccordions = accordionItems.map((item, index) => {
+    return (
+      <Accordion
+        key={item.title}
+        show={show === index}
+        setShow={() => {
+          if (show === index) {
+            setShow(null);
+          } else {
+            setShow(index);
+          }
+        }}
+        title={item.title}
+      >
+        {item.content}
+      </Accordion>
+    );
+  });
 
   return (
     <div
@@ -218,26 +239,7 @@ function App() {
         />
       </Wrapper>
       <Wrapper>
-        <div>
-          {accordionItems.map((item, index) => {
-            return (
-              <Accordion
-                key={item.title}
-                show={show === index}
-                setShow={() => {
-                  if (show === index) {
-                    setShow(null);
-                  } else {
-                    setShow(index);
-                  }
-                }}
-                title={item.title}
-              >
-                {item.content}
-              </Accordion>
-            );
-          })}
-        </div>
+        <div>{mapperAccordions}</div>
       </Wrapper>
       <Wrapper>
         <Dropdown
@@ -418,6 +420,9 @@ function App() {
           items={items}
           setItems={setItems}
         />
+      </Wrapper>
+      <Wrapper>
+        <Tabs value={tabValue} onChange={setTabValue} />
       </Wrapper>
     </div>
   );
