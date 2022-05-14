@@ -37,6 +37,26 @@ const ChildrenContainer = styled.div<{
           top: calc(-${props.offset / 2 + "px"} + 50%);
           left: calc(100% + 10px);
         `;
+      case "left-top":
+        return css`
+          bottom: 40px;
+          left: 0;
+        `;
+      case "right-top":
+        return css`
+          bottom: 40px;
+          right: 0;
+        `;
+      case "left-bottom":
+        return css`
+          top: 40px;
+          left: 0;
+        `;
+      case "right-bottom":
+        return css`
+          top: 40px;
+          right: 0;
+        `;
       default:
         break;
     }

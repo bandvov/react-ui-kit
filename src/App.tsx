@@ -303,6 +303,59 @@ function App() {
             </Dropdown>
           </>
         </Dropdown>
+
+        <Dropdown
+          position="right-bottom"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
+        <Dropdown
+          position="left-bottom"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
+        <Dropdown
+          position="right-top"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
+        <Dropdown
+          position="left-top"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
       </Wrapper>
       <div>
         <Dropdown
