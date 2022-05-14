@@ -61,7 +61,7 @@ describe("Dropdown", () => {
     const children = screen.getByTestId("children");
     expect(children).toBeInTheDocument();
     expect(children).toHaveStyle({
-      width: "100%",
+      width: "calc(100% + 3px)",
     });
   });
   test("Closed dropdown", () => {
