@@ -77,7 +77,7 @@ export default function Dropdown({
   onMouseEnter = () => {},
   onMouseLeave = () => {},
   position = "bottom",
-  buttonStyles,
+  buttonStyles = {},
   fullWidth = false,
   ...props
 }: {
@@ -118,10 +118,15 @@ export default function Dropdown({
       setOffsetHeight(childrenRef.current.scrollHeight);
       setOffsetWidth(childrenRef.current.clientWidth);
     }
-  }, [childrenRef]);
+  }, [childrenRef, title]);
 
   const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
 
+  function escapeHandler(e: KeyboardEvent): void {
+    if (e.code === "Escape") {
+      onKeyDown(!isOpen);
+    }
+  }
   function closeHandler(): void {
     if (onClick) {
       onClick(false);
@@ -153,7 +158,7 @@ export default function Dropdown({
         style={{
           display: "flex",
           justifyContent: "space-between",
-          ...(buttonStyles || {}),
+          ...buttonStyles,
         }}
         onClick={() => {
           onClick(!isOpen);
@@ -164,11 +169,7 @@ export default function Dropdown({
         onMouseLeave={() => {
           onMouseLeave(!isOpen);
         }}
-        onKeyDown={(e: any) => {
-          if (e.code === "Escape") {
-            onKeyDown(!isOpen);
-          }
-        }}
+        onKeyDown={escapeHandler}
       >
         {title}{" "}
         <img
