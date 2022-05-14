@@ -21,6 +21,82 @@ describe("Dropdown", () => {
     });
   });
 
+  test("Open on top left", () => {
+    render(
+      <Dropdown
+        position="left-top"
+        title="Test"
+        isOpen={true}
+        onClick={() => {}}
+      >
+        <div>default</div>
+      </Dropdown>
+    );
+    const children = screen.getByTestId("children");
+    expect(children).toBeInTheDocument();
+    expect(children).toHaveStyle({
+      bottom: "40px",
+      left: 0,
+      opacity: 1,
+    });
+  });
+  test("Open on top right", () => {
+    render(
+      <Dropdown
+        position="right-top"
+        title="Test"
+        isOpen={true}
+        onClick={() => {}}
+      >
+        <div>default</div>
+      </Dropdown>
+    );
+    const children = screen.getByTestId("children");
+    expect(children).toBeInTheDocument();
+    expect(children).toHaveStyle({
+      bottom: "40px",
+      right: 0,
+      opacity: 1,
+    });
+  });
+  test("Open on bottom right", () => {
+    render(
+      <Dropdown
+        position="right-bottom"
+        title="Test"
+        isOpen={true}
+        onClick={() => {}}
+      >
+        <div>default</div>
+      </Dropdown>
+    );
+    const children = screen.getByTestId("children");
+    expect(children).toBeInTheDocument();
+    expect(children).toHaveStyle({
+      top: "40px",
+      right: 0,
+      opacity: 1,
+    });
+  });
+  test("Open on bottom left", () => {
+    render(
+      <Dropdown
+        position="left-bottom"
+        title="Test"
+        isOpen={true}
+        onClick={() => {}}
+      >
+        <div>default</div>
+      </Dropdown>
+    );
+    const children = screen.getByTestId("children");
+    expect(children).toBeInTheDocument();
+    expect(children).toHaveStyle({
+      top: "40px",
+      left: 0,
+      opacity: 1,
+    });
+  });
   test("Open on top", () => {
     render(
       <Dropdown position="top" title="Test" isOpen={true} onClick={() => {}}>
