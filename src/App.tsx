@@ -85,15 +85,6 @@ function App() {
   const validate = (value: string) => {
     return !/^[0-9\-\+]{9,15}$/.test(value);
   };
-  const getTitle = () => {
-    if (values.length === 0) {
-      return "Select";
-    } else if (values.length === 1) {
-      return items[values[0]].title;
-    } else {
-      return values.length + " selected";
-    }
-  };
 
   return (
     <div
@@ -457,9 +448,8 @@ function App() {
           multi={true}
           values={values}
           setValues={setValues}
-          title={getTitle()}
+          title={"One"}
           items={items}
-          setItems={setItems}
         />
         <Select
           values={values}
@@ -470,7 +460,6 @@ function App() {
           fullWidth
           title="I am select"
           items={items}
-          setItems={setItems}
         />
       </Wrapper>
     </div>
