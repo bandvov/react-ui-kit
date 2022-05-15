@@ -44,6 +44,7 @@ export default function Select({
   const mappedItems = items.map((item) => {
     return (
       <li
+        key={item.title}
         data-testId="list-item"
         tabIndex={0}
         role="option"
