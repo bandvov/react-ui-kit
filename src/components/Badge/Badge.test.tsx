@@ -17,8 +17,8 @@ describe("Badge", () => {
       width: "10px",
       backgroundColor: COLORS.green,
       borderRadius: "50%",
-      left: "80%",
-      top: "0",
+      left: "calc(100% - 10px)",
+      top: 0,
     });
   });
   test("Default badge with position bottom", () => {
@@ -32,7 +32,7 @@ describe("Badge", () => {
       height: "10px",
       width: "10px",
       backgroundColor: COLORS.green,
-      left: "80%",
+      left: "calc(100% - 10px)",
       bottom: 0,
       borderRadius: "50%",
     });
@@ -46,8 +46,8 @@ describe("Badge", () => {
     const element = screen.getByTestId(/badge/i);
     expect(element).toHaveStyle({
       backgroundColor: COLORS.green,
-      left: "80%",
-      top: "-40%",
+      left: "calc(100% - 10px)",
+      top: "-45%",
       borderRadius: "13px",
     });
   });

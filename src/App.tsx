@@ -134,14 +134,10 @@ function App() {
             &copy;
           </Button>
         </Badge>
-        <Badge onClick={() => alert("click on badge")} label={5}>
+        <Badge label={5}>
           <Button>large</Button>
         </Badge>
-        <Badge
-          position="bottom"
-          onClick={() => alert("click on badge")}
-          label={5}
-        >
+        <Badge position="bottom" label={5}>
           <Button>large</Button>
         </Badge>
         <Badge position={"bottom"} label={5}>
