@@ -55,9 +55,7 @@ function Pagination({
   });
 
   const previousButtonHandler = () => {
-    if (show - currentButton === 0) {
-      setArrayOfCurrentButtons(baseArray.slice(0, show));
-    }
+    if (currentButton === 0) return;
     if (currentButton < arrayOfCurrentButtons[0] && currentButton > 0) {
       setArrayOfCurrentButtons(
         baseArray.slice(
@@ -67,15 +65,11 @@ function Pagination({
       );
     }
 
-    if (currentButton + 1 === arrayOfCurrentButtons[0] && currentButton === 0) {
-      setCurrentButton(baseArray.length - 1);
-      setArrayOfCurrentButtons(baseArray.slice(-show));
-    } else {
-      setCurrentButton(currentButton - 1);
-    }
+    setCurrentButton(currentButton - 1);
   };
 
   const nextButtonHandler = () => {
+    if (currentButton + 1 === baseArray.length) return;
     if (
       currentButton + 1 >=
       arrayOfCurrentButtons[arrayOfCurrentButtons.length - 1]
@@ -87,18 +81,8 @@ function Pagination({
         )
       );
     }
-    if (currentButton + 1 === baseArray.length) {
-      setArrayOfCurrentButtons(
-        baseArray.slice(
-          0,
 
-          show
-        )
-      );
-      setCurrentButton(0);
-    } else {
-      setCurrentButton(currentButton + 1);
-    }
+    setCurrentButton(currentButton + 1);
   };
 
   return (
@@ -123,6 +107,7 @@ function Pagination({
         </li>
         <li>
           <Button
+            disabled={currentButton === 0}
             variant="default-outlined"
             padding="4px 10px"
             onClick={previousButtonHandler}
@@ -208,6 +193,7 @@ function Pagination({
 
         <li>
           <Button
+            disabled={currentButton + 1 === baseArray.length}
             padding="4px 10px"
             variant="default-outlined"
             onClick={nextButtonHandler}
