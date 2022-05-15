@@ -11,7 +11,6 @@ import {
   DialogModal,
 } from "./components";
 import Select from "./components/Select/Select";
-import { COLORS } from "./CONSTANTS";
 import { IDropdownItem } from "./types";
 import Wrapper from "./Wrapper";
 
@@ -71,7 +70,6 @@ const dropdownItems: IDropdownItem[] = [
 
 function App() {
   const [checked, setChecked] = useState(false);
-  const [show, setShow] = useState<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [openDropdown1, setOpenDropdown1] = useState<boolean>(false);
   const [openInnerDropdown, setOpenInnerDropdown] = useState<boolean>(false);
@@ -209,26 +207,7 @@ function App() {
         />
       </Wrapper>
       <Wrapper>
-        <div>
-          {accordionItems.map((item, index) => {
-            return (
-              <Accordion
-                key={item.title}
-                show={show === index}
-                setShow={() => {
-                  if (show === index) {
-                    setShow(null);
-                  } else {
-                    setShow(index);
-                  }
-                }}
-                title={item.title}
-              >
-                {item.content}
-              </Accordion>
-            );
-          })}
-        </div>
+        <Accordion items={accordionItems}></Accordion>
       </Wrapper>
       <Wrapper>
         <Dropdown

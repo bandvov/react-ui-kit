@@ -32,7 +32,7 @@ export interface IButton extends CommonProps {
   icon?: ReactElement;
   iconLeft?: ReactElement;
   disabled?: boolean;
-  justify?: "center" | "flex-start" | "flex-end" | "stretch";
+  justify?: "center" | "flex-start" | "flex-end" | "stretch" | "space-between";
   type?: "button" | "submit";
 }
 

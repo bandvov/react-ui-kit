@@ -1,4 +1,5 @@
 import Accordion from "./Accordion/Accordion";
+import AccordionItem from "./Accordion/AccordionItem";
 import Badge from "./Badge/Badge";
 import Button from "./Button/Button";
 import Checkbox from "./Checkbox/Checkbox";
@@ -11,6 +12,7 @@ import DialogModal from "./DialogModal/DialogModal";
 export {
   Button,
   Badge,
+  AccordionItem,
   Accordion,
   Checkbox,
   TextInput,
