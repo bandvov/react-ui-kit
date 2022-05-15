@@ -137,6 +137,13 @@ function App() {
         <Badge onClick={() => alert("click on badge")} label={5}>
           <Button>large</Button>
         </Badge>
+        <Badge
+          position="bottom"
+          onClick={() => alert("click on badge")}
+          label={5}
+        >
+          <Button>large</Button>
+        </Badge>
         <Badge position={"bottom"} label={5}>
           <Button rounded>&copy;</Button>
         </Badge>
@@ -357,6 +364,7 @@ function App() {
           }}
         />
         <Pagination
+          square
           handler={(value: number) => {
             console.log(value);
           }}
