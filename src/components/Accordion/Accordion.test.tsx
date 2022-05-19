@@ -1,14 +1,14 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { AccordionItem } from "..";
+import { Accordion } from "..";
 
-describe("AccordionItem", () => {
+describe("Accordion", () => {
   test("Closed accordion", () => {
     const title = "Test";
     render(
-      <AccordionItem active={false} onToggle={() => {}} title={title}>
+      <Accordion title={title}>
         <div>this is test content</div>
-      </AccordionItem>
+      </Accordion>
     );
     const accordionTitle = screen.getByTestId("button");
     expect(accordionTitle).toBeInTheDocument();
@@ -16,23 +16,20 @@ describe("AccordionItem", () => {
   });
   test("Open accordion", () => {
     const title = "Test";
-    const handler = jest.fn();
     render(
-      <AccordionItem active={false} onToggle={handler} title={title}>
-        <div>AccordionItem content</div>
-      </AccordionItem>
+      <Accordion title={title}>
+        <div>Accordion content</div>
+      </Accordion>
     );
     const accordionTitle = screen.getByTestId("button");
     fireEvent.click(accordionTitle);
-    expect(handler).toBeCalledTimes(1);
   });
   test("Closed accordion styles", () => {
     const title = "Test";
-    const handler = jest.fn();
     render(
-      <AccordionItem active={false} onToggle={handler} title={title}>
-        <div>AccordionItem content</div>
-      </AccordionItem>
+      <Accordion title={title}>
+        <div>Accordion content</div>
+      </Accordion>
     );
     const accordionTitle = screen.getByTestId("button");
     expect(accordionTitle).not.toHaveStyle({
@@ -43,13 +40,13 @@ describe("AccordionItem", () => {
     });
   });
 
-  test.skip("AccordionItem keyboard events", () => {
+  test.skip("Accordion keyboard events", () => {
     const title = "Test";
     const handler = jest.fn();
     render(
-      <AccordionItem active={false} onToggle={handler} title={title}>
-        <div>AccordionItem content</div>
-      </AccordionItem>
+      <Accordion title={title}>
+        <div>Accordion content</div>
+      </Accordion>
     );
     const accordionTitle = screen.getByTestId("button");
     fireEvent.keyDown(accordionTitle, {

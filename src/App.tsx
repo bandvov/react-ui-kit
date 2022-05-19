@@ -210,7 +210,17 @@ function App() {
         />
       </Wrapper>
       <Wrapper>
-        <Accordion items={accordionItems}></Accordion>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "stretch",
+            flexDirection: "column",
+          }}
+        >
+          {accordionItems.map(({ title, content }) => {
+            return <Accordion title={title}>{content}</Accordion>;
+          })}
+        </div>
       </Wrapper>
       <Wrapper>
         <Dropdown
