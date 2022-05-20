@@ -2,9 +2,15 @@ import React, { ReactElement, useRef, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Button from "../Button/Button";
 import { Position } from "../../types";
+import { ReactComponent as ArrowDown } from "../../icons/arrow_down.svg";
+import { ReactComponent as ArrowUp } from "../../icons/arrow_up.svg";
+import { COLORS } from "../../CONSTANTS";
 
-const iconPath = process.env.PUBLIC_URL + "/icons/";
-
+const DropdownButton = styled(Button)`
+  svg line {
+    stroke: ${(props) => props.color};
+  }
+`;
 const ChildrenContainer = styled.div<{
   offset: number;
   isOpen: boolean;
@@ -120,8 +126,6 @@ export default function Dropdown({
     }
   }, [childrenRef, title]);
 
-  const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
-
   function escapeHandler(e: KeyboardEvent): void {
     if (e.code === "Escape") {
       onKeyDown(!isOpen);
@@ -150,7 +154,8 @@ export default function Dropdown({
       }}
       {...props}
     >
-      <Button
+      <DropdownButton
+        color={COLORS.Blue}
         aria-expanded={isOpen}
         fullWidth={fullWidth}
         backgroundColor="white"
@@ -171,15 +176,13 @@ export default function Dropdown({
         }}
         onKeyDown={escapeHandler}
       >
-        {title}{" "}
-        <img
-          alt={isOpen ? "arrow up" : "arrowDown"}
-          style={{ marginTop: "auto", marginBottom: "auto" }}
-          width={10}
-          height={10}
-          src={iconPath + iconName}
-        />
-      </Button>
+        {title}
+        {isOpen ? (
+          <ArrowUp width={10} height={10} style={{ margin: "auto 0" }} />
+        ) : (
+          <ArrowDown width={10} height={10} style={{ margin: "auto 0" }} />
+        )}
+      </DropdownButton>
       <ChildrenContainer
         data-testId="children"
         offset={
