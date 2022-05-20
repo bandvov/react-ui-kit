@@ -1,9 +1,16 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import styled, { css } from "styled-components";
 import { COLORS } from "../../CONSTANTS";
 import Button from "../Button/Button";
-const iconPath = process.env.PUBLIC_URL + "/icons/";
+// const iconPath = process.env.PUBLIC_URL + "/icons/";
+import { ReactComponent as ArrowDown } from "../../icons/arrow_down.svg";
+import { ReactComponent as ArrowUp } from "../../icons/arrow_up.svg";
 
+const AccordionTitle = styled(Button)`
+  svg line {
+    stroke: ${(props) => props.color};
+  }
+`;
 const AccordionContent = styled.div<{ isOpen: boolean }>`
   overflow: hidden;
   ${(props) => {
@@ -26,34 +33,29 @@ const Accordion = ({
   title,
   children,
 }: {
-  title: string;
+  title: ReactElement | string;
   children: ReactElement | string;
 }) => {
-  const [isOpen, setOpen] = React.useState(false);
-  const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
+  const [isOpen, setOpen] = useState(false);
 
   return (
     <div>
-      <Button
+      <AccordionTitle
+        color={isOpen ? "black" : COLORS.gray}
         borderRadius="0"
         fullWidth
         justify="space-between"
         backgroundColor="transparent"
         border={`1px solid ${COLORS.gray} `}
-        style={{
-          color: isOpen ? "black" : COLORS.gray,
-        }}
         onClick={() => setOpen(!isOpen)}
       >
         {title}
-        <img
-          alt={isOpen ? "arrow up" : "arrowDown"}
-          style={{ marginTop: "auto", marginBottom: "auto" }}
-          width={10}
-          height={10}
-          src={iconPath + iconName}
-        />
-      </Button>
+        {isOpen ? (
+          <ArrowUp width={10} height={10} style={{ margin: "auto 0" }} />
+        ) : (
+          <ArrowDown width={10} height={10} style={{ margin: "auto 0" }} />
+        )}
+      </AccordionTitle>
       <AccordionContent isOpen={isOpen}>
         <div>{children}</div>
       </AccordionContent>

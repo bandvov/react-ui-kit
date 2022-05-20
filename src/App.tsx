@@ -14,7 +14,10 @@ import Select from "./components/Select/Select";
 import { IDropdownItem } from "./types";
 import Wrapper from "./Wrapper";
 
-const accordionItems: { title: string; content: string | ReactElement }[] = [
+const accordionItems: {
+  title: ReactElement | string;
+  content: ReactElement | string;
+}[] = [
   {
     title: "one",
     content: `bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bl
