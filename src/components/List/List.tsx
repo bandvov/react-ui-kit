@@ -15,9 +15,14 @@ const StyledList = styled.ul`
     background-color: aliceblue;
   }
 `;
-export default function List({ children }: { children: ReactElement[] }) {
+export default function List({
+  children,
+  ...props
+}: {
+  children: ReactElement[];
+}) {
   return (
-    <StyledList>
+    <StyledList {...props}>
       {children.map((item) => {
         return <li>{item}</li>;
       })}
