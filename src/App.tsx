@@ -10,6 +10,7 @@ import {
   TextInput,
   DialogModal,
 } from "./components";
+import List from "./components/List/List";
 import Select from "./components/Select/Select";
 import { IDropdownItem } from "./types";
 import Wrapper from "./Wrapper";
@@ -457,6 +458,13 @@ function App() {
           title="I am select"
           items={items}
         />
+      </Wrapper>
+      <Wrapper>
+        <List>
+          <div>adasd</div>
+          <div>adasd</div>
+          <div>adasd</div>
+        </List>
       </Wrapper>
     </div>
   );
