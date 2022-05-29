@@ -85,8 +85,7 @@ function App() {
   const [value, setValue] = useState("");
   const [values, setValues] = useState<number[]>([]);
   const [error, setError] = useState(false);
-  const [tabValue, setTabValue] = useState("Three");
-  const [innerAccordion, setInnerAccordion] = useState(false);
+  const [tabValue, setTabValue] = useState<number>(0);
 
   const validate = (value: string) => {
     return !/^[0-9\-\+]{9,15}$/.test(value);

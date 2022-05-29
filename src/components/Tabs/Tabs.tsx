@@ -19,16 +19,16 @@ export default function Tabs({
   buttonStyles?: { [key: string]: string };
   activeButtonStyles?: { [key: string]: string };
   value: string | number;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: Dispatch<SetStateAction<number>>;
 }) {
-  const mappedItems = items.map((item) => {
+  const mappedItems = items.map((item, index) => {
     return (
       <Tab
         activeButtonStyles={{ ...buttonStyles, ...activeButtonStyles }}
         buttonStyles={buttonStyles}
-        value={value}
+        active={value === index}
         fullWidth
-        onClick={() => onChange(item)}
+        onClick={() => onChange(index)}
         label={item}
       />
     );

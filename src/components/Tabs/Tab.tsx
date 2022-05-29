@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 export default function Tab({
   label,
   onClick,
-  value,
+  active,
   buttonStyles = {},
   activeButtonStyles = {},
   ...rest
@@ -13,15 +13,15 @@ export default function Tab({
   activeButtonStyles?: { [key: string]: string };
   fullWidth?: boolean;
   label: string;
-  onClick: (value: number | string) => void;
-  value: string | number;
+  onClick: () => void;
+  active: boolean;
 }) {
   return (
     <Button
       padding="1rem"
-      style={value === label ? activeButtonStyles : buttonStyles}
-      onClick={() => onClick(value)}
-      color={value === label ? "" : "lightgray"}
+      style={active ? activeButtonStyles : buttonStyles}
+      onClick={() => onClick()}
+      color={active ? "" : "lightgray"}
       borderRadius="0"
       {...rest}
     >

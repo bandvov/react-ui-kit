@@ -2,6 +2,9 @@ import React, { ReactElement, useRef, useState } from "react";
 import styled from "styled-components";
 
 const StyledSwiper = styled.div<{ width: string }>`
+  > div {
+    transition: transform 0.3s ease-out;
+  }
   box-sizing: border-box;
   display: flex;
   width: ${(props) => props.width};
@@ -21,6 +24,7 @@ export default function Swiper({
   const startXRef = useRef(0);
 
   const [offsetX, setOffsetX] = useState(0);
+  const offsetXRef = useRef(0);
 
   const onTouchStart = (e: any) => {
     const clientX = e.clientX ? e.clientX : e.touches[0].clientX;
@@ -52,9 +56,17 @@ export default function Swiper({
         childrenRef.current!.offsetWidth - containerRef.current!.offsetWidth;
     }
     setOffsetX(newOffset);
+    offsetXRef.current = newOffset;
   };
 
   const onTouchEnd = () => {
+    const idx = Math.round(
+      offsetXRef.current / containerRef.current!.offsetWidth
+    );
+    const newOffset = idx * containerRef.current!.offsetWidth;
+    console.log(idx);
+
+    setOffsetX(newOffset);
     window.removeEventListener("touchmove", onTouchMove);
     window.removeEventListener("mousemove", onTouchMove);
     window.removeEventListener("mouseup", onTouchEnd);
