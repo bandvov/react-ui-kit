@@ -9,9 +9,11 @@ import {
   Backdrop,
   TextInput,
   DialogModal,
+  Select,
+  Swiper,
 } from "./components";
 import List from "./components/List/List";
-import Select from "./components/Select/Select";
+import Tabs from "./components/Tabs/Tabs";
 import { IDropdownItem } from "./types";
 import Wrapper from "./Wrapper";
 
@@ -83,6 +85,7 @@ function App() {
   const [value, setValue] = useState("");
   const [values, setValues] = useState<number[]>([]);
   const [error, setError] = useState(false);
+  const [tabValue, setTabValue] = useState<number>(0);
 
   const validate = (value: string) => {
     return !/^[0-9\-\+]{9,15}$/.test(value);
@@ -465,6 +468,58 @@ function App() {
           <div>adasd</div>
           <div>adasd</div>
         </List>
+      </Wrapper>
+      <Wrapper>
+        <Tabs
+          items={["One", "Two", "Three", "Four"]}
+          value={tabValue}
+          onChange={setTabValue}
+        />
+      </Wrapper>
+      <Wrapper>
+        <Swiper width="300px">
+          <div
+            style={{ width: "300px", height: "400px", backgroundColor: "red" }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "green",
+            }}
+          />
+          <div
+            style={{ width: "300px", height: "400px", backgroundColor: "blue" }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "yellow",
+            }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "red",
+            }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "brown",
+            }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "pink",
+            }}
+          />
+        </Swiper>
       </Wrapper>
     </div>
   );
