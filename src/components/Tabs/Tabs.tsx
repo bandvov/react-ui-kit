@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import Tab from "./Tab";
 
@@ -33,9 +33,5 @@ export default function Tabs({
       />
     );
   });
-  return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <StyledTabs>{mappedItems}</StyledTabs>
-    </div>
-  );
+  return <StyledTabs data-testid="tabs">{mappedItems}</StyledTabs>;
 }
