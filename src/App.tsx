@@ -10,6 +10,7 @@ import {
   TextInput,
   DialogModal,
   Select,
+  Swiper,
 } from "./components";
 import List from "./components/List/List";
 import Tabs from "./components/Tabs/Tabs";
@@ -84,7 +85,7 @@ function App() {
   const [value, setValue] = useState("");
   const [values, setValues] = useState<number[]>([]);
   const [error, setError] = useState(false);
-  const [tabValue, setTabValue] = useState("Two");
+  const [tabValue, setTabValue] = useState("Three");
   const [innerAccordion, setInnerAccordion] = useState(false);
 
   const validate = (value: string) => {
@@ -470,7 +471,56 @@ function App() {
         </List>
       </Wrapper>
       <Wrapper>
-        <Tabs value={tabValue} onChange={setTabValue} />
+        <Tabs
+          items={["One", "Two", "Three", "Four"]}
+          value={tabValue}
+          onChange={setTabValue}
+        />
+      </Wrapper>
+      <Wrapper>
+        <Swiper width="300px">
+          <div
+            style={{ width: "300px", height: "400px", backgroundColor: "red" }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "green",
+            }}
+          />
+          <div
+            style={{ width: "300px", height: "400px", backgroundColor: "blue" }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "yellow",
+            }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "red",
+            }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "brown",
+            }}
+          />
+          <div
+            style={{
+              width: "300px",
+              height: "400px",
+              backgroundColor: "pink",
+            }}
+          />
+        </Swiper>
       </Wrapper>
     </div>
   );

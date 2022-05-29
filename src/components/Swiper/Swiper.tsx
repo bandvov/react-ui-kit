@@ -1,14 +1,19 @@
 import React, { ReactElement, useRef, useState } from "react";
 import styled from "styled-components";
 
-const StyledSwiper = styled.div`
+const StyledSwiper = styled.div<{ width: string }>`
+  box-sizing: border-box;
   display: flex;
-  width: 50vw;
+  width: ${(props) => props.width};
+  border: 3px solid red;
+  overflow: hidden;
   position: relative;
 `;
 export default function Swiper({
   children,
+  width = "100%",
 }: {
+  width?: string;
   children: ReactElement | ReactElement[];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,6 +63,7 @@ export default function Swiper({
 
   return (
     <StyledSwiper
+      width={width}
       ref={containerRef}
       onTouchStart={onTouchStart}
       onMouseDown={onTouchStart}
