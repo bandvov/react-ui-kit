@@ -1,37 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tabs Tab handler 1`] = `
-<div
-  class="sc-gsDKAQ eJRZPP"
-  data-testid="tabs"
->
-  <button
-    class="sc-bdvvtL feyXfz"
-    color="lightgray"
-    data-testid="button"
-    type="button"
-  >
-    One
-  </button>
-  <button
-    class="sc-bdvvtL ecqrqj"
-    color=""
-    data-testid="button"
-    type="button"
-  >
-    Two
-  </button>
-  <button
-    class="sc-bdvvtL feyXfz"
-    color="lightgray"
-    data-testid="button"
-    type="button"
-  >
-    Three
-  </button>
-</div>
-`;
-
 exports[`Tabs Tabs should be in the document 1`] = `
 <div
   class="sc-gsDKAQ eJRZPP"
