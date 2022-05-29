@@ -8,15 +8,14 @@ export default function Select({
   values,
   title,
   setValues,
-  setItems,
   multi = false,
   height = "200px",
+  buttonStyles,
   ...rest
 }: Omit<IDropdown, "isOpen" | "children"> & {
   values: number[];
   setValues: (items: number[]) => void;
   items: IDropdownItem[];
-  setItems: (items: IDropdownItem[]) => void;
   multi?: boolean;
   height?: string;
 }) {
@@ -32,10 +31,20 @@ export default function Select({
       setIsOpen(false);
     }
   };
+  const getTitle = () => {
+    if (values.length === 0) {
+      return title;
+    } else if (values.length === 1) {
+      return items.find((item) => item.value === values[0])!.title;
+    } else {
+      return values.length + " selected";
+    }
+  };
 
   const mappedItems = items.map((item) => {
     return (
       <li
+        key={item.title}
         data-testId="list-item"
         tabIndex={0}
         role="option"
@@ -65,7 +74,8 @@ export default function Select({
 
   return (
     <Dropdown
-      title={title}
+      buttonStyles={buttonStyles}
+      title={getTitle()}
       aria-haspopup="listbox"
       aria-expanded={isOpen}
       isOpen={isOpen}

@@ -25,13 +25,13 @@ const StyledBadge = styled.div<IBadge>`
   ${(props) => {
     if (props.position === "bottom") {
       return css`
-        left: 80%;
-        bottom: -40%;
+        left: calc(100% - 10px);
+        bottom: -45%;
       `;
     } else {
       return css`
-        left: 80%;
-        top: -40%;
+        left: calc(100% - 10px);
+        top: -45%;
       `;
     }
   }}
@@ -67,7 +67,14 @@ const Badge: FC<IBadge> = ({
   ...props
 }): ReactElement => {
   return (
-    <div style={{ position: "relative", width: "max-content" }}>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        position: "relative",
+        width: "max-content",
+      }}
+    >
       <StyledBadge data-testId="badge" className={className} {...props}>
         {label}
       </StyledBadge>

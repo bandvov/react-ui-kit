@@ -9,13 +9,17 @@ import {
   Backdrop,
   TextInput,
   DialogModal,
+  Select,
 } from "./components";
-import Select from "./components/Select/Select";
+import List from "./components/List/List";
 import Tabs from "./components/Tabs/Tabs";
 import { IDropdownItem } from "./types";
 import Wrapper from "./Wrapper";
 
-const accordionItems: { title: string; content: string | ReactElement }[] = [
+const accordionItems: {
+  title: ReactElement | string;
+  content: ReactElement | string;
+}[] = [
   {
     title: "one",
     content: `bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bl
@@ -71,7 +75,6 @@ const dropdownItems: IDropdownItem[] = [
 
 function App() {
   const [checked, setChecked] = useState(false);
-  const [show, setShow] = useState<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [openDropdown1, setOpenDropdown1] = useState<boolean>(false);
   const [openInnerDropdown, setOpenInnerDropdown] = useState<boolean>(false);
@@ -87,34 +90,6 @@ function App() {
   const validate = (value: string) => {
     return !/^[0-9\-\+]{9,15}$/.test(value);
   };
-  const getTitle = () => {
-    if (values.length === 0) {
-      return "Select";
-    } else if (values.length === 1) {
-      return items[values[0]].title;
-    } else {
-      return values.length + " selected";
-    }
-  };
-
-  const mapperAccordions = accordionItems.map((item, index) => {
-    return (
-      <Accordion
-        key={item.title}
-        show={show === index}
-        setShow={() => {
-          if (show === index) {
-            setShow(null);
-          } else {
-            setShow(index);
-          }
-        }}
-        title={item.title}
-      >
-        {item.content}
-      </Accordion>
-    );
-  });
 
   return (
     <div
@@ -166,7 +141,10 @@ function App() {
             &copy;
           </Button>
         </Badge>
-        <Badge onClick={() => alert("click on badge")} label={5}>
+        <Badge label={5}>
+          <Button>large</Button>
+        </Badge>
+        <Badge position="bottom" label={5}>
           <Button>large</Button>
         </Badge>
         <Badge position={"bottom"} label={5}>
@@ -239,7 +217,17 @@ function App() {
         />
       </Wrapper>
       <Wrapper>
-        <div>{mapperAccordions}</div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "stretch",
+            flexDirection: "column",
+          }}
+        >
+          {accordionItems.map(({ title, content }) => {
+            return <Accordion title={title}>{content}</Accordion>;
+          })}
+        </div>
       </Wrapper>
       <Wrapper>
         <Dropdown
@@ -305,6 +293,59 @@ function App() {
             </Dropdown>
           </>
         </Dropdown>
+
+        <Dropdown
+          position="right-bottom"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
+        <Dropdown
+          position="left-bottom"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
+        <Dropdown
+          position="right-top"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
+        <Dropdown
+          position="left-top"
+          isOpen={openDropdown}
+          title={"Location"}
+          onClick={setOpenDropdown}
+          onKeyDown={setOpenDropdown}
+        >
+          <div style={{ border: "1px solid" }}>
+            <h1 style={{ margin: "2rem" }} tabIndex={0}>
+              Dropdown
+            </h1>
+          </div>
+        </Dropdown>
       </Wrapper>
       <div>
         <Dropdown
@@ -336,6 +377,7 @@ function App() {
           }}
         />
         <Pagination
+          square
           handler={(value: number) => {
             console.log(value);
           }}
@@ -386,6 +428,7 @@ function App() {
           Open dialog
         </Button>
         <DialogModal
+          slide="bottom"
           header={<div>header</div>}
           body={<div>body</div>}
           footer={
@@ -405,9 +448,8 @@ function App() {
           multi={true}
           values={values}
           setValues={setValues}
-          title={getTitle()}
+          title={"One"}
           items={items}
-          setItems={setItems}
         />
         <Select
           values={values}
@@ -418,8 +460,14 @@ function App() {
           fullWidth
           title="I am select"
           items={items}
-          setItems={setItems}
         />
+      </Wrapper>
+      <Wrapper>
+        <List>
+          <div>adasd</div>
+          <div>adasd</div>
+          <div>adasd</div>
+        </List>
       </Wrapper>
       <Wrapper>
         <Tabs value={tabValue} onChange={setTabValue} />

@@ -2,9 +2,15 @@ import React, { ReactElement, useRef, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import Button from "../Button/Button";
 import { Position } from "../../types";
+import { ReactComponent as ArrowDown } from "../../icons/arrow_down.svg";
+import { ReactComponent as ArrowUp } from "../../icons/arrow_up.svg";
+import { COLORS } from "../../CONSTANTS";
 
-const iconPath = process.env.PUBLIC_URL + "/icons/";
-
+const DropdownButton = styled(Button)`
+  svg line {
+    stroke: ${(props) => props.color};
+  }
+`;
 const ChildrenContainer = styled.div<{
   offset: number;
   isOpen: boolean;
@@ -37,6 +43,26 @@ const ChildrenContainer = styled.div<{
           top: calc(-${props.offset / 2 + "px"} + 50%);
           left: calc(100% + 10px);
         `;
+      case "left-top":
+        return css`
+          bottom: 40px;
+          left: 0;
+        `;
+      case "right-top":
+        return css`
+          bottom: 40px;
+          right: 0;
+        `;
+      case "left-bottom":
+        return css`
+          top: 40px;
+          left: 0;
+        `;
+      case "right-bottom":
+        return css`
+          top: 40px;
+          right: 0;
+        `;
       default:
         break;
     }
@@ -57,7 +83,7 @@ export default function Dropdown({
   onMouseEnter = () => {},
   onMouseLeave = () => {},
   position = "bottom",
-  buttonStyles,
+  buttonStyles = {},
   fullWidth = false,
   ...props
 }: {
@@ -98,10 +124,13 @@ export default function Dropdown({
       setOffsetHeight(childrenRef.current.scrollHeight);
       setOffsetWidth(childrenRef.current.clientWidth);
     }
-  }, [childrenRef]);
+  }, [childrenRef, title]);
 
-  const iconName = isOpen ? "arrow_down.svg" : "arrow_up.svg";
-
+  function escapeHandler(e: KeyboardEvent): void {
+    if (e.code === "Escape") {
+      onKeyDown(!isOpen);
+    }
+  }
   function closeHandler(): void {
     if (onClick) {
       onClick(false);
@@ -125,7 +154,8 @@ export default function Dropdown({
       }}
       {...props}
     >
-      <Button
+      <DropdownButton
+        color={COLORS.Blue}
         aria-expanded={isOpen}
         fullWidth={fullWidth}
         backgroundColor="white"
@@ -133,7 +163,7 @@ export default function Dropdown({
         style={{
           display: "flex",
           justifyContent: "space-between",
-          ...(buttonStyles || {}),
+          ...buttonStyles,
         }}
         onClick={() => {
           onClick(!isOpen);
@@ -144,21 +174,15 @@ export default function Dropdown({
         onMouseLeave={() => {
           onMouseLeave(!isOpen);
         }}
-        onKeyDown={(e: any) => {
-          if (e.code === "Escape") {
-            onKeyDown(!isOpen);
-          }
-        }}
+        onKeyDown={escapeHandler}
       >
-        {title}{" "}
-        <img
-          alt={isOpen ? "arrow up" : "arrowDown"}
-          style={{ marginTop: "auto", marginBottom: "auto" }}
-          width={10}
-          height={10}
-          src={iconPath + iconName}
-        />
-      </Button>
+        {title}
+        {isOpen ? (
+          <ArrowUp width={10} height={10} style={{ margin: "auto 0" }} />
+        ) : (
+          <ArrowDown width={10} height={10} style={{ margin: "auto 0" }} />
+        )}
+      </DropdownButton>
       <ChildrenContainer
         data-testId="children"
         offset={

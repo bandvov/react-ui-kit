@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 import { COLORS } from "../../CONSTANTS";
 import Button from "../Button/Button";
 
+const PaginationButton = styled(Button)`
+  :hover {
+    background-color: ${(props) => (props.disabled ? "" : "#cccccc")};
+  }
+`;
 function Pagination({
   pages = 1,
-  show = 4,
+  show = 5,
   handler,
+  square = false,
+  rounded = true,
 }: {
+  rounded?: boolean;
+  square?: boolean;
   pages?: number;
   show?: number;
   handler: (value: number) => void;
@@ -25,10 +35,6 @@ function Pagination({
   }, []);
 
   useEffect(() => {
-    console.log("current", currentButton);
-    console.log("show", show);
-    console.log("arrayOfCurrentButtons", arrayOfCurrentButtons[0]);
-    console.log(currentButton < show);
     handler(currentButton);
   }, [currentButton]);
 
@@ -36,7 +42,8 @@ function Pagination({
     const isCurrentButton = currentButton === item - 1;
     return (
       <li>
-        <Button
+        <PaginationButton
+          borderRadius={square ? "0" : rounded ? "13px" : ""}
           color={isCurrentButton ? "white" : ""}
           padding="4px 10px"
           variant="default-outlined"
@@ -49,15 +56,13 @@ function Pagination({
           key={index}
         >
           {item}
-        </Button>
+        </PaginationButton>
       </li>
     );
   });
 
   const previousButtonHandler = () => {
-    if (show - currentButton === 0) {
-      setArrayOfCurrentButtons(baseArray.slice(0, show));
-    }
+    if (currentButton === 0) return;
     if (currentButton < arrayOfCurrentButtons[0] && currentButton > 0) {
       setArrayOfCurrentButtons(
         baseArray.slice(
@@ -67,15 +72,11 @@ function Pagination({
       );
     }
 
-    if (currentButton + 1 === arrayOfCurrentButtons[0] && currentButton === 0) {
-      setCurrentButton(baseArray.length - 1);
-      setArrayOfCurrentButtons(baseArray.slice(-show));
-    } else {
-      setCurrentButton(currentButton - 1);
-    }
+    setCurrentButton(currentButton - 1);
   };
 
   const nextButtonHandler = () => {
+    if (currentButton + 1 === baseArray.length) return;
     if (
       currentButton + 1 >=
       arrayOfCurrentButtons[arrayOfCurrentButtons.length - 1]
@@ -87,25 +88,16 @@ function Pagination({
         )
       );
     }
-    if (currentButton + 1 === baseArray.length) {
-      setArrayOfCurrentButtons(
-        baseArray.slice(
-          0,
 
-          show
-        )
-      );
-      setCurrentButton(0);
-    } else {
-      setCurrentButton(currentButton + 1);
-    }
+    setCurrentButton(currentButton + 1);
   };
 
   return (
     <div style={{ display: "flex" }}>
       <ul style={{ display: "flex", listStyle: "none", padding: 0 }}>
         <li>
-          <Button
+          <PaginationButton
+            borderRadius={square ? "0" : rounded ? "13px" : ""}
             variant="default-outlined"
             padding="4px 10px"
             disabled={currentButton === 0}
@@ -119,10 +111,12 @@ function Pagination({
             }}
           >
             &laquo;
-          </Button>
+          </PaginationButton>
         </li>
         <li>
-          <Button
+          <PaginationButton
+            borderRadius={square ? "0" : rounded ? "13px" : ""}
+            disabled={currentButton === 0}
             variant="default-outlined"
             padding="4px 10px"
             onClick={previousButtonHandler}
@@ -132,11 +126,12 @@ function Pagination({
             }}
           >
             &#8249;
-          </Button>
+          </PaginationButton>
         </li>
         {currentButton >= show && (
           <li>
-            <Button
+            <PaginationButton
+              borderRadius={square ? "0" : rounded ? "13px" : ""}
               padding="4px 10px"
               variant="default-outlined"
               onClick={() => {
@@ -156,14 +151,15 @@ function Pagination({
               }}
             >
               {"..."}
-            </Button>
+            </PaginationButton>
           </li>
         )}
         {items}
 
         {arrayOfCurrentButtons[0] + show <= baseArray.length && (
           <li>
-            <Button
+            <PaginationButton
+              borderRadius={square ? "0" : rounded ? "13px" : ""}
               padding="4px 10px"
               variant="default-outlined"
               onClick={() => {
@@ -202,12 +198,14 @@ function Pagination({
               }}
             >
               {"..."}
-            </Button>
+            </PaginationButton>
           </li>
         )}
 
         <li>
-          <Button
+          <PaginationButton
+            borderRadius={square ? "0" : rounded ? "13px" : ""}
+            disabled={currentButton + 1 === baseArray.length}
             padding="4px 10px"
             variant="default-outlined"
             onClick={nextButtonHandler}
@@ -217,10 +215,11 @@ function Pagination({
             }}
           >
             &rsaquo;
-          </Button>
+          </PaginationButton>
         </li>
         <li>
-          <Button
+          <PaginationButton
+            borderRadius={square ? "0" : rounded ? "13px" : ""}
             padding="4px 10px"
             variant="default-outlined"
             disabled={currentButton + 1 === baseArray[baseArray.length - 1]}
@@ -234,7 +233,7 @@ function Pagination({
             }}
           >
             &raquo;
-          </Button>
+          </PaginationButton>
         </li>
       </ul>
     </div>
