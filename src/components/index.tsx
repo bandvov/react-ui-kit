@@ -7,19 +7,21 @@ import DialogModal from "./DialogModal/DialogModal";
 import Dropdown from "./Dropdown/Dropdown";
 import List from "./List/List";
 import Pagination from "./Pagination/Pagination";
-import TextInput from "./Form/TextInput";
 import Select from "./Select/Select";
+import Swiper from "./Swiper/Swiper";
+import TextInput from "./Form/TextInput";
 
 export {
   Button,
   Badge,
   Accordion,
-  Checkbox,
-  TextInput,
-  Dropdown,
   Backdrop,
-  Pagination,
-  Select,
+  Checkbox,
   DialogModal,
+  Dropdown,
+  Pagination,
   List,
+  Select,
+  Swiper,
+  TextInput,
 };

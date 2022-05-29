@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import styled from "styled-components";
+import Swiper from "../Swiper/Swiper";
 import Tab from "./Tab";
 
 const StyledTabs = styled.div`
@@ -7,9 +8,6 @@ const StyledTabs = styled.div`
   width: 50vw;
   position: relative;
   overflow-x: hidden;
-  ::-webkit-scrollbar {
-    width: 0;
-  }
 `;
 export default function Tabs({
   value,
@@ -78,13 +76,7 @@ export default function Tabs({
         style={{ border: "3px solix" }}
         onMouseLeave={onTouchEnd}
       >
-        <div
-          ref={childrenRef}
-          style={{
-            display: "flex",
-            transform: `translateX(-${offsetX}px)`,
-          }}
-        >
+        <Swiper>
           <Tab
             fullWidth
             value={value}
@@ -120,7 +112,7 @@ export default function Tabs({
             onClick={() => {}}
             label="Three"
           />
-        </div>
+        </Swiper>
       </StyledTabs>
     </div>
   );
