@@ -479,43 +479,43 @@ function App() {
       <Wrapper>
         <Swiper width="300px">
           <div
-            style={{ width: "300px", height: "400px", backgroundColor: "red" }}
+            style={{ width: "300px", height: "100px", backgroundColor: "red" }}
           />
           <div
             style={{
               width: "300px",
-              height: "400px",
+              height: "100px",
               backgroundColor: "green",
             }}
           />
           <div
-            style={{ width: "300px", height: "400px", backgroundColor: "blue" }}
+            style={{ width: "300px", height: "100px", backgroundColor: "blue" }}
           />
           <div
             style={{
               width: "300px",
-              height: "400px",
+              height: "100px",
               backgroundColor: "yellow",
             }}
           />
           <div
             style={{
               width: "300px",
-              height: "400px",
+              height: "100px",
               backgroundColor: "red",
             }}
           />
           <div
             style={{
               width: "300px",
-              height: "400px",
+              height: "100px",
               backgroundColor: "brown",
             }}
           />
           <div
             style={{
               width: "300px",
-              height: "400px",
+              height: "100px",
               backgroundColor: "pink",
             }}
           />
