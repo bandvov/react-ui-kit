@@ -10,6 +10,7 @@ import Pagination from "./Pagination/Pagination";
 import Select from "./Select/Select";
 import Swiper from "./Swiper/Swiper";
 import TextInput from "./Form/TextInput";
+import Datepicker from "./datepicker/Datepicker";
 
 export {
   Button,
@@ -24,4 +25,5 @@ export {
   Select,
   Swiper,
   TextInput,
+  Datepicker,
 };

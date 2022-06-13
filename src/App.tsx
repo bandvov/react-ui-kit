@@ -11,6 +11,7 @@ import {
   DialogModal,
   Select,
   Swiper,
+  Datepicker,
 } from "./components";
 import List from "./components/List/List";
 import Tabs from "./components/Tabs/Tabs";
@@ -520,6 +521,9 @@ function App() {
             }}
           />
         </Swiper>
+      </Wrapper>
+      <Wrapper>
+        <Datepicker />
       </Wrapper>
     </div>
   );
