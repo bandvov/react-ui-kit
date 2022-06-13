@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { COLORS } from "../../CONSTANTS";
 import { ReactComponent as LeftArrow } from "../../icons/larr.svg";
 import { ReactComponent as RightArrow } from "../../icons/rarr.svg";
 
@@ -11,6 +12,12 @@ const StyledWeekName = styled.div`
   height: 30px;
   font-size: 14px;
   color: gray;
+`;
+const StyledTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+  align-items: center;
 `;
 const StyledWeekDay = styled.div`
   display: flex;
@@ -25,7 +32,7 @@ const StyledWeekDay = styled.div`
 `;
 const StyledWeek = styled.div``;
 const StyledDatepickerContainer = styled.div`
-  border: 1px solid blue;
+  border: 1px solid ${COLORS.Blue};
   ${StyledWeekName} {
     border-right: none;
   }
@@ -41,7 +48,7 @@ const StyledDatepickerContainer = styled.div`
   }
 
   div svg path {
-    stroke: black;
+    stroke: ${COLORS.Blue};
   }
 `;
 const months = [
@@ -68,8 +75,14 @@ const weekday = [
   "Saturday",
 ];
 
-export default function Datepicker() {
-  const [date, setDate] = useState<Date>(new Date(2020, 1, 0));
+export default function Datepicker({
+  minYear = new Date(Date.now()).getFullYear() - 2,
+  maxYear = new Date(Date.now()).getFullYear() + 2,
+}: {
+  minYear?: number;
+  maxYear?: number;
+}) {
+  const [date, setDate] = useState<Date>(new Date(Date.now()));
   const [selectedDate, setSelectedDate] = useState<Date | null>();
 
   const [daysInMonth, setDaysInMonth] = useState<number>(
@@ -83,9 +96,11 @@ export default function Datepicker() {
   }, [date]);
 
   const prevMonthHandler = () => {
+    if (date.getTime() < new Date(minYear, 1, 0).getTime()) return;
     setDate(new Date(date.getFullYear(), date.getMonth() - 1));
   };
   const nextMonthHandler = () => {
+    if (date.getTime() > new Date(maxYear, 0, 0).getTime()) return;
     setDate(new Date(date.getFullYear(), date.getMonth() + 1));
   };
 
@@ -119,23 +134,14 @@ export default function Datepicker() {
     }
     return daysArray;
   };
-  console.log(getDays());
 
   return (
     <StyledDatepickerContainer>
-      <div
-        style={{
-          backgroundColor: "white",
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "4px",
-          alignItems: "center",
-        }}
-      >
+      <StyledTitle>
         <LeftArrow height={16} onClick={prevMonthHandler} />
         {months[date.getMonth()]} {date.getFullYear()}
         <RightArrow height={16} onClick={nextMonthHandler} />
-      </div>
+      </StyledTitle>
       <div style={{ display: "flex" }}>
         {weekday.map((day) => {
           return <StyledWeekName>{day.substring(0, 2)}</StyledWeekName>;
