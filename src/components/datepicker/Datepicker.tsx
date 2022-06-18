@@ -5,6 +5,7 @@ import { ReactComponent as LeftArrow } from "../../icons/larr.svg";
 import { ReactComponent as RightArrow } from "../../icons/rarr.svg";
 
 const StyledWeekName = styled.div`
+  margin: 0.5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +20,10 @@ const StyledTitle = styled.div`
   padding: 4px;
   align-items: center;
 `;
-const StyledWeekDay = styled.div`
+const StyledWeekDay = styled.button`
+  background-color: transparent;
+  margin: 0.5px;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,9 +141,37 @@ export default function Datepicker({
   return (
     <StyledDatepickerContainer>
       <StyledTitle>
-        <LeftArrow height={16} onClick={prevMonthHandler} />
-        {months[date.getMonth()]} {date.getFullYear()}
-        <RightArrow height={16} onClick={nextMonthHandler} />
+        <LeftArrow
+          aria-label="go to previos month"
+          title="go to previos month"
+          style={{ padding: "5px" }}
+          onKeyDown={(e: React.KeyboardEvent<HTMLOrSVGElement>) => {
+            if (e.key === "Enter") {
+              prevMonthHandler();
+            }
+          }}
+          tabIndex={0}
+          height={16}
+          width={16}
+          onClick={prevMonthHandler}
+        />
+        <span aria-label="active month">
+          {months[date.getMonth()]} {date.getFullYear()}
+        </span>
+        <RightArrow
+          aria-label="go to next month"
+          title="go to previos month"
+          style={{ padding: "5px" }}
+          tabIndex={0}
+          onKeyDown={(e: React.KeyboardEvent<HTMLOrSVGElement>) => {
+            if (e.key === "Enter") {
+              nextMonthHandler();
+            }
+          }}
+          height={16}
+          width={16}
+          onClick={nextMonthHandler}
+        />
       </StyledTitle>
       <div style={{ display: "flex" }}>
         {weekday.map((day) => {
@@ -163,6 +195,7 @@ export default function Datepicker({
 
                 return (
                   <StyledWeekDay
+                    tabIndex={isPassedDate ? -1 : 0}
                     onClick={() => {
                       if (isPassedDate) return;
                       setSelectedDate(date);
@@ -178,7 +211,7 @@ export default function Datepicker({
                         : isPassedDate
                         ? COLORS.lightgrey
                         : "",
-                      outline:
+                      border:
                         !isPassedDate &&
                         date.getTime() <
                           new Date(Date.now()).getTime() + 1000 * 360 * 24
