@@ -11,7 +11,7 @@ const StyledWeekName = styled.div`
   width: 30px;
   height: 30px;
   font-size: 14px;
-  color: gray;
+  color: ${COLORS.Blue};
 `;
 const StyledTitle = styled.div`
   display: flex;
@@ -26,7 +26,6 @@ const StyledWeekDay = styled.div`
   width: 30px;
   height: 30px;
   :hover {
-    cursor: pointer;
     background-color: #01459733;
   }
 `;
@@ -52,18 +51,18 @@ const StyledDatepickerContainer = styled.div`
   }
 `;
 const months = [
-  "january",
-  "february",
-  "march",
-  "april",
-  "may",
-  "june",
-  "july",
-  "august",
-  "september",
-  "october",
-  "november",
-  "december",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 const weekday = [
   "Sunday",
@@ -157,18 +156,35 @@ export default function Datepicker({
               }}
             >
               {week.map((date) => {
+                const isSelectedDate =
+                  selectedDate?.toISOString() === date?.toISOString();
+                const isPassedDate =
+                  date.getTime() < Date.now() - 1000 * 60 * 60 * 24;
+
                 return (
                   <StyledWeekDay
-                    onClick={() => setSelectedDate(date)}
+                    onClick={() => {
+                      if (isPassedDate) return;
+                      setSelectedDate(date);
+                    }}
                     style={{
-                      backgroundColor:
-                        selectedDate?.toISOString() === date?.toISOString()
-                          ? "#014597"
+                      backgroundColor: isSelectedDate
+                        ? COLORS.Blue
+                        : isPassedDate
+                        ? "#aaaaaa22"
+                        : "",
+                      color: isSelectedDate
+                        ? "white"
+                        : isPassedDate
+                        ? COLORS.lightgrey
+                        : "",
+                      outline:
+                        !isPassedDate &&
+                        date.getTime() <
+                          new Date(Date.now()).getTime() + 1000 * 360 * 24
+                          ? `1px solid ${COLORS.Blue}`
                           : "",
-                      color:
-                        selectedDate?.toISOString() === date?.toISOString()
-                          ? "white"
-                          : "",
+                      cursor: isPassedDate ? "not-allowed" : "pointer",
                     }}
                   >
                     {date?.getDate()}
