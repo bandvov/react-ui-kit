@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "../../CONSTANTS";
 import { ReactComponent as LeftArrow } from "../../icons/larr.svg";
 import { ReactComponent as RightArrow } from "../../icons/rarr.svg";
+import Dropdown from "../Dropdown/Dropdown";
 
 const StyledWeekName = styled.div`
   margin: 0.5px;
@@ -48,6 +49,7 @@ const StyledDatepickerContainer = styled.div`
 
   div svg:hover {
     cursor: pointer;
+    background-color: #01459733;
   }
 
   div svg path {
@@ -87,6 +89,7 @@ export default function Datepicker({
 }) {
   const [date, setDate] = useState<Date>(new Date(Date.now()));
   const [selectedDate, setSelectedDate] = useState<Date | null>();
+  const [isOpen, setIsOpen] = useState(false);
 
   const [daysInMonth, setDaysInMonth] = useState<number>(
     new Date(2020, 1, 0).getDate()
@@ -139,95 +142,101 @@ export default function Datepicker({
   };
 
   return (
-    <StyledDatepickerContainer>
-      <StyledTitle>
-        <LeftArrow
-          aria-label="go to previos month"
-          title="go to previos month"
-          style={{ padding: "5px" }}
-          onKeyDown={(e: React.KeyboardEvent<HTMLOrSVGElement>) => {
-            if (e.key === "Enter") {
-              prevMonthHandler();
-            }
-          }}
-          tabIndex={0}
-          height={16}
-          width={16}
-          onClick={prevMonthHandler}
-        />
-        <span aria-label="active month">
-          {months[date.getMonth()]} {date.getFullYear()}
-        </span>
-        <RightArrow
-          aria-label="go to next month"
-          title="go to previos month"
-          style={{ padding: "5px" }}
-          tabIndex={0}
-          onKeyDown={(e: React.KeyboardEvent<HTMLOrSVGElement>) => {
-            if (e.key === "Enter") {
-              nextMonthHandler();
-            }
-          }}
-          height={16}
-          width={16}
-          onClick={nextMonthHandler}
-        />
-      </StyledTitle>
-      <div style={{ display: "flex" }}>
-        {weekday.map((day) => {
-          return <StyledWeekName>{day.substring(0, 2)}</StyledWeekName>;
-        })}
-      </div>
-      <div>
-        {getDays().map((week) => {
-          return (
-            <StyledWeek
-              style={{
-                display: "flex",
-                flexDirection: "row",
-              }}
-            >
-              {week.map((date) => {
-                const isSelectedDate =
-                  selectedDate?.toISOString() === date?.toISOString();
-                const isPassedDate =
-                  date.getTime() < Date.now() - 1000 * 60 * 60 * 24;
+    <Dropdown
+      title={selectedDate ? selectedDate.toLocaleDateString() : "Select date"}
+      onClick={setIsOpen}
+      isOpen={isOpen}
+    >
+      <StyledDatepickerContainer>
+        <StyledTitle>
+          <LeftArrow
+            aria-label="go to previos month"
+            title="go to previos month"
+            style={{ padding: "5px" }}
+            onKeyDown={(e: React.KeyboardEvent<HTMLOrSVGElement>) => {
+              if (e.key === "Enter") {
+                prevMonthHandler();
+              }
+            }}
+            tabIndex={0}
+            height={16}
+            width={16}
+            onClick={prevMonthHandler}
+          />
+          <span aria-label="active month">
+            {months[date.getMonth()]} {date.getFullYear()}
+          </span>
+          <RightArrow
+            aria-label="go to next month"
+            title="go to previos month"
+            style={{ padding: "5px" }}
+            tabIndex={0}
+            onKeyDown={(e: React.KeyboardEvent<HTMLOrSVGElement>) => {
+              if (e.key === "Enter") {
+                nextMonthHandler();
+              }
+            }}
+            height={16}
+            width={16}
+            onClick={nextMonthHandler}
+          />
+        </StyledTitle>
+        <div style={{ display: "flex" }}>
+          {weekday.map((day) => {
+            return <StyledWeekName>{day.substring(0, 2)}</StyledWeekName>;
+          })}
+        </div>
+        <div>
+          {getDays().map((week) => {
+            return (
+              <StyledWeek
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                {week.map((date) => {
+                  const isSelectedDate =
+                    selectedDate?.toISOString() === date?.toISOString();
+                  const isPassedDate =
+                    date.getTime() < Date.now() - 1000 * 60 * 60 * 24;
 
-                return (
-                  <StyledWeekDay
-                    tabIndex={isPassedDate ? -1 : 0}
-                    onClick={() => {
-                      if (isPassedDate) return;
-                      setSelectedDate(date);
-                    }}
-                    style={{
-                      backgroundColor: isSelectedDate
-                        ? COLORS.Blue
-                        : isPassedDate
-                        ? "#aaaaaa22"
-                        : "",
-                      color: isSelectedDate
-                        ? "white"
-                        : isPassedDate
-                        ? COLORS.lightgrey
-                        : "",
-                      border:
-                        !isPassedDate &&
-                        date.getTime() <
-                          new Date(Date.now()).getTime() + 1000 * 360 * 24
-                          ? `1px solid ${COLORS.Blue}`
+                  return (
+                    <StyledWeekDay
+                      tabIndex={isPassedDate ? -1 : 0}
+                      onClick={() => {
+                        if (isPassedDate) return;
+                        setSelectedDate(date);
+                      }}
+                      style={{
+                        backgroundColor: isSelectedDate
+                          ? COLORS.Blue
+                          : isPassedDate
+                          ? "#aaaaaa22"
                           : "",
-                      cursor: isPassedDate ? "not-allowed" : "pointer",
-                    }}
-                  >
-                    {date?.getDate()}
-                  </StyledWeekDay>
-                );
-              })}
-            </StyledWeek>
-          );
-        })}
-      </div>
-    </StyledDatepickerContainer>
+                        color: isSelectedDate
+                          ? "white"
+                          : isPassedDate
+                          ? COLORS.lightgrey
+                          : "",
+                        border:
+                          !isPassedDate &&
+                          date.getTime() <
+                            new Date(Date.now()).getTime() + 1000 * 360 * 24
+                            ? `1px solid ${COLORS.Blue}`
+                            : "",
+                        cursor: isPassedDate ? "not-allowed" : "pointer",
+                      }}
+                    >
+                      {date?.getDate()}
+                    </StyledWeekDay>
+                  );
+                })}
+              </StyledWeek>
+            );
+          })}
+        </div>
+      </StyledDatepickerContainer>
+    </Dropdown>
   );
 }
