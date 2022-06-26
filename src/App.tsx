@@ -13,7 +13,6 @@ import {
   Swiper,
   Datepicker,
 } from "./components";
-import List from "./components/List/List";
 import Tabs from "./components/Tabs/Tabs";
 import { IDropdownItem } from "./types";
 import Wrapper from "./Wrapper";
@@ -252,9 +251,6 @@ function App() {
           isOpen={openDropdown1}
           title={"Location"}
           onClick={setOpenDropdown1}
-          onKeyDown={setOpenDropdown1}
-          onMouseEnter={setOpenDropdown1}
-          onMouseLeave={setOpenDropdown1}
           position={"left"}
         >
           <div>Dropdown</div>
@@ -462,13 +458,6 @@ function App() {
           title="I am select"
           items={items}
         />
-      </Wrapper>
-      <Wrapper>
-        <List>
-          <div>adasd</div>
-          <div>adasd</div>
-          <div>adasd</div>
-        </List>
       </Wrapper>
       <Wrapper>
         <Tabs
