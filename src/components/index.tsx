@@ -5,11 +5,11 @@ import Button from "./Button/Button";
 import Checkbox from "./Checkbox/Checkbox";
 import DialogModal from "./DialogModal/DialogModal";
 import Dropdown from "./Dropdown/Dropdown";
-import List from "./List/List";
 import Pagination from "./Pagination/Pagination";
 import Select from "./Select/Select";
 import Swiper from "./Swiper/Swiper";
 import TextInput from "./Form/TextInput";
+import Datepicker from "./datepicker/Datepicker";
 
 export {
   Button,
@@ -20,8 +20,8 @@ export {
   DialogModal,
   Dropdown,
   Pagination,
-  List,
   Select,
   Swiper,
   TextInput,
+  Datepicker,
 };
