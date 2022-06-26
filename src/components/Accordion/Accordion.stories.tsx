@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Accordion } from "..";
 
 export default {
-  title: "Example/Accordion",
+  title: "Components/Accordion",
   component: Accordion,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
@@ -30,6 +30,7 @@ export default {
           text: "With text",
         },
       },
+      defaultValue: "text",
     },
   },
 } as ComponentMeta<typeof Accordion>;
@@ -43,10 +44,10 @@ const Template: ComponentStory<typeof Accordion> = (args) => {
   );
 };
 
-export const DropdownTemplate = Template.bind({});
+export const AccordionTemplate = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
-DropdownTemplate.args = {
+AccordionTemplate.args = {
   title: "test",
   children: (
     <div>
@@ -55,4 +56,4 @@ DropdownTemplate.args = {
     </div>
   ),
 };
-DropdownTemplate.storyName = "Accordion";
+AccordionTemplate.storyName = "Accordion";
